@@ -12,7 +12,7 @@
     --transizioneSenzaRimbalzo: cubic-bezier(0.3, 0, 0.25, 1);
 }
 
-@font-face { font-family: myFont; src: url("assets/fonts/consola.TTF"); font-display: swap; }
+@font-face { font-family: myFont; src: url("assets/fonts/consola.TTF"); }
 
 * { padding: 0; margin: 0; box-sizing: border-box; }
 
@@ -20,6 +20,7 @@ body, html {
     background-color: var(--bgColor);
     color: var(--textColor);
     font-family: "myFont", Helvetica;
+    font-display: swap;
     font-size: calc(14px + .390625vw);
     letter-spacing: .05rem;
     word-spacing: .1rem;
