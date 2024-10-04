@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- inserimento sito in risultati ricerca google -->
+    
+
+    <!-- favicon per i vari dispositivi (anche icone sito aggiunto a desktop) -->
+    
+    
+    <link href="style.css" rel="stylesheet">
+    <link rel="preload" href="assets/fonts/consola.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <title>Noverflow - rappresentazioni binarie</title>
+    <meta name="description" content="Scopri Noverflow, il tool online gratuito che ti permette di trasformare il binario puro in rappresentazioni complesse quali complemento a 1, complemento a 2, e virgola mobile a singola o doppia precisione.">
+</head>
+<body class="body--loading">
+    <header class="osservato" style="--stacks: 3;">
+            <h1 style="--index: 0;" onclick="window.location.href='index.html';">Noverflow</h1>
+            <h1 style="--index: 1;" onclick="window.location.href='index.html';">Noverflow</h1>
+            <h1 style="--index: 2;" onclick="window.location.href='index.html';">Noverflow</h1>
+    </header>
+
+    <main id="rappresentazioniPage">
+        <section id="spazioRappresentazione">
+            <article class="cardFunzione osservato">
+                <h2>Rappresentazioni binarie</h2>
+                <div id="spazioSceltaRappresentazione">
+                    <div id="selettoreRappresentazione" class="selettore">
+                        <p>FP32</p>
+                        <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" id="iconaMenuSelezione" draggable="false"/>
+                    </div>
+                    <input type="text" id="elementoDaRappresentare" name="elementoDaRappresentare" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                </div>
+            </article>
+            <article class="cardRisultato osservato">
+                <p id="risultato">Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...</p>
+            </article>
+        </section>
+        <section id="scelteDisponibili">
+            <article id="conversioniCard" class="card osservato">
+                <h2>Conversioni di&nbsp;base</h2>
+                <p class="cardTestiPiccoli">Binario&nbsp;a&nbsp;decimale<br>Decimale&nbsp;a&nbsp;binario<br>Decimale&nbsp;a&nbsp;ottale<br>Altro&nbsp;ancora...</p>
+                <p class="cardTestiGrandi">Binario&nbsp;a&nbsp;decimale, Decimale&nbsp;a&nbsp;binario, Decimale&nbsp;a&nbsp;ottale, Altro&nbsp;ancora...</p>
+                <button onclick="apriUrl('conversioni.html')">Vai</button>
+            </article>
+            <article id="operazioniCard" class="card osservato">
+                <h2>Operazioni binarie</h2>
+                <p class="cardTestiPiccoli">Addizioni&nbsp;binarie<br>Sottrazioni&nbsp;binarie<br>Prodotti&nbsp;binari<br>Altro&nbsp;ancora...</p>
+                <p class="cardTestiGrandi">Addizioni&nbsp;binarie, Sottrazioni&nbsp;binarie, Prodotti&nbsp;binari, Altro&nbsp;ancora...</p>
+                <button onclick="apriUrl('operazioni.html')">Vai</button>
+            </article>
+        </section>
+    </main>
+
+    <footer class="osservato">©&nbsp;2024&nbsp;Emanuele&nbsp;Ciotola. Tutti&nbsp;i&nbsp;diritti&nbsp;riservati.</footer>
+
+    <script src="script/main.js"></script>
+</body>
+</html>

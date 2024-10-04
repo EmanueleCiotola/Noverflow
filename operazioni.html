@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- inserimento sito in risultati ricerca google -->
+    
+
+    <!-- favicon per i vari dispositivi (anche icone sito aggiunto a desktop) -->
+    
+    
+    <link href="style.css" rel="stylesheet">
+    <link rel="preload" href="assets/fonts/consola.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <title>Noverflow - conversioni di base</title>
+    <meta name="description" content="Scopri Noverflow, il tool online gratuito che ti permette di svolgere operazioni binarie di addizione, sottrazione, moltiplicazione e shift a sinistra o destra.">
+</head>
+<body class="body--loading">
+    <header class="osservato" style="--stacks: 3;">
+            <h1 style="--index: 0;" onclick="window.location.href='index.html';">Noverflow</h1>
+            <h1 style="--index: 1;" onclick="window.location.href='index.html';">Noverflow</h1>
+            <h1 style="--index: 2;" onclick="window.location.href='index.html';">Noverflow</h1>
+    </header>
+
+    <main id="operazioniPage">
+        <section id="spazioOperazione">
+            <article class="cardFunzione osservato">
+                <h2>Conversioni di&nbsp;base</h2>
+                <div id="spazioSceltaOperandi">
+                    <input type="text" id="primoOperando" name="primoOperando" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <div id="selettoreOperazionePiccolo" class="selettore">
+                        <p>Addizione</p>
+                        <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" id="iconaMenuSelezione" draggable="false"/>
+                    </div>
+                    <input type="text" id="secondoOperando" name="secondoOperando" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                </div>
+                <div id="selettoreOperazioneGrande" class="selettore">
+                    <p>Addizione</p>
+                    <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" id="iconaMenuSelezione" draggable="false"/>
+                </div>
+            </article>
+            <article class="cardRisultato osservato">
+                <p id="risultato">Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...</p>
+            </article>
+        </section>
+        <section id="scelteDisponibili">
+            <article id="conversioniCard" class="card osservato">
+                <h2>Conversioni di&nbsp;base</h2>
+                <p class="cardTestiPiccoli">Binario&nbsp;a&nbsp;decimale<br>Decimale&nbsp;a&nbsp;binario<br>Decimale&nbsp;a&nbsp;ottale<br>Altro&nbsp;ancora...</p>
+                <p class="cardTestiGrandi">Binario&nbsp;a&nbsp;decimale, Decimale&nbsp;a&nbsp;binario, Decimale&nbsp;a&nbsp;ottale, Altro&nbsp;ancora...</p>
+                <button onclick="apriUrl('conversioni.html')">Vai</button>
+            </article>
+            <article id="rappresentazioniCard" class="card osservato">
+                <h2>Rappresentazioni binarie</h2>
+                <p class="cardTestiPiccoli">Complemento&nbsp;a&nbsp;1<br>Complemento&nbsp;a&nbsp;2<br>Virgola&nbsp;mobile<br>Altro&nbsp;ancora...</p>
+                <p class="cardTestiGrandi">Complemento&nbsp;a&nbsp;1, Complemento&nbsp;a&nbsp;2, Virgola&nbsp;mobile, Altro&nbsp;ancora...</p>
+                <button onclick="apriUrl('rappresentazioni.html')">Vai</button>
+            </article>
+        </section>
+    </main>
+
+    <footer class="osservato">©&nbsp;2024&nbsp;Emanuele&nbsp;Ciotola. Tutti&nbsp;i&nbsp;diritti&nbsp;riservati.</footer>
+
+    <script src="script/main.js"></script>
+</body>
+</html>

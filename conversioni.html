@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- inserimento sito in risultati ricerca google -->
+    
+
+    <!-- favicon per i vari dispositivi (anche icone sito aggiunto a desktop) -->
+    
+    
+    <link href="style.css" rel="stylesheet">
+    <link rel="preload" href="assets/fonts/consola.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <title>Noverflow - conversioni di base</title>
+    <meta name="description" content="Scopri Noverflow, il tool online gratuito che ti permette di convertire numeri tra binario, ottale, decimale ed esadecimale.">
+</head>
+<body class="body--loading">
+    <header class="osservato" style="--stacks: 3;">
+            <h1 style="--index: 0;" onclick="window.location.href='index.html';">Noverflow</h1>
+            <h1 style="--index: 1;" onclick="window.location.href='index.html';">Noverflow</h1>
+            <h1 style="--index: 2;" onclick="window.location.href='index.html';">Noverflow</h1>
+    </header>
+
+    <main id="conversioniPage">
+        <section id="spazioConversione">
+            <article class="cardFunzione osservato">
+                <h2>Conversioni di&nbsp;base</h2>
+                <div id="spazioSceltaBasi">
+                    <div id="selettorePrimaBase" class="selettore">
+                        <p>Binario</p>
+                        <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" id="iconaMenuSelezione" draggable="false"/>
+                    </div>
+                    <button id="bottoneSwitchaBase">
+                        <img src="assets/images/iconaConversioneInversa.png" alt="Inverti" id="iconaBottoneSwitchaBase" draggable="false"/>
+                    </button>
+                    <div id="selettoreSecondaBase" class="selettore">
+                        <p>Decimale</p>
+                        <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" id="iconaMenuSelezione" draggable="false"/>
+                    </div>
+                </div>
+                <input type="text" id="elementoDaConvertire" name="elementoDaConvertire" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            </article>
+            <article class="cardRisultato osservato">
+                <p id="risultato">Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...</p>
+            </article>
+        </section>
+        <section id="scelteDisponibili">
+            <article id="rappresentazioniCard" class="card osservato">
+                <h2>Rappresentazioni binarie</h2>
+                <p class="cardTestiPiccoli">Complemento&nbsp;a&nbsp;1<br>Complemento&nbsp;a&nbsp;2<br>Virgola&nbsp;mobile<br>Altro&nbsp;ancora...</p>
+                <p class="cardTestiGrandi">Complemento&nbsp;a&nbsp;1, Complemento&nbsp;a&nbsp;2, Virgola&nbsp;mobile, Altro&nbsp;ancora...</p>
+                <button onclick="apriUrl('rappresentazioni.html')">Vai</button>
+            </article>
+            <article id="operazioniCard" class="card osservato">
+                <h2>Operazioni binarie</h2>
+                <p class="cardTestiPiccoli">Addizioni&nbsp;binarie<br>Sottrazioni&nbsp;binarie<br>Prodotti&nbsp;binari<br>Altro&nbsp;ancora...</p>
+                <p class="cardTestiGrandi">Addizioni&nbsp;binarie, Sottrazioni&nbsp;binarie, Prodotti&nbsp;binari, Altro&nbsp;ancora...</p>
+                <button onclick="apriUrl('operazioni.html')">Vai</button>
+            </article>
+        </section>
+    </main>
+
+    <footer class="osservato">©&nbsp;2024&nbsp;Emanuele&nbsp;Ciotola. Tutti&nbsp;i&nbsp;diritti&nbsp;riservati.</footer>
+
+    <script src="script/main.js"></script>
+</body>
+</html>
