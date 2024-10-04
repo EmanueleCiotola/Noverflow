@@ -10,13 +10,10 @@ var callback = function(items) {
         }
     });
 }
-setTimeout(() => {
-    var observer = new IntersectionObserver(callback, { threshold: 0 });
-    elementiDaOsservare.forEach((element) => {
-        observer.observe(element);
-    });
-}, 100); // delay di 1 secondo
-
+var observer = new IntersectionObserver(callback, {threshold: 0});
+elementiDaOsservare.forEach((element) => {
+    observer.observe(element);
+});
 
 // gestione dei link esterni
 function apriUrl(url) { window.open(url, "_self"); }
