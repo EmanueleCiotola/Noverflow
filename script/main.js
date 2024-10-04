@@ -10,12 +10,12 @@ var callback = function(items) {
         }
     });
 }
-window.addEventListener('load', () => {
+setTimeout(() => {
     var observer = new IntersectionObserver(callback, { threshold: 0 });
     elementiDaOsservare.forEach((element) => {
         observer.observe(element);
     });
-}); // delay di 1 secondo
+}, 100); // delay di 1 secondo
 
 
 // gestione dei link esterni
