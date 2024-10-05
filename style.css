@@ -47,10 +47,14 @@ button {
 @media (hover: hover) { button:hover { box-shadow: 0 0 15px var(--accentColor) !important; } }
 button:active { transform: scale(.95); box-shadow: 0 0 20px var(--accentColor) !important; }
 
-header { display: grid; grid-template-columns: 1fr; min-height: 13vh; align-content: end; opacity: 0; transform: translateY(-10px); }
+header {
+    min-height: 13vh;
+    align-content: end;
+    opacity: 0;
+    transform: translateY(-10px);
+}
 header h1 {
     width: min-content;
-    margin: 0 auto;
     user-select: none;
     cursor: pointer;
     grid-row-start: 1;
@@ -91,6 +95,8 @@ header h1:first-child, header h1:last-child { user-select: none; }
     71.5% { text-shadow: .04em -.06em 0 var(--secondaryColor), -.04em .06em 0 var(--accentColor); }
     72%, 100% { text-shadow: none; transform: none; }
 }
+#noverflow { display: grid; grid-template-columns: 1fr; width: min-content; margin: 0 auto; transition: transform .05s var(--transizioneSenzaRimbalzo) }
+#noverflow:active { transform: scale(.95); }
 
 footer { min-height: 7vh; color: var(--disabledTextColor); opacity: 0; margin: 0 5rem; }
 #homePageFooter.osservato { transition-delay: 900ms !important; }
