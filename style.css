@@ -24,7 +24,7 @@ body, html {
     letter-spacing: .05rem;
     word-spacing: .1rem;
     line-height: 1.6rem;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     text-align: center;
 }
 ::selection { background-color: var(--accentColor); color: var(--bgColor); }
