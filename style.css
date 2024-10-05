@@ -27,6 +27,7 @@ body, html {
     scroll-behavior: smooth;
     text-align: center;
 }
+::selection { background-color: var(--accentColor); color: var(--bgColor); }
 
 h1 { font-size: calc(40px + .390625vw); line-height: 2.6rem; }
 h2 { font-size: calc(16px + .390625vw); font-weight: bolder; }
@@ -40,10 +41,11 @@ button {
     font-weight: bolder;
     border: none;
     cursor: pointer;
-    transition: transform 0.3s var(--transizioneSenzaRimbalzo), box-shadow 0.3s var(--transizioneSenzaRimbalzo);
+    box-shadow: none !important;
+    transition: transform .05s var(--transizioneSenzaRimbalzo), box-shadow .05s var(--transizioneSenzaRimbalzo);
 }
-button:hover { box-shadow: 0 0 15px var(--accentColor); }
-button:active { transform: scale(0.95); box-shadow: 0 0 20px var(--accentColor); }
+@media (hover: hover) { button:hover { box-shadow: 0 0 15px var(--accentColor) !important; } }
+button:active { transform: scale(.95); box-shadow: 0 0 20px var(--accentColor) !important; }
 
 header { display: grid; grid-template-columns: 1fr; min-height: 13vh; align-content: end; opacity: 0; transform: translateY(-10px); }
 header h1 {
@@ -139,7 +141,6 @@ input[type="text"] {
     outline: none;
 }
 input[type="text"]::placeholder { color: var(--disabledTextColor); }
-input[type="text"]::selection { background-color: var(--accentColor); color: var(--bgColor); }
 .cardRisultato {
     background-color: var(--cardColor);
     padding: 1.8rem 1.8rem;
