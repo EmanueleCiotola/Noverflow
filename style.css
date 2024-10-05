@@ -197,7 +197,6 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
     align-items: center;
     min-height: 80vh;
 }
-
 #homePage .card:nth-child(1).osservato { transition-delay: 500ms !important; }
 #homePage .card:nth-child(2).osservato { transition-delay: 600ms !important; }
 #homePage .card:nth-child(3).osservato { transition-delay: 700ms !important; }
