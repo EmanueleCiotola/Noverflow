@@ -231,8 +231,8 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
 
 @media (max-height: 600px) {
     header { padding-top: 30px; }
-    footer { padding-bottom: 30px; }
     #homePage { min-height: 65vh; margin: 2rem 0; padding: 0 !important; }
+    footer { padding-bottom: 30px; }
 }
 
 @media (max-width: 1150px) {
@@ -258,9 +258,10 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
     #homePage .card:nth-child(2).osservato { transition-delay: 300ms !important; }
     #homePage .card:nth-child(3).osservato { transition-delay: 300ms !important; }
     #scelteDisponibili .card:nth-child(2).osservato { transition-delay: 300ms !important; }
-    footer.osservato { transition-delay: 300ms !important; }
     #selettoreRappresentazione { width: 25%; }
     #elementoDaRappresentare { width: 70%; }
+    footer.osservato { transition-delay: 300ms !important; }
+    #homePageFooter.osservato { transition-delay: 300ms !important; }
 }
 
 @media (max-width: 800px) {
