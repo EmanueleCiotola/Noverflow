@@ -16,7 +16,7 @@
     <link href="style.css" rel="stylesheet">
     <link rel="preload" href="assets/fonts/consola.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <title>Noverflow - rappresentazioni binarie</title>
-    <meta name="description" content="Scopri Noverflow, il tool online gratuito che ti permette di trasformare il binario puro in rappresentazioni complesse quali complemento a 1, complemento a 2, e virgola mobile a singola o doppia precisione.">
+    <meta name="description" content="Scopri Noverflow, il tool online gratuito che ti permette di trasformare il binario puro in rappresentazioni complesse quali complemento a 1, complemento a 2, virgola mobile a singola o doppia precisione, e viceversa.">
 </head>
 <body>
     <header class="osservato" style="--stacks: 3;">
@@ -31,13 +31,38 @@
         <section id="spazioRappresentazione">
             <article class="cardFunzione osservato">
                 <h2>Rappresentazioni binarie</h2>
-                <div id="spazioSceltaRappresentazione">
-                    <div id="selettoreRappresentazione" class="selettore">
-                        <p>FP32</p>
-                        <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" id="iconaMenuSelezione" draggable="false"/>
+                <div id="spazioSceltaRappresentazioni">
+                    <div id="selettorePrimaRappresentazione" class="selettore">
+                        <div class="spazioSelezionatoSelettore">
+                            <p class="elementoSelezionato">Binario</p>
+                            <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" class="iconaMenuSelezione" draggable="false"/>
+                        </div>
+                        <ul class="elementiSelettore">
+                            <li class="selezionatoDaSelettore">Binario</li>
+                            <li>C1</li>
+                            <li>C2</li>
+                            <li>FP32</li>
+                            <li>FP64</li>
+                        </ul>
                     </div>
-                    <input type="text" id="elementoDaRappresentare" name="elementoDaRappresentare" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <button id="bottoneSwitchaRappresentazione">
+                        <img src="assets/images/iconaConversioneInversa.png" alt="Inverti" id="iconaBottoneSwitchaBase" draggable="false"/>
+                    </button>
+                    <div id="selettoreSecondaRappresentazione" class="selettore">
+                        <div class="spazioSelezionatoSelettore">
+                            <p class="elementoSelezionato">Binario</p>
+                            <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" class="iconaMenuSelezione" draggable="false"/>
+                        </div>
+                        <ul class="elementiSelettore">
+                            <li class="selezionatoDaSelettore">Binario</li>
+                            <li>C1</li>
+                            <li>C2</li>
+                            <li>FP32</li>
+                            <li>FP64</li>
+                        </ul>
+                    </div>
                 </div>
+                <input type="text" id="elementoDaRappresentare" name="elementoDaConvertire" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </article>
             <article class="cardRisultato osservato">
                 <p id="risultato">Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...</p>

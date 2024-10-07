@@ -34,14 +34,32 @@
                 <div id="spazioSceltaOperandi">
                     <input type="text" id="primoOperando" name="primoOperando" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     <div id="selettoreOperazionePiccolo" class="selettore">
-                        <p>Addizione</p>
-                        <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" id="iconaMenuSelezione" draggable="false"/>
+                        <div class="spazioSelezionatoSelettore">
+                            <p class="elementoSelezionato">ADD</p>
+                            <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" class="iconaMenuSelezione" draggable="false"/>
+                        </div>
+                        <ul class="elementiSelettore">
+                            <li class="selezionatoDaSelettore">ADD</li>
+                                <li>SUB</li>
+                                <li>MUL</li>
+                                <li>SHL</li>
+                                <li>SHR</li>
+                        </ul>
                     </div>
                     <input type="text" id="secondoOperando" name="secondoOperando" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                 </div>
                 <div id="selettoreOperazioneGrande" class="selettore">
-                    <p>Addizione</p>
-                    <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" id="iconaMenuSelezione" draggable="false"/>
+                    <div class="spazioSelezionatoSelettore">
+                        <p class="elementoSelezionato">ADD</p>
+                        <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" class="iconaMenuSelezione" draggable="false"/>
+                    </div>
+                    <ul class="elementiSelettore">
+                        <li class="selezionatoDaSelettore">ADD</li>
+                            <li>SUB</li>
+                            <li>MUL</li>
+                            <li>SHL</li>
+                            <li>SHR</li>
+                    </ul>
                 </div>
             </article>
             <article class="cardRisultato osservato">

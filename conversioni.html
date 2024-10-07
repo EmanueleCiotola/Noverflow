@@ -33,15 +33,31 @@
                 <h2>Conversioni di&nbsp;base</h2>
                 <div id="spazioSceltaBasi">
                     <div id="selettorePrimaBase" class="selettore">
-                        <p>Binario</p>
-                        <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" id="iconaMenuSelezione" draggable="false"/>
+                        <div class="spazioSelezionatoSelettore">
+                            <p class="elementoSelezionato">Binario</p>
+                            <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" class="iconaMenuSelezione" draggable="false"/>
+                        </div>
+                        <ul class="elementiSelettore">
+                            <li class="selezionatoDaSelettore">Binario</li>
+                            <li>Ottale</li>
+                            <li>Decimale</li>
+                            <li>Hex</li>
+                        </ul>
                     </div>
                     <button id="bottoneSwitchaBase">
                         <img src="assets/images/iconaConversioneInversa.png" alt="Inverti" id="iconaBottoneSwitchaBase" draggable="false"/>
                     </button>
                     <div id="selettoreSecondaBase" class="selettore">
-                        <p>Decimale</p>
-                        <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" id="iconaMenuSelezione" draggable="false"/>
+                        <div class="spazioSelezionatoSelettore">
+                            <p class="elementoSelezionato">Binario</p>
+                            <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" class="iconaMenuSelezione" draggable="false"/>
+                        </div>
+                        <ul class="elementiSelettore">
+                            <li class="selezionatoDaSelettore">Binario</li>
+                            <li>Ottale</li>
+                            <li>Decimale</li>
+                            <li>Hex</li>
+                        </ul>
                     </div>
                 </div>
                 <input type="text" id="elementoDaConvertire" name="elementoDaConvertire" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
