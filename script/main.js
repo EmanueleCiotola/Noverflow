@@ -15,7 +15,7 @@ elementiDaOsservare.forEach((element) => {
     observer.observe(element);
 });
 
-// Gestione dei selettori
+// gestione dei selettori
 let selettoreAperto = null; // variabile per tenere traccia del selettore attualmente aperto
 document.querySelectorAll('.selettore').forEach(element => {
     const spazioSelezionatoSelettore = element.querySelector('.spazioSelezionatoSelettore');
@@ -65,10 +65,24 @@ const selezionaOpzione = (opzioneSelezionata, tutteLeOpzioni) => {
 document.addEventListener('click', chiudiTuttiISelettori);
 window.addEventListener('scroll', chiudiTuttiISelettori);
 
-
-
-
-
+// gestione switch dei selettori
+function switchaSelettori(idSelettore1, idSelettore2) {
+    const selettore1 = document.getElementById(idSelettore1).querySelector('.elementoSelezionato');
+    const selettore2 = document.getElementById(idSelettore2).querySelector('.elementoSelezionato');
+    // recupera i testi delle opzioni selezionate
+    const testo1 = selettore1.innerText;
+    const testo2 = selettore2.innerText;
+    // scambia i testi
+    selettore1.innerText = testo2;
+    selettore2.innerText = testo1;
+    // aggiorna le classi delle opzioni selezionate
+    const opzioni1 = document.querySelectorAll(`#${idSelettore1} .elementiSelettore li`);
+    const opzioni2 = document.querySelectorAll(`#${idSelettore2} .elementiSelettore li`);
+    opzioni1.forEach(op => op.classList.remove('selezionatoDaSelettore'));
+    opzioni2.forEach(op => op.classList.remove('selezionatoDaSelettore'));
+    opzioni1.forEach(op => { if (op.textContent === testo2) { op.classList.add('selezionatoDaSelettore'); } });
+    opzioni2.forEach(op => { if (op.textContent === testo1) { op.classList.add('selezionatoDaSelettore'); } });
+}
 
 // gestione dei link esterni
 function apriUrl(url) { window.open(url, "_self"); }
