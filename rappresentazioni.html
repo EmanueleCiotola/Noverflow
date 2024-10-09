@@ -62,7 +62,7 @@
                         </ul>
                     </div>
                 </div>
-                <input type="text" id="elementoDaRappresentare" name="elementoDaConvertire" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                <input type="text" id="elementoDaRappresentare" name="elementoDaConvertire" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^0-1+-]/g, ''); rappresenta();" autocomplete="off">
             </article>
             <article class="cardRisultato osservato">
                 <p id="risultato">Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...</p>
