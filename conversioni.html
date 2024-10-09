@@ -32,7 +32,7 @@
             <article class="cardFunzione osservato">
                 <h2>Conversioni di&nbsp;base</h2>
                 <div id="spazioSceltaBasi">
-                    <div id="selettorePrimaBase" class="selettore">
+                    <div id="selettorePrimaBase" class="selettore selettore-conversione">
                         <div class="spazioSelezionatoSelettore">
                             <p class="elementoSelezionato">Binario</p>
                             <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" class="iconaMenuSelezione" draggable="false"/>
@@ -44,10 +44,10 @@
                             <li>Hex</li>
                         </ul>
                     </div>
-                    <button id="bottoneSwitchaBase" onclick="switchaSelettori('selettorePrimaBase', 'selettoreSecondaBase');">
+                    <button id="bottoneSwitchaBase" onclick="switchaSelettori('selettorePrimaBase', 'selettoreSecondaBase', 'elementoDaConvertire'); converti();">
                         <img src="assets/images/iconaConversioneInversa.png" alt="Inverti" id="iconaBottoneSwitchaBase" draggable="false"/>
                     </button>
-                    <div id="selettoreSecondaBase" class="selettore">
+                    <div id="selettoreSecondaBase" class="selettore selettore-conversione">
                         <div class="spazioSelezionatoSelettore">
                             <p class="elementoSelezionato">Ottale</p>
                             <img src="assets/images/iconaMenuSelezione.png" alt="Espandi" class="iconaMenuSelezione" draggable="false"/>
@@ -60,7 +60,7 @@
                         </ul>
                     </div>
                 </div>
-                <input type="text" id="elementoDaConvertire" name="elementoDaConvertire" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                <input type="text" id="elementoDaConvertire" name="elementoDaConvertire" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^0-9a-fA-F]/g, ''); converti();">
             </article>
             <article class="cardRisultato osservato">
                 <p id="risultato">Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...</p>
