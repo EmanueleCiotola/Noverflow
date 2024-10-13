@@ -155,25 +155,31 @@ function converti() {
     if (valoreDaConvertire.length === 1 &&
         (valoreDaConvertire == "+" ||
         valoreDaConvertire == "-")) {
-        risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.classList.remove('risultatoCalcolato');
     } else {
         if (controlloRisultato.test(valoreDaConvertire)) {
             let numeroConvertito;
             if (valoreDaConvertire.includes('.')) {
                 if ((valoreDaConvertire.indexOf('.') + 1) == (valoreDaConvertire.length)) {
                     risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...";
+                    risultato.classList.remove('risultatoCalcolato');
                 } else {
                     numeroConvertito = convertiDecimaleConVirgola(valoreDaConvertire, basePrima, baseSeconda);
                     risultato.innerText = numeroConvertito.toUpperCase(); // mostra risultato in maiuscolo se esadecimale
+                    risultato.classList.add('risultatoCalcolato');
                 }
             } else {
                 numeroConvertito = parseInt(valoreDaConvertire, basePrima).toString(baseSeconda);
                 risultato.innerText = numeroConvertito.toUpperCase(); // mostra risultato in maiuscolo se esadecimale
+                risultato.classList.add('risultatoCalcolato');
             }
         } else if (valoreDaConvertire === "") {
             risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.classList.remove('risultatoCalcolato');
         } else {
             risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+            risultato.classList.remove('risultatoCalcolato');
         }
     }
 }
@@ -209,18 +215,34 @@ function rappresenta() {
     // verifica e rappresentazione
     if (primaRappresentazione === "Binario" &&
         valoreDaRappresentare.length === 1 &&
-        valoreDaRappresentare != "0" &&
-        valoreDaRappresentare != "1") risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+        (valoreDaRappresentare == "+" ||
+        valoreDaRappresentare == "-")) {
+            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.classList.remove('risultatoCalcolato');
+        }
     else if ((primaRappresentazione === "C1" || primaRappresentazione === "C2") && valoreDaRappresentare.length === 1) {
-        if (controlloRisultato.test(valoreDaRappresentare)) risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
-        else risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+        if (controlloRisultato.test(valoreDaRappresentare)) {
+            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.classList.remove('risultatoCalcolato');
+        }
+        else {
+            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+            risultato.classList.remove('risultatoCalcolato');
+        }
     }
     else {
         if (controlloRisultato.test(valoreDaRappresentare)) {
             let numeroRappresentato = convertiRappresentazione(primaRappresentazione, secondaRappresentazione, valoreDaRappresentare);
             risultato.innerText = numeroRappresentato; // mostra risultato
-        } else if (valoreDaRappresentare === "") risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
-        else risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+            risultato.classList.add('risultatoCalcolato');
+        } else if (valoreDaRappresentare === "") {
+            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.classList.remove('risultatoCalcolato');
+        }
+        else {
+            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+            risultato.classList.remove('risultatoCalcolato');
+        }
     }
 }
 function convertiRappresentazione(primaRappresentazione, secondaRappresentazione, valore) {

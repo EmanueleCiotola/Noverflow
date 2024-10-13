@@ -196,6 +196,7 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
     text-align: center;
 }
 #risultato { color: var(--disabledTextColor); }
+#risultato.risultatoCalcolato { color: var(--textColor); word-break: break-all; overflow-wrap: break-word; }
 
 #scelteDisponibili {
     display: grid;
