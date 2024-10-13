@@ -104,16 +104,16 @@ function switchaSelettori(idSelettore1, idSelettore2, idInput) {
     // recupera i testi delle opzioni selezionate
     const testo1 = selettore1.innerText;
     const testo2 = selettore2.innerText;
-    // scambia i testi
-    selettore1.innerText = testo2;
-    selettore2.innerText = testo1;
-    // aggiorna le classi delle opzioni selezionate
-    aggiornaClassiOpzioni(idSelettore1, testo2);
-    aggiornaClassiOpzioni(idSelettore2, testo1);
-    // scambia input e risultato se quest'ultimo è non nullo
     const testo3 = input.value;
     const testo4= risultato.innerText;
     if (/^[0-9A-Fa-f.+-]+$/.test(testo4)) {
+        // scambia i testi
+        selettore1.innerText = testo2;
+        selettore2.innerText = testo1;
+        // aggiorna le classi delle opzioni selezionate
+        aggiornaClassiOpzioni(idSelettore1, testo2);
+        aggiornaClassiOpzioni(idSelettore2, testo1);
+        // scambia input e risultato
         input.value = testo4;
         risultato.innerText = testo3;
     }
