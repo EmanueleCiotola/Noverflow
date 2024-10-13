@@ -113,7 +113,7 @@ function switchaSelettori(idSelettore1, idSelettore2, idInput) {
     // scambia input e risultato se quest'ultimo è non nullo
     const testo3 = input.value;
     const testo4= risultato.innerText;
-    if (/^[0-9A-Fa-f,+-]+$/.test(testo4)) {
+    if (/^[0-9A-Fa-f.+-]+$/.test(testo4)) {
         input.value = testo4;
         risultato.innerText = testo3;
     }
@@ -147,24 +147,29 @@ function converti() {
     basePrima = baseMappa[primaBase];
     baseSeconda = baseMappa[secondaBase];
     // controllo del valore in ingresso
-    if (basePrima === 2) controlloRisultato = /^[01,+-]+(\.[01]+)?$/; // binario
-    else if (basePrima === 8) controlloRisultato = /^[0-7,+-]+(\.[0-7]+)?$/; // ottale
-    else if (basePrima === 10) controlloRisultato = /^[0-9,+-]+(\.[0-9]+)?$/; // decimale
-    else controlloRisultato = /^[0-9A-Fa-f,+-]+(\.[0-9A-Fa-f]+)?$/; // esadecimale
+    if (basePrima === 2) controlloRisultato = /^[01.+-]+(\.[01]+)?$/; // binario
+    else if (basePrima === 8) controlloRisultato = /^[0-7.+-]+(\.[0-7]+)?$/; // ottale
+    else if (basePrima === 10) controlloRisultato = /^[0-9.+-]+(\.[0-9]+)?$/; // decimale
+    else controlloRisultato = /^[0-9A-Fa-f.+-]+(\.[0-9A-Fa-f]+)?$/; // esadecimale
     // verifica e conversione
     if (valoreDaConvertire.length === 1 &&
-        valoreDaConvertire !== "0" &&
-        valoreDaConvertire !== "1") {
+        (valoreDaConvertire == "+" ||
+        valoreDaConvertire == "-")) {
         risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
     } else {
         if (controlloRisultato.test(valoreDaConvertire)) {
             let numeroConvertito;
             if (valoreDaConvertire.includes('.')) {
-                numeroConvertito = convertiDecimaleConVirgola(valoreDaConvertire, basePrima, baseSeconda);
+                if ((valoreDaConvertire.indexOf('.') + 1) == (valoreDaConvertire.length)) {
+                    risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...";
+                } else {
+                    numeroConvertito = convertiDecimaleConVirgola(valoreDaConvertire, basePrima, baseSeconda);
+                    risultato.innerText = numeroConvertito.toUpperCase(); // mostra risultato in maiuscolo se esadecimale
+                }
             } else {
                 numeroConvertito = parseInt(valoreDaConvertire, basePrima).toString(baseSeconda);
+                risultato.innerText = numeroConvertito.toUpperCase(); // mostra risultato in maiuscolo se esadecimale
             }
-            risultato.innerText = numeroConvertito.toUpperCase(); // mostra risultato in maiuscolo se esadecimale
         } else if (valoreDaConvertire === "") {
             risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
         } else {
