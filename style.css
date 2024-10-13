@@ -47,12 +47,7 @@ button {
 @media (hover: hover) { button:hover { box-shadow: 0 0 15px var(--accentColor) !important; } }
 button:active { transform: scale(.95); box-shadow: 0 0 20px var(--accentColor) !important; }
 
-header {
-    min-height: 13vh;
-    align-content: end;
-    opacity: 0;
-    transform: translateY(-10px);
-}
+header { min-height: 13vh; align-content: end; opacity: 0; transform: translateY(-10px); }
 header h1 {
     width: min-content;
     user-select: none;
@@ -269,27 +264,28 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
 #selettoreOperazionePiccolo .elementiSelettore { margin-top: 4rem; max-width: 447.16px; }
 /* Fine operazioniPage */
 
-@media (max-height: 600px) {
-    header { padding-top: 30px; }
-    #homePage { min-height: 65vh; margin: 2rem 0; padding: 0 !important; }
-    footer { padding-bottom: 30px; }
+@media (max-height: 900px) {
+    body { display: flex; flex-direction: column; }
+    header { padding-top: 1.5rem; }
+    #homePage { padding: 3rem 0 !important; }
+    footer { padding-bottom: 1rem; }
 }
 
 @media (max-width: 1150px) {
     #homePage {
-        display: flex !important;
-        justify-content: center !important;
-        flex-direction: column !important;
-        height: min-content !important;
-        gap: 3rem !important;
-        padding: 3rem 0 !important;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: min-content;
+        gap: 3rem;
+        padding: 3rem 0;
     }
     #scelteDisponibili {
-        display: flex !important;
-        justify-content: center !important;
-        flex-direction: column !important;
-        height: min-content !important;
-        gap: 3rem !important;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: min-content;
+        gap: 3rem;
     }
     .card { width: 80%; }
     .cardTestiGrandi { display: block; }
