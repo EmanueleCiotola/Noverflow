@@ -113,7 +113,7 @@ function switchaSelettori(idSelettore1, idSelettore2, idInput) {
     // scambia input e risultato se quest'ultimo è non nullo
     const testo3 = input.value;
     const testo4= risultato.innerText;
-    if (/^[0-9A-Fa-f]+$/.test(testo4)) {
+    if (/^[0-9A-Fa-f,+-]+$/.test(testo4)) {
         input.value = testo4;
         risultato.innerText = testo3;
     }
@@ -133,7 +133,7 @@ function converti() {
     // ottieni le basi selezionate
     const primaBase = document.querySelector('#selettorePrimaBase .elementoSelezionato').innerText;
     const secondaBase = document.querySelector('#selettoreSecondaBase .elementoSelezionato').innerText;
-    const valoreDaConvertire = document.getElementById('elementoDaConvertire').value;
+    const valoreDaConvertire = document.getElementById('elementoDaConvertire').value.trim();
     let basePrima, baseSeconda;
     let controlloRisultato;
     // mappa delle basi
@@ -147,16 +147,50 @@ function converti() {
     basePrima = baseMappa[primaBase];
     baseSeconda = baseMappa[secondaBase];
     // controllo del valore in ingresso
-    if (basePrima === 2) controlloRisultato = /^[01]+$/; // binario
-    else if (basePrima === 8) controlloRisultato = /^[0-7]+$/; // ottale
-    else if (basePrima === 10) controlloRisultato = /^\d+$/; // decimale
-    else controlloRisultato = /^[0-9A-Fa-f]+$/; // esadecimale
+    if (basePrima === 2) controlloRisultato = /^[01,+-]+(\.[01]+)?$/; // binario
+    else if (basePrima === 8) controlloRisultato = /^[0-7,+-]+(\.[0-7]+)?$/; // ottale
+    else if (basePrima === 10) controlloRisultato = /^[0-9,+-]+(\.[0-9]+)?$/; // decimale
+    else controlloRisultato = /^[0-9A-Fa-f,+-]+(\.[0-9A-Fa-f]+)?$/; // esadecimale
     // verifica e conversione
-    if (controlloRisultato.test(valoreDaConvertire)) {
-        let numeroConvertito = parseInt(valoreDaConvertire, basePrima).toString(baseSeconda);
-        risultato.innerText = numeroConvertito.toUpperCase(); // mostra risultato in maiuscolo se esadecimale
-    } else if (valoreDaConvertire === "") risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà&nbsp;mostrato&nbsp;qui...";
-    else risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+    if (valoreDaConvertire.length === 1 &&
+        valoreDaConvertire !== "0" &&
+        valoreDaConvertire !== "1") {
+        risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+    } else {
+        if (controlloRisultato.test(valoreDaConvertire)) {
+            let numeroConvertito;
+            if (valoreDaConvertire.includes('.')) {
+                numeroConvertito = convertiDecimaleConVirgola(valoreDaConvertire, basePrima, baseSeconda);
+            } else {
+                numeroConvertito = parseInt(valoreDaConvertire, basePrima).toString(baseSeconda);
+            }
+            risultato.innerText = numeroConvertito.toUpperCase(); // mostra risultato in maiuscolo se esadecimale
+        } else if (valoreDaConvertire === "") {
+            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+        } else {
+            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+        }
+    }
+}
+function convertiDecimaleConVirgola(valore, basePrima, baseSeconda) {
+    const [parteIntera, parteDecimale] = valore.split('.');
+    let parteInteraConvertita = parseInt(parteIntera, basePrima).toString(baseSeconda);
+    let parteDecimaleConvertita = '';
+    if (parteDecimale) {
+        let decimale = 0;
+        for (let i = 0; i < parteDecimale.length; i++) {
+            decimale += parseInt(parteDecimale[i], basePrima) / Math.pow(basePrima, i + 1);
+        }
+        let contatore = 0;
+        while (decimale > 0 && contatore < 10) {
+            decimale *= baseSeconda;
+            let cifra = Math.floor(decimale);
+            parteDecimaleConvertita += cifra.toString(baseSeconda);
+            decimale -= cifra;
+            contatore++;
+        }
+    }
+    return parteInteraConvertita + (parteDecimaleConvertita ? '.' + parteDecimaleConvertita : '');
 }
 
 function rappresenta() {
@@ -171,16 +205,16 @@ function rappresenta() {
     if (primaRappresentazione === "Binario" &&
         valoreDaRappresentare.length === 1 &&
         valoreDaRappresentare != "0" &&
-        valoreDaRappresentare != "1") risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà&nbsp;mostrato&nbsp;qui...";
+        valoreDaRappresentare != "1") risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
     else if ((primaRappresentazione === "C1" || primaRappresentazione === "C2") && valoreDaRappresentare.length === 1) {
-        if (controlloRisultato.test(valoreDaRappresentare)) risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà&nbsp;mostrato&nbsp;qui...";
+        if (controlloRisultato.test(valoreDaRappresentare)) risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
         else risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
     }
     else {
         if (controlloRisultato.test(valoreDaRappresentare)) {
             let numeroRappresentato = convertiRappresentazione(primaRappresentazione, secondaRappresentazione, valoreDaRappresentare);
             risultato.innerText = numeroRappresentato; // mostra risultato
-        } else if (valoreDaRappresentare === "") risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà&nbsp;mostrato&nbsp;qui...";
+        } else if (valoreDaRappresentare === "") risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
         else risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
     }
 }
@@ -262,7 +296,20 @@ function Binario_C2(valore) {
     return `${segno}${complemento2}`; // restituisce il valore come stringa
 }
 function Binario_FP32(valore) {
+    // // Creiamo un ArrayBuffer di 4 byte (32 bit)
+    // const buffer = new ArrayBuffer(4);
+    // // Usiamo un DataView per lavorare con i dati come float a 32 bit
+    // const view = new DataView(buffer);
+    // // Inseriamo il numero float nel buffer
+    // view.setFloat32(0, valore);
 
+    // // Recuperiamo i 4 byte come un intero a 32 bit senza segno
+    // const intVal = view.getUint32(0);
+
+    // // Convertiamo l'intero in una stringa binaria di 32 bit
+    // const fp32 = intVal.toString(2).padStart(32, '0');
+
+    // return fp32;
 }
 function Binario_FP64(valore) {
 
