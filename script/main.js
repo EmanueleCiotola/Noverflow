@@ -45,7 +45,7 @@ document.querySelectorAll('.selettore').forEach(element => {
             aggiornaSelettore(opzione, elementoSelezionato, opzioni);
             if (element.classList.contains('selettore-operazione')) sincronizzaSelettoriOperandi(opzione.innerText);
         }
-        if (element.classList.contains('selettore-conversione')) {scegliConversione(); console.log("suca")}
+        if (element.classList.contains('selettore-conversione')) scegliConversione();
         else if (element.classList.contains('selettore-rappresentazione')) rappresenta();
         else opera();
         chiudiTuttiISelettori(); // chiudi tutti i selettori dopo la selezione
@@ -85,7 +85,6 @@ function verificaSeUguali(idElemento, opzioneScelta, idSelettore1, idSelettore2,
 }
 // funzione per sincronizzare i selettori operatore piccolo e grande
 function sincronizzaSelettoriOperandi(valore) {
-    console.log(valore)
     const selettorePiccolo = document.querySelector('#selettoreOperazionePiccolo .elementoSelezionato');
     const selettoreGrande = document.querySelector('#selettoreOperazioneGrande .elementoSelezionato');
     selettorePiccolo.innerHTML = valore;
@@ -371,29 +370,38 @@ function opera() {
     const primoOperando = document.getElementById('primoOperando').value;
     const secondoOperando = document.getElementById('secondoOperando').value;
     const operatore = document.querySelector('.selettore-operazione .elementoSelezionato').innerText;
-
+    // converti in decimale
     const primoInDecimale = converti(2, 10, primoOperando.toString());
     const secondoInDecimale = converti(2, 10, secondoOperando.toString());
-    console.log(primoInDecimale, secondoInDecimale);
-    let risultatoinDecimale;
-
-    switch (operatore) {
-        case 'ADD':
-            risultatoinDecimale = parseFloat(primoInDecimale) + parseFloat(secondoInDecimale);
-            break;
-        case 'SUB':
-            risultatoinDecimale = primoInDecimale + secondoInDecimale;
-            break;
-        case 'MUL':
-            risultatoinDecimale = primoInDecimale * secondoInDecimale;
-            break;
-        case 'DIV':
-            risultatoinDecimale = primoInDecimale / secondoInDecimale;
-            break;
+    let risultatoCalcolato;
+    if (primoInDecimale === "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui..." ||
+        secondoInDecimale === "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...") {
+        risultatoCalcolato = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+        risultato.classList.remove('risultatoCalcolato');
+    } else if (primoInDecimale === "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto..." ||
+        secondoInDecimale === "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...") {
+        risultatoCalcolato = "Un&nbsp;valore&nbsp;inserito è&nbsp;incompleto...";
+        risultato.classList.remove('risultatoCalcolato'); 
+    } else {
+        let risultatoinDecimale;
+        switch (operatore) {
+            case 'ADD':
+                risultatoinDecimale = parseFloat(primoInDecimale) + parseFloat(secondoInDecimale);
+                break;
+            case 'SUB':
+                risultatoinDecimale = parseFloat(primoInDecimale) - parseFloat(secondoInDecimale);
+                break;
+            case 'MUL':
+                risultatoinDecimale = parseFloat(primoInDecimale) * parseFloat(secondoInDecimale);
+                break;
+            case 'DIV':
+                risultatoinDecimale = parseFloat(primoInDecimale) / parseFloat(secondoInDecimale);
+                break;
+        }
+        // riconverti in binario e setta risultato
+        risultatoCalcolato = parseFloat(converti(10, 2, risultatoinDecimale.toString()).toString());
     }
-
-    risultato.innerHTML = converti(10, 2, risultatoinDecimale.toString());
-    console.log(risultatoinDecimale, risultato.innerHTML);
+    risultato.innerHTML = risultatoCalcolato; // conversioni in più per la rimozione degli 0 non significativi
 }
 
 
