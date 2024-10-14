@@ -41,10 +41,13 @@ document.querySelectorAll('.selettore').forEach(element => {
         } else if (element.classList.contains('selettore-rappresentazione')) {
             shouldUpdate = verificaSeUguali(element.id, opzione.innerText, "selettorePrimaRappresentazione", "selettoreSecondaRappresentazione", "elementoDaRappresentare");
         }
-        if (shouldUpdate) aggiornaSelettore(opzione, elementoSelezionato, opzioni);
-        if (element.classList.contains('selettore-conversione')) converti();
+        if (shouldUpdate) {
+            aggiornaSelettore(opzione, elementoSelezionato, opzioni);
+            if (element.classList.contains('selettore-operazione')) sincronizzaSelettoriOperandi(opzione.innerText);
+        }
+        if (element.classList.contains('selettore-conversione')) {scegliConversione(); console.log("suca")}
         else if (element.classList.contains('selettore-rappresentazione')) rappresenta();
-        else operaLa();
+        else opera();
         chiudiTuttiISelettori(); // chiudi tutti i selettori dopo la selezione
         selettoreAperto = null; // resetta la variabile del selettore aperto
         event.stopPropagation(); // impedisci la propagazione dell'evento
@@ -80,6 +83,17 @@ function verificaSeUguali(idElemento, opzioneScelta, idSelettore1, idSelettore2,
     }
     return true;
 }
+// funzione per sincronizzare i selettori operatore piccolo e grande
+function sincronizzaSelettoriOperandi(valore) {
+    console.log(valore)
+    const selettorePiccolo = document.querySelector('#selettoreOperazionePiccolo .elementoSelezionato');
+    const selettoreGrande = document.querySelector('#selettoreOperazioneGrande .elementoSelezionato');
+    selettorePiccolo.innerHTML = valore;
+    selettoreGrande.innerHTML = valore;
+    // aggiorna le classi delle opzioni selezionate
+    aggiornaClassiOpzioni('selettoreOperazionePiccolo', valore);
+    aggiornaClassiOpzioni('selettoreOperazioneGrande', valore);
+}
 // funzione per chiudere tutti i selettori
 const chiudiTuttiISelettori = () => {
     document.querySelectorAll('.selettoreAperto').forEach(elementoAperto => {
@@ -105,17 +119,19 @@ function switchaSelettori(idSelettore1, idSelettore2, idInput) {
     const testo1 = selettore1.innerText;
     const testo2 = selettore2.innerText;
     const testo3 = input.value;
-    const testo4= risultato.innerText;
-    if (/^[0-9A-Fa-f.+-]+$/.test(testo4)) {
+    const testo4 = risultato.innerHTML;
+    if (/^[0-9A-Fa-f.+-]+$/.test(testo4) || testo4 == "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...") {
         // scambia i testi
         selettore1.innerText = testo2;
         selettore2.innerText = testo1;
         // aggiorna le classi delle opzioni selezionate
         aggiornaClassiOpzioni(idSelettore1, testo2);
         aggiornaClassiOpzioni(idSelettore2, testo1);
-        // scambia input e risultato
-        input.value = testo4;
-        risultato.innerText = testo3;
+        // scambia input e risultato se risultato esiste
+        if (testo4 != "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...") { 
+            input.value = testo4;
+            risultato.innerText = testo3;
+        }
     }
 }
 // funzione per aggiornare le classi delle opzioni
@@ -129,13 +145,12 @@ const aggiornaClassiOpzioni = (idSelettore, testo) => {
 
 const risultato = document.getElementById("risultato");
 
-function converti() {
+function scegliConversione() {
     // ottieni le basi selezionate
     const primaBase = document.querySelector('#selettorePrimaBase .elementoSelezionato').innerText;
     const secondaBase = document.querySelector('#selettoreSecondaBase .elementoSelezionato').innerText;
-    const valoreDaConvertire = document.getElementById('elementoDaConvertire').value.trim();
+    const valoreDaConvertire = document.getElementById('elementoDaConvertire').value;
     let basePrima, baseSeconda;
-    let controlloRisultato;
     // mappa delle basi
     const baseMappa = {
         "Binario": 2,
@@ -146,6 +161,10 @@ function converti() {
     // ottenere le basi numeriche
     basePrima = baseMappa[primaBase];
     baseSeconda = baseMappa[secondaBase];
+    risultato.innerHTML = converti(basePrima, baseSeconda, valoreDaConvertire);
+}
+function converti(basePrima, baseSeconda, valoreDaConvertire) {
+    let controlloRisultato;
     // controllo del valore in ingresso
     if (basePrima === 2) controlloRisultato = /^[01.+-]+(\.[01]+)?$/; // binario
     else if (basePrima === 8) controlloRisultato = /^[0-7.+-]+(\.[0-7]+)?$/; // ottale
@@ -157,6 +176,7 @@ function converti() {
         valoreDaConvertire == "-")) {
             risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
             risultato.classList.remove('risultatoCalcolato');
+            return "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
     } else {
         if (controlloRisultato.test(valoreDaConvertire)) {
             let numeroConvertito;
@@ -164,22 +184,27 @@ function converti() {
                 if ((valoreDaConvertire.indexOf('.') + 1) == (valoreDaConvertire.length)) {
                     risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...";
                     risultato.classList.remove('risultatoCalcolato');
+                    return "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...";
                 } else {
                     numeroConvertito = convertiDecimaleConVirgola(valoreDaConvertire, basePrima, baseSeconda);
-                    risultato.innerText = numeroConvertito.toUpperCase(); // mostra risultato in maiuscolo se esadecimale
+                    risultato.innerHTML = numeroConvertito.toUpperCase();
                     risultato.classList.add('risultatoCalcolato');
+                    return numeroConvertito.toUpperCase(); // mostra risultato in maiuscolo se esadecimale
                 }
             } else {
                 numeroConvertito = parseInt(valoreDaConvertire, basePrima).toString(baseSeconda);
-                risultato.innerText = numeroConvertito.toUpperCase(); // mostra risultato in maiuscolo se esadecimale
+                risultato.innerHTML = numeroConvertito.toUpperCase();
                 risultato.classList.add('risultatoCalcolato');
+                return numeroConvertito.toUpperCase(); // mostra risultato in maiuscolo se esadecimale
             }
         } else if (valoreDaConvertire === "") {
             risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
             risultato.classList.remove('risultatoCalcolato');
+            return "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
         } else {
             risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
             risultato.classList.remove('risultatoCalcolato');
+            return "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
         }
     }
 }
@@ -342,9 +367,33 @@ function Binario_FP64(valore) {
 
 }
 
-function operaLa() {
-    const ged = document.querySelectorAll('.selettore-conversione .elementoSelezionato').innerText;
-    console.log("yeah")
+function opera() {
+    const primoOperando = document.getElementById('primoOperando').value;
+    const secondoOperando = document.getElementById('secondoOperando').value;
+    const operatore = document.querySelector('.selettore-operazione .elementoSelezionato').innerText;
+
+    const primoInDecimale = converti(2, 10, primoOperando.toString());
+    const secondoInDecimale = converti(2, 10, secondoOperando.toString());
+    console.log(primoInDecimale, secondoInDecimale);
+    let risultatoinDecimale;
+
+    switch (operatore) {
+        case 'ADD':
+            risultatoinDecimale = parseFloat(primoInDecimale) + parseFloat(secondoInDecimale);
+            break;
+        case 'SUB':
+            risultatoinDecimale = primoInDecimale + secondoInDecimale;
+            break;
+        case 'MUL':
+            risultatoinDecimale = primoInDecimale * secondoInDecimale;
+            break;
+        case 'DIV':
+            risultatoinDecimale = primoInDecimale / secondoInDecimale;
+            break;
+    }
+
+    risultato.innerHTML = converti(10, 2, risultatoinDecimale.toString());
+    console.log(risultatoinDecimale, risultato.innerHTML);
 }
 
 

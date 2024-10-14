@@ -30,9 +30,9 @@
     <main id="operazioniPage">
         <section id="spazioOperazione">
             <article class="cardFunzione osservato">
-                <h2>Conversioni di&nbsp;base</h2>
+                <h2>Operazioni binarie</h2>
                 <div id="spazioSceltaOperandi">
-                    <input type="text" id="primoOperando" name="primoOperando" placeholder="Inserisci..." oninput="this.value = this.value.replace(/[^01,+-]/g, '').replace(/(?!^[-+]?)[+-]/g, '').replace(/^(,)/g, '').replace(/(,.*),/g, '$1'); opera();" autocomplete="off">
+                    <input type="text" id="primoOperando" name="primoOperando" placeholder="Inserisci..." oninput="this.value = this.value.replace(/,/g, '.').replace(/[^01.+-]/g, '').replace(/(?!^[-+]?)[+-]/g, '').replace(/^(\.)/g, '').replace(/(\..*?)(\.)/g, '$1'); opera();" autocomplete="off">
                     <div id="selettoreOperazionePiccolo" class="selettore selettore-operazione">
                         <div class="spazioSelezionatoSelettore">
                             <p class="elementoSelezionato">ADD</p>
@@ -42,11 +42,10 @@
                             <li class="selezionatoDaSelettore">ADD</li>
                                 <li>SUB</li>
                                 <li>MUL</li>
-                                <li>SHL</li>
-                                <li>SHR</li>
+                                <li>DIV</li>
                         </ul>
                     </div>
-                    <input type="text" id="secondoOperando" name="secondoOperando" placeholder="Inserisci..." oninput="this.value = this.value.replace(/,/g, '.').replace(/[^0-9a-fA-F.+-]/g, '').replace(/(?!^[-+]?)[+-]/g, '').replace(/^(\.)/g, '').replace(/(\..*?)(\.)/g, '$1'); opera();" autocomplete="off">
+                    <input type="text" id="secondoOperando" name="secondoOperando" placeholder="Inserisci..." oninput="this.value = this.value.replace(/,/g, '.').replace(/[^01.+-]/g, '').replace(/(?!^[-+]?)[+-]/g, '').replace(/^(\.)/g, '').replace(/(\..*?)(\.)/g, '$1'); opera();" autocomplete="off">
                 </div>
                 <div id="selettoreOperazioneGrande" class="selettore selettore-operazione">
                     <div class="spazioSelezionatoSelettore">
@@ -57,8 +56,7 @@
                         <li class="selezionatoDaSelettore">ADD</li>
                             <li>SUB</li>
                             <li>MUL</li>
-                            <li>SHL</li>
-                            <li>SHR</li>
+                            <li>DIV</li>
                     </ul>
                 </div>
             </article>
