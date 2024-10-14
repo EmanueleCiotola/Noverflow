@@ -264,7 +264,7 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
 #selettoreOperazionePiccolo .elementiSelettore { margin-top: 4rem; max-width: 447.16px; }
 /* Fine operazioniPage */
 
-@media (max-height: 900px) {
+@media (max-height: 600px) {
     body { display: flex; flex-direction: column; }
     header { padding-top: 1.5rem; }
     #homePage { padding: 3rem 0 !important; }
