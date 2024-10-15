@@ -27,6 +27,7 @@ body, html {
     scroll-behavior: auto;
     text-align: center;
 }
+body { display: flex; flex-direction: column; justify-content: space-between; min-height: 100vh; }
 ::selection { background-color: var(--accentColor); color: var(--bgColor); }
 
 h1 { font-size: calc(40px + .390625vw); line-height: 2.6rem; }
@@ -47,7 +48,7 @@ button {
 @media (hover: hover) { button:hover { box-shadow: 0 0 15px var(--accentColor) !important; } }
 button:active { transform: scale(.95); box-shadow: 0 0 20px var(--accentColor) !important; }
 
-header { min-height: 13vh; align-content: end; opacity: 0; transform: translateY(-10px); }
+header { padding-top: 3rem; align-content: end; opacity: 0; transform: translateY(-10px); }
 header h1 {
     width: min-content;
     user-select: none;
@@ -93,7 +94,7 @@ header h1:first-child, header h1:last-child { user-select: none; }
 #noverflow { display: grid; grid-template-columns: 1fr; width: min-content; margin: 0 auto; transition: transform .05s var(--transizioneSenzaRimbalzo) }
 #noverflow:active { transform: scale(.95); }
 
-footer { min-height: 7vh; color: var(--disabledTextColor); opacity: 0; margin: 0 5rem; }
+footer { padding-bottom: 1.5rem; color: var(--disabledTextColor); opacity: 0; margin: 0 5rem; }
 #homePageFooter.osservato { transition-delay: 900ms !important; }
 footer.osservato { transition-delay: 500ms !important; }
 
@@ -227,7 +228,6 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
     gap: 4rem;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
 }
 #homePage .card:nth-child(1).osservato { transition-delay: 500ms !important; }
 #homePage .card:nth-child(2).osservato { transition-delay: 600ms !important; }
@@ -263,13 +263,6 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
 #selettoreOperazionePiccolo .spazioSelezionatoSelettore { display: none; width: 100%; }
 #selettoreOperazionePiccolo .elementiSelettore { margin-top: 4rem; max-width: 447.16px; }
 /* Fine operazioniPage */
-
-@media (max-height: 600px) {
-    body { display: flex; flex-direction: column; }
-    header { padding-top: 1.5rem; }
-    #homePage { padding: 3rem 0 !important; }
-    footer { padding-bottom: 1rem; }
-}
 
 @media (max-width: 1150px) {
     #homePage {
