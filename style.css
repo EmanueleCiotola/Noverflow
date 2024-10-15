@@ -48,7 +48,8 @@ button {
 @media (hover: hover) { button:hover { box-shadow: 0 0 15px var(--accentColor) !important; } }
 button:active { transform: scale(.95); box-shadow: 0 0 20px var(--accentColor) !important; }
 
-header { padding-top: 3rem; align-content: end; opacity: 0; transform: translateY(-10px); }
+header { padding-top: 2rem; align-content: end; opacity: 0; transform: translateY(-10px); }
+#homePageHeader { padding-top: 3rem; }
 header h1 {
     width: min-content;
     user-select: none;
@@ -94,7 +95,8 @@ header h1:first-child, header h1:last-child { user-select: none; }
 #noverflow { display: grid; grid-template-columns: 1fr; width: min-content; margin: 0 auto; transition: transform .05s var(--transizioneSenzaRimbalzo) }
 #noverflow:active { transform: scale(.95); }
 
-footer { padding-bottom: 1.5rem; color: var(--disabledTextColor); opacity: 0; margin: 0 5rem; }
+footer { padding-bottom: 1rem; color: var(--disabledTextColor); opacity: 0; margin: 0 5rem; }
+#homePageFooter { padding-bottom: 1.5rem; }
 #homePageFooter.osservato { transition-delay: 900ms !important; }
 footer.osservato { transition-delay: 500ms !important; }
 
@@ -290,7 +292,6 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
     footer.osservato { transition-delay: 300ms !important; }
     #homePageFooter.osservato { transition-delay: 300ms !important; }
 }
-
 @media (max-width: 800px) {
     #spazioSceltaBasi, #spazioSceltaRappresentazioni { flex-direction: column; }
     #bottoneSwitchaBase, #bottoneSwitchaRappresentazione { margin: 1.5rem 0; }
@@ -301,12 +302,30 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
     #selettoreOperazionePiccolo, #selettoreOperazionePiccolo .spazioSelezionatoSelettore { display: flex; }
     #selettoreOperazioneGrande, #selettoreOperazioneGrande .spazioSelezionatoSelettore { display: none; }
 }
-
 @media (max-width: 575px) {
     .cardTestiGrandi { display: none; }
     .cardTestiPiccoli { display: block; }
     footer { margin: 0 3rem; }
 }
-
 @media (max-width: 400px) { footer { margin: 0; } }
+
+@media (max-height: 500px) {
+    header { padding-top: 1.5rem; }
+    #spazioConversione, #spazioRappresentazione, #spazioOperazione { margin-top: 2rem; }
+    .cardRisultato { margin-top: 1.5rem; }
+    #scelteDisponibili { margin: 4rem 0; }
+    footer { padding-bottom: 1rem; }
+}
+
+@media (max-height: 500px) and (max-width: 1150px) {
+    #homePage { gap: 2rem; padding: 2rem 0; }
+    #scelteDisponibili { gap: 2rem; }
+    #homePageHeader { padding-top: 2rem; }
+    #homePageFooter { padding-bottom: 1.5rem; }
+}
+@media (max-height: 575px) and (min-width: 1150px) {
+    #homePage { margin: 2rem 0; }
+    #homePageHeader { padding-top: 1.5rem; }
+    #homePageFooter { padding-bottom: 1rem; }
+}
 /* Fine regolazioni grandezza */
