@@ -119,7 +119,7 @@ function switchaSelettori(idSelettore1, idSelettore2, idInput) {
     const testo2 = selettore2.innerText;
     const testo3 = input.value;
     const testo4 = risultato.innerHTML;
-    if (/^[0-9A-Fa-f.+-]+$/.test(testo4) || testo4 == "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui..." ||
+    if (/^(?!.*[+-]{2})(?!.*\..*\.)[0-9A-Fa-f]*([+-]?[0-9A-Fa-f]*(\.[0-9A-Fa-f]*)?)?$/.test(testo4) || testo4 == "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui..." ||
     testo4 == "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido..." || testo4 == "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...") {
         // scambia i testi
         selettore1.innerText = testo2;
@@ -237,7 +237,7 @@ function rappresenta() {
     const valoreDaRappresentare = document.getElementById('elementoDaRappresentare').value;
     let controlloRisultato;
     // controllo del valore in ingresso
-    if (primaRappresentazione === "Binario") controlloRisultato = /^[+-]?[01]+$/; // binario
+    if (primaRappresentazione === "Binario") controlloRisultato = /^[01.+-]+(\.[01]+)?$/; // binario
     else controlloRisultato = /^[01]+$/; // altre rappresentazioni
     // verifica e rappresentazione
     if (primaRappresentazione === "Binario" &&
@@ -257,7 +257,29 @@ function rappresenta() {
             risultato.classList.remove('risultatoCalcolato');
         }
     }
-    else {
+    else if (primaRappresentazione === "FP32" && valoreDaRappresentare.length != 32) {
+        if (valoreDaRappresentare === "") {
+            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.classList.remove('risultatoCalcolato');
+        } else if (valoreDaRappresentare.length < 32 && controlloRisultato.test(valoreDaRappresentare)) {
+            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.classList.remove('risultatoCalcolato');
+        } else {
+            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+            risultato.classList.remove('risultatoCalcolato');
+        }
+    } else if (primaRappresentazione === "FP64" && valoreDaRappresentare.length != 64) {
+        if (valoreDaRappresentare === "") {
+            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.classList.remove('risultatoCalcolato');
+        } else if (valoreDaRappresentare.length < 64 && controlloRisultato.test(valoreDaRappresentare)) {
+            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.classList.remove('risultatoCalcolato');
+        } else {
+            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+            risultato.classList.remove('risultatoCalcolato');
+        }
+    } else {
         if (controlloRisultato.test(valoreDaRappresentare)) {
             let numeroRappresentato = convertiRappresentazione(primaRappresentazione, secondaRappresentazione, valoreDaRappresentare);
             risultato.innerText = numeroRappresentato; // mostra risultato
@@ -266,6 +288,7 @@ function rappresenta() {
             risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
             risultato.classList.remove('risultatoCalcolato');
         }
+        
         else {
             risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
             risultato.classList.remove('risultatoCalcolato');
@@ -307,8 +330,6 @@ function convertiRappresentazione(primaRappresentazione, secondaRappresentazione
         case "FP64":
             risultatoConversione = Binario_FP64(valoreBinario);
             break;
-        default:
-            return "Rappresentazione non supportata."; //TODO Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...
     }
 
     return risultatoConversione;
@@ -324,10 +345,28 @@ function C2_Binario(valore) {
     return C1_Binario(complemento1); // restituisce il valore come stringa
 }
 function FP32_Binario(valore) {
-    
+    // converte la stringa binaria in un numero intero senza segno (32 bit)
+    const intValue = parseInt(valore, 2);
+    // creazione di un array buffer di 4 byte (32 bit)
+    const buffer = new ArrayBuffer(4);
+    // creazione di una vista Uint32Array per scrivere il valore intero nel buffer
+    const intView = new Uint32Array(buffer);
+     intView[0] = intValue;
+    // creazione di una vista Float32Array per leggere il valore in virgola mobile dal buffer
+    const float32View = new Float32Array(buffer);
+    return parseFloat(converti(10, 2, float32View[0].toString()).toString());
 }
 function FP64_Binario(valore) {
-    
+    // converte la stringa binaria in un BigInt
+    const intValue = BigInt('0b' + valore);
+    // creazione di un array buffer di 8 byte (64 bit)
+    const buffer = new ArrayBuffer(8);
+    // creazione di una vista BigUint64Array per scrivere il valore intero nel buffer
+    const intView = new BigUint64Array(buffer);
+    intView[0] = intValue;
+    // creazione di una vista Float64Array per leggere il valore in virgola mobile dal buffer
+    const float64View = new Float64Array(buffer);
+    return parseFloat(converti(10, 2, float64View[0].toString().toString()));
 }
 function Binario_C1(valore) {
     const primoCarattere = valore.charAt(0);
@@ -350,23 +389,24 @@ function Binario_C2(valore) {
     return `${segno}${complemento2}`; // restituisce il valore come stringa
 }
 function Binario_FP32(valore) {
-    // // Creiamo un ArrayBuffer di 4 byte (32 bit)
-    // const buffer = new ArrayBuffer(4);
-    // // Usiamo un DataView per lavorare con i dati come float a 32 bit
-    // const view = new DataView(buffer);
-    // // Inseriamo il numero float nel buffer
-    // view.setFloat32(0, valore);
-
-    // // Recuperiamo i 4 byte come un intero a 32 bit senza segno
-    // const intVal = view.getUint32(0);
-
-    // // Convertiamo l'intero in una stringa binaria di 32 bit
-    // const fp32 = intVal.toString(2).padStart(32, '0');
-
-    // return fp32;
+    const valoreDecimale = converti(2, 10, valore.toString());
+    // creazione di un array Float32Array e impostazione del valore decimale
+    const float32 = new Float32Array(1);
+    float32[0] = valoreDecimale;
+    // creazione di una vista Uint32Array per leggere i bit del Float32Array
+    const intView = new Uint32Array(float32.buffer);
+    // converte il valore in una stringa binaria di 32 bit
+    return intView[0].toString(2).padStart(32, '0');
 }
 function Binario_FP64(valore) {
-
+    const valoreDecimale = converti(2, 10, valore.toString());
+    // creazione di un array Float64Array e impostazione del valore decimale
+    const float64 = new Float64Array(1);
+    float64[0] = valoreDecimale;
+    // creazione di una vista Uint64Array per leggere i bit del Float64Array
+    const intView = new BigUint64Array(float64.buffer);
+    // converte il valore in una stringa binaria di 64 bit
+    return intView[0].toString(2).padStart(64, '0');
 }
 
 function opera() {
