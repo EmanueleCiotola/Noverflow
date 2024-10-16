@@ -116,7 +116,6 @@ footer.osservato { transition-delay: 500ms !important; }
     background-color: var(--cardColor);
     padding: 2rem 1.8rem 2.8rem 1.8rem;
     width: 80%;
-    height: fit-content; /*TODO*/
     border-radius: .8rem;
     opacity: 0;
     transform: translateY(10px);
@@ -186,7 +185,6 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
     background-color: var(--cardColor);
     padding: 1.8rem 1.8rem;
     width: 80%;
-    height: fit-content; /*TODO*/
     border-radius: .8rem;
     opacity: 0;
     transform: translateY(10px);

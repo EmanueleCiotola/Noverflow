@@ -62,7 +62,7 @@
                 </div>
                 <input type="text" id="elementoDaConvertire" name="elementoDaConvertire" placeholder="Inserisci..." oninput="this.value = this.value.replace(/,/g, '.').replace(/[^0-9a-fA-F.+-]/g, '').replace(/(?!^[-+]?)[+-]/g, '').replace(/^(\.)/g, '').replace(/(\..*?)(\.)/g, '$1'); scegliConversione();" autocomplete="off">
             </article>
-            <article class="cardRisultato osservato">
+            <article class="cardRisultato osservato" onclick="copiaRisultato();">
                 <p id="risultato">Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...</p>
             </article>
         </section>

@@ -1,20 +1,25 @@
 // gestione items osservati
 var elementiDaOsservare = document.querySelectorAll('.osservato');
-var callback = function(items) {
-    items.forEach((item) => {
-        var position = item.target.getBoundingClientRect();
-        if (item.isIntersecting) {
-            item.target.classList.add("mostrato");
-        } else if (position.top > 0) { // rimuove la classe mostrato solo se l'item si trova nella parte non visibile superiore dello schermo
-            item.target.classList.remove("mostrato");
-        }
-    });
-}
-var observer = new IntersectionObserver(callback, {threshold: .05});
+// rimozione preventiva per evitare effetto taglio animazione
 elementiDaOsservare.forEach((element) => {
-    observer.observe(element);
+    element.classList.remove("mostrato");
 });
-
+setTimeout(() => {
+    var callback = function(items) {
+        items.forEach((item) => {
+            var position = item.target.getBoundingClientRect();
+            if (item.isIntersecting) {
+                item.target.classList.add("mostrato");
+            } else if (position.top > 0) { // rimuove la classe mostrato solo se l'item si trova nella parte non visibile superiore dello schermo
+                item.target.classList.remove("mostrato");
+            }
+        });
+    }
+    var observer = new IntersectionObserver(callback, {threshold: .05});
+    elementiDaOsservare.forEach((element) => {
+        observer.observe(element);
+    });
+}, 300);
 
 
 // gestione dei selettori
@@ -262,7 +267,7 @@ function rappresenta() {
             risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
             risultato.classList.remove('risultatoCalcolato');
         } else if (valoreDaRappresentare.length < 32 && controlloRisultato.test(valoreDaRappresentare)) {
-            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...";
             risultato.classList.remove('risultatoCalcolato');
         } else {
             risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
@@ -273,7 +278,7 @@ function rappresenta() {
             risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
             risultato.classList.remove('risultatoCalcolato');
         } else if (valoreDaRappresentare.length < 64 && controlloRisultato.test(valoreDaRappresentare)) {
-            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...";
             risultato.classList.remove('risultatoCalcolato');
         } else {
             risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
@@ -445,6 +450,33 @@ function opera() {
         risultatoCalcolato = parseFloat(converti(10, 2, risultatoinDecimale.toString()).toString());
     }
     risultato.innerHTML = risultatoCalcolato; // conversioni in più per la rimozione degli 0 non significativi
+}
+
+
+
+// gestione copia risultato al click
+// todo
+function copiaRisultato() {
+    // seleziona l'elemento del risultato
+    const risultato = document.getElementById('risultato');
+    const testoRisultato = risultato.innerHTML;
+    // verifica se il testo è diverso dal testo predefinito
+    if (testoRisultato !== "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui..." &&
+        testoRisultato !== "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido..." &&
+        testoRisultato !== "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto..." &&
+        testoRisultato !== "Un&nbsp;valore&nbsp;inserito è&nbsp;incompleto...") {
+        // utilizza l'API Clipboard per copiare il testo
+        navigator.clipboard.writeText(testoRisultato)
+            .then(() => {
+                // mostra un messaggio di conferma
+                alert('Risultato copiato: ' + testoRisultato);
+            })
+            .catch(err => {
+                console.error('Errore nella copia: ', err);
+            });
+    } else {
+        alert('Nessun risultato da copiare.');
+    }
 }
 
 
