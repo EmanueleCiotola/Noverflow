@@ -19,7 +19,7 @@ setTimeout(() => {
     elementiDaOsservare.forEach((element) => {
         observer.observe(element);
     });
-}, 400);
+}, 300);
 
 
 // gestione dei selettori
