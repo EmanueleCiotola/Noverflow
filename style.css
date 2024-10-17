@@ -7,7 +7,6 @@
     --accentColor: #51f02d;
     --cardColor: rgba(164, 226, 151, .05);
     --disabledTextColor: rgba(231, 240, 229, .5);
-
     --transizioneConRimbalzo: cubic-bezier(0.3, 0, 0.25, 1.5);
     --transizioneSenzaRimbalzo: cubic-bezier(0.3, 0, 0.25, 1);
 }
@@ -133,6 +132,7 @@ footer.osservato { transition-delay: 500ms !important; }
     align-items: center;
     cursor: pointer;
 }
+.spazioSelezionatoSelettore:has(.elementiSelettore.selettoreAperto) {background-color: red;}
 .iconaMenuSelezione {
     width: 1rem;
     height: 1rem;
@@ -190,6 +190,7 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
     transform: translateY(10px);
     margin-top: 2rem;
     text-align: center;
+    cursor: pointer;
 }
 #risultato { color: var(--disabledTextColor); }
 #risultato.risultatoCalcolato { color: var(--textColor); word-break: break-all; overflow-wrap: break-word; }
@@ -359,3 +360,28 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
     #homePageFooter { padding-bottom: 1rem; }
 }
 /* Fine regolazioni grandezza */
+
+
+
+
+
+
+/* todo */
+#avvisoMessaggioCopiato {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--cardColor);
+    filter: brightness(1.2);
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    border-radius: .8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#avvisoMessaggioCopiato.visibile {
+    opacity: 1;
+}

@@ -149,7 +149,7 @@ const aggiornaClassiOpzioni = (idSelettore, testo) => {
 };
 
 
-
+// gestione conversioni
 const risultato = document.getElementById("risultato");
 
 function scegliConversione() {
@@ -236,6 +236,7 @@ function convertiDecimaleConVirgola(valore, basePrima, baseSeconda) {
     return parteInteraConvertita + (parteDecimaleConvertita ? '.' + parteDecimaleConvertita : '');
 }
 
+// gestione rappresentazioni
 function rappresenta() {
     const primaRappresentazione = document.querySelector('#selettorePrimaRappresentazione .elementoSelezionato').innerText;
     const secondaRappresentazione = document.querySelector('#selettoreSecondaRappresentazione .elementoSelezionato').innerText;
@@ -414,6 +415,7 @@ function Binario_FP64(valore) {
     return intView[0].toString(2).padStart(64, '0');
 }
 
+// gestione operazioni
 function opera() {
     const primoOperando = document.getElementById('primoOperando').value;
     const secondoOperando = document.getElementById('secondoOperando').value;
@@ -456,28 +458,29 @@ function opera() {
 
 // gestione copia risultato al click
 // todo
+let timerCopiato;
 function copiaRisultato() {
-    // seleziona l'elemento del risultato
     const risultato = document.getElementById('risultato');
     const testoRisultato = risultato.innerHTML;
-    // verifica se il testo è diverso dal testo predefinito
+    const avvisoMessaggioCopiato = document.getElementById('avvisoMessaggioCopiato');
     if (testoRisultato !== "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui..." &&
         testoRisultato !== "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido..." &&
         testoRisultato !== "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto..." &&
         testoRisultato !== "Un&nbsp;valore&nbsp;inserito è&nbsp;incompleto...") {
-        // utilizza l'API Clipboard per copiare il testo
-        navigator.clipboard.writeText(testoRisultato)
-            .then(() => {
-                // mostra un messaggio di conferma
-                alert('Risultato copiato: ' + testoRisultato);
-            })
-            .catch(err => {
-                console.error('Errore nella copia: ', err);
-            });
-    } else {
-        alert('Nessun risultato da copiare.');
+        navigator.clipboard.writeText(testoRisultato).then(() => {
+            // rimuovi qualsiasi timer precedente
+            clearTimeout(timerCopiato);
+            // mostra il messaggio "Copiato"
+            avvisoMessaggioCopiato.classList.add('visibile');
+            // avvia un nuovo timer per nascondere il messaggio dopo 2 secondi
+            timerCopiato = setTimeout(() => {
+                avvisoMessaggioCopiato.classList.remove('visibile');
+            }, 2000);
+        });
     }
 }
+
+
 
 
 
