@@ -196,7 +196,6 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
 
 #scelteDisponibili {
     display: grid;
-    grid-template-columns: repeat(1, auto);
     grid-template-columns: repeat(2, 15rem);
     gap: 4rem;
     justify-content: center;
@@ -205,6 +204,29 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
 }
 #scelteDisponibili .card:nth-child(1).osservato { transition-delay: 300ms !important; }
 #scelteDisponibili .card:nth-child(2).osservato { transition-delay: 400ms !important; }
+
+#spazioDescrizione {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    text-align: left;
+    color: var(--secondaryTextColor);
+    margin-bottom: 5rem;
+}
+#spazioDescrizione h3 { padding-bottom: 1rem; }
+#spazioDescrizione p:not(:last-child), #spazioDescrizione li:not(:last-child) { padding-bottom: .5rem; }
+#spazioDescrizione ul { padding-left: 1rem; }
+#spazioDescrizione ol  { padding-left: 2rem; }
+.cardDescrizione {
+    background-color: var(--cardColor);
+    padding: 2rem 1.8rem;
+    width: 80%;
+    border-radius: .8rem;
+    opacity: 0;
+    transform: translateY(10px);
+}
+.cardDescrizione .osservato { transition-delay: 400ms !important; }
 
 .osservato { will-change: transform, opacity; }
 .mostrato {
@@ -287,6 +309,7 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
     #homePage .card:nth-child(2).osservato { transition-delay: 300ms !important; }
     #homePage .card:nth-child(3).osservato { transition-delay: 300ms !important; }
     #scelteDisponibili .card:nth-child(2).osservato { transition-delay: 300ms !important; }
+    .cardDescrizione { transition-delay: 300ms !important; }
     footer.osservato { transition-delay: 300ms !important; }
     #homePageFooter.osservato { transition-delay: 300ms !important; }
 }
@@ -305,6 +328,13 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
     .cardTestiPiccoli { display: block; }
     footer { margin: 0 3rem; }
 }
+@media (max-width: 480px) {
+    #spazioDescrizione { background-color: var(--cardColor); gap: 0; }
+    #spazioDescrizione h3 { padding-bottom: .5rem; }
+    #spazioDescrizione p:not(:last-child), #spazioDescrizione li:not(:last-child) { padding-bottom: .3rem; }
+    .cardDescrizione { width: 100%; border-radius: 0; margin-top: 0; padding: 1.5rem 2rem; background-color: transparent; }
+    .cardDescrizione:not(:first-child) { margin-top: 0; }
+}
 @media (max-width: 400px) { footer { margin: 0; } }
 
 @media (max-height: 500px) {
@@ -312,12 +342,14 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
     #spazioConversione, #spazioRappresentazione, #spazioOperazione { margin-top: 2rem; }
     .cardRisultato { margin-top: 1.5rem; }
     #scelteDisponibili { margin: 4rem 0; }
+    #spazioDescrizione { margin-bottom: 4rem; }
     footer { padding-bottom: 1rem; }
 }
 
 @media (max-height: 500px) and (max-width: 1150px) {
     #homePage { gap: 2rem; padding: 2rem 0; }
     #scelteDisponibili { gap: 2rem; }
+    #spazioDescrizione { gap: 2rem; }
     #homePageHeader { padding-top: 2rem; }
     #homePageFooter { padding-bottom: 1.5rem; }
 }
