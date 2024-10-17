@@ -19,7 +19,7 @@ setTimeout(() => {
     elementiDaOsservare.forEach((element) => {
         observer.observe(element);
     });
-}, 300);
+}, 400);
 
 
 // gestione dei selettori
@@ -473,9 +473,7 @@ function copiaRisultato() {
             // mostra il messaggio "Copiato"
             avvisoMessaggioCopiato.classList.add('visibile');
             // avvia un nuovo timer per nascondere il messaggio dopo 2 secondi
-            timerCopiato = setTimeout(() => {
-                avvisoMessaggioCopiato.classList.remove('visibile');
-            }, 2000);
+            timerCopiato = setTimeout(() => { avvisoMessaggioCopiato.classList.remove('visibile'); }, 1300);
         });
     }
 }
