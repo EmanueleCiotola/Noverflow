@@ -22,6 +22,7 @@ setTimeout(() => {
 }, 300);
 
 
+
 // gestione dei selettori
 let selettoreAperto = null; // variabile per tenere traccia del selettore attualmente aperto
 document.querySelectorAll('.selettore').forEach(element => {
@@ -147,6 +148,7 @@ const aggiornaClassiOpzioni = (idSelettore, testo) => {
     opzioni.forEach(op => op.classList.remove('selezionatoDaSelettore'));
     opzioni.forEach(op => { if (op.textContent === testo) { op.classList.add('selezionatoDaSelettore'); } });
 };
+
 
 
 // gestione conversioni
@@ -453,32 +455,6 @@ function opera() {
     }
     risultato.innerHTML = risultatoCalcolato; // conversioni in più per la rimozione degli 0 non significativi
 }
-
-
-
-// gestione copia risultato al click
-// todo
-let timerCopiato;
-function copiaRisultato() {
-    const risultato = document.getElementById('risultato');
-    const testoRisultato = risultato.innerHTML;
-    const avvisoMessaggioCopiato = document.getElementById('avvisoMessaggioCopiato');
-    if (testoRisultato !== "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui..." &&
-        testoRisultato !== "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido..." &&
-        testoRisultato !== "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto..." &&
-        testoRisultato !== "Un&nbsp;valore&nbsp;inserito è&nbsp;incompleto...") {
-        navigator.clipboard.writeText(testoRisultato).then(() => {
-            // rimuovi qualsiasi timer precedente
-            clearTimeout(timerCopiato);
-            // mostra il messaggio "Copiato"
-            avvisoMessaggioCopiato.classList.add('visibile');
-            // avvia un nuovo timer per nascondere il messaggio dopo 2 secondi
-            timerCopiato = setTimeout(() => { avvisoMessaggioCopiato.classList.remove('visibile'); }, 1300);
-        });
-    }
-}
-
-
 
 
 
