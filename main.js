@@ -115,11 +115,13 @@ const selezionaOpzione = (opzioneSelezionata, tutteLeOpzioni) => {
 document.addEventListener('click', chiudiTuttiISelettori);
 window.addEventListener('scroll', chiudiTuttiISelettori);
 // gestione switch dei selettori
+let rotazione = 0;
 function switchaSelettori(idSelettore1, idSelettore2, idInput) {
     const selettore1 = document.getElementById(idSelettore1).querySelector('.elementoSelezionato');
     const selettore2 = document.getElementById(idSelettore2).querySelector('.elementoSelezionato');
     const input = document.getElementById(idInput);
     const risultato = document.getElementById("risultato");
+    const icona = document.querySelector(".iconaBottoneSwitchaSelettori");
     // recupera i testi delle opzioni selezionate
     const testo1 = selettore1.innerText;
     const testo2 = selettore2.innerText;
@@ -133,6 +135,9 @@ function switchaSelettori(idSelettore1, idSelettore2, idInput) {
         // aggiorna le classi delle opzioni selezionate
         aggiornaClassiOpzioni(idSelettore1, testo2);
         aggiornaClassiOpzioni(idSelettore2, testo1);
+        // ruotaIcona
+        rotazione += 180;
+        icona.style.transform = `rotate(${rotazione}deg)`;
         // scambia input e risultato se risultato esiste
         if (testo4 != "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui..." &&
             testo4 != "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido..." &&
