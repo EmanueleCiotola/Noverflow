@@ -339,7 +339,7 @@ input[type="text"]::placeholder { color: var(--disabledTextColor); }
     footer { margin: 0 3rem; }
 }
 @media (max-width: 480px) {
-    #spazioDescrizione { background-color: var(--cardColor); gap: 0; }
+    #spazioDescrizione { background-color: var(--cardColor); gap: 0; padding: 1.5rem 0; }
     #spazioDescrizione h3 { padding-bottom: .5rem; }
     #spazioDescrizione p:not(:last-child), #spazioDescrizione li:not(:last-child) { padding-bottom: .3rem; }
     .cardDescrizione { width: 100%; border-radius: 0; margin-top: 0; padding: 1.5rem 2rem; background-color: transparent; }
