@@ -8,7 +8,7 @@ setTimeout(() => {
     var callback = function(items) {
         items.forEach((item) => {
             var position = item.target.getBoundingClientRect();
-            if (item.isIntersecting) {
+            if (item.isIntersecting || position.bottom < 0) {
                 item.target.classList.add("mostrato");
             } else if (position.top > 0) { // rimuove la classe mostrato solo se l'item si trova nella parte non visibile superiore dello schermo
                 item.target.classList.remove("mostrato");
@@ -23,8 +23,25 @@ setTimeout(() => {
 
 
 
+// gestioni variabili globali
+const risultato = document.getElementById("risultato");
+const messaggiRisultato = {
+    risultatoDefault: "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...",
+    valoreIncompleto: "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...",
+    valoreNonValido: "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido..."
+};
+const controlli = {
+    2: /^[01.+-]+(\.[01]+)?$/, // binario
+    8: /^[0-7.+-]+(\.[0-7]+)?$/, // ottale
+    10: /^[0-9.+-]+(\.[0-9]+)?$/, // decimale
+    16: /^[0-9A-Fa-f.+-]+(\.[0-9A-Fa-f]+)?$/ // esadecimale
+};
+
+
+
 // gestione dei selettori
 let selettoreAperto = null; // variabile per tenere traccia del selettore attualmente aperto
+let rotazioneIconaSwitchSelettori = 0; // variabile per tenere traccia della rotazione dell'icona switchSelettori
 document.querySelectorAll('.selettore').forEach(element => {
     const spazioSelezionatoSelettore = element.querySelector('.spazioSelezionatoSelettore');
     const elementoSelezionato = element.querySelector('.elementoSelezionato');
@@ -32,38 +49,34 @@ document.querySelectorAll('.selettore').forEach(element => {
     const elementiSelettore = element.querySelector('.elementiSelettore');
     const opzioni = element.querySelectorAll('.elementiSelettore li');
     const toggleSelettore = (event) => {
-        if (selettoreAperto === elementiSelettore) {
-            chiudiTuttiISelettori(); // chiudi il selettore se è già aperto
-        } else {
+        if (selettoreAperto !== elementiSelettore) {
             chiudiTuttiISelettori(); // chiudi gli altri selettori
             apriSelettore(elementiSelettore, iconaMenuSelezione);
-        }
+        } else chiudiTuttiISelettori(); // chiudi il selettore aperto se è cliccato di nuovo
         event.stopPropagation();
     };
     const gestisciOpzioneSelezionata = (opzione) => (event) => {
-        let shouldUpdate = true; // variabile per controllare se aggiornare
-        if (element.classList.contains('selettore-conversione')) {
-            shouldUpdate = verificaSeUguali(element.id, opzione.innerText, "selettorePrimaBase", "selettoreSecondaBase", "elementoDaConvertire");
-        } else if (element.classList.contains('selettore-rappresentazione')) {
-            shouldUpdate = verificaSeUguali(element.id, opzione.innerText, "selettorePrimaRappresentazione", "selettoreSecondaRappresentazione", "elementoDaRappresentare");
-        }
+        const shouldUpdate = element.classList.contains('selettore-conversione') 
+            ? verificaSeUguali(element.id, opzione.innerText, "selettorePrimaBase", "selettoreSecondaBase", "elementoDaConvertire")
+            : element.classList.contains('selettore-rappresentazione') 
+                ? verificaSeUguali(element.id, opzione.innerText, "selettorePrimaRappresentazione", "selettoreSecondaRappresentazione", "elementoDaRappresentare")
+                : true;
         if (shouldUpdate) {
             aggiornaSelettore(opzione, elementoSelezionato, opzioni);
-            if (element.classList.contains('selettore-operazione')) sincronizzaSelettoriOperandi(opzione.innerText);
+            if (element.classList.contains('selettore-conversione')) scegliConversione();
+            else if (element.classList.contains('selettore-rappresentazione')) rappresenta();
+            else {
+                sincronizzaSelettoriOperandi(opzione.innerText);
+                opera();
+            }
         }
-        if (element.classList.contains('selettore-conversione')) scegliConversione();
-        else if (element.classList.contains('selettore-rappresentazione')) rappresenta();
-        else opera();
         chiudiTuttiISelettori(); // chiudi tutti i selettori dopo la selezione
         selettoreAperto = null; // resetta la variabile del selettore aperto
         event.stopPropagation(); // impedisci la propagazione dell'evento
     };
     spazioSelezionatoSelettore.addEventListener('click', toggleSelettore);
     opzioni.forEach(opzione => opzione.addEventListener('click', gestisciOpzioneSelezionata(opzione)));
-    // aggiungi un evento di clic sugli elementi del selettore per evitare di chiudere
-    elementiSelettore.addEventListener('click', (event) => {
-        event.stopPropagation(); // impedisci la propagazione dell'evento
-    });
+    elementiSelettore.addEventListener('click', (event) => { event.stopPropagation(); });
 });
 // funzione per aprire il selettore
 const apriSelettore = (elementiSelettore, iconaMenuSelezione) => {
@@ -80,30 +93,23 @@ const aggiornaSelettore = (opzioneSelezionata, elementoSelezionato, tutteLeOpzio
 function verificaSeUguali(idElemento, opzioneScelta, idSelettore1, idSelettore2, idInput) {
     const selettore1 = document.getElementById(idSelettore1);
     const selettore2 = document.getElementById(idSelettore2);
-    if (idElemento === selettore1.id && opzioneScelta === selettore2.innerText) {
-        switchaSelettori(idSelettore1, idSelettore2, idInput);
-        return false;
-    } else if (idElemento === selettore2.id && opzioneScelta === selettore1.innerText) {
-        switchaSelettori(idSelettore1, idSelettore2, idInput);
-        return false;
-    }
-    return true;
+    const uguali = (idElemento === selettore1.id && opzioneScelta === selettore2.innerText) ||
+        (idElemento === selettore2.id && opzioneScelta === selettore1.innerText);
+    if (uguali) switchaSelettori(idSelettore1, idSelettore2, idInput);
+    return !uguali; // restituisce true se non sono uguali
 }
 // funzione per sincronizzare i selettori operatore piccolo e grande
 function sincronizzaSelettoriOperandi(valore) {
-    const selettorePiccolo = document.querySelector('#selettoreOperazionePiccolo .elementoSelezionato');
-    const selettoreGrande = document.querySelector('#selettoreOperazioneGrande .elementoSelezionato');
-    selettorePiccolo.innerHTML = valore;
-    selettoreGrande.innerHTML = valore;
-    // aggiorna le classi delle opzioni selezionate
-    aggiornaClassiOpzioni('selettoreOperazionePiccolo', valore);
-    aggiornaClassiOpzioni('selettoreOperazioneGrande', valore);
+    const selettoriPiccoliEGrandi = ['#selettoreOperazionePiccolo', '#selettoreOperazioneGrande'];
+    selettoriPiccoliEGrandi.forEach(selettoreId => {
+        const selettore = document.querySelector(`${selettoreId} .elementoSelezionato`);
+        selettore.innerHTML = valore;
+        aggiornaClassiOpzioni(selettoreId.slice(1), valore); // rimuovi il #
+    });
 }
 // funzione per chiudere tutti i selettori
 const chiudiTuttiISelettori = () => {
-    document.querySelectorAll('.selettoreAperto').forEach(elementoAperto => {
-        elementoAperto.classList.remove('selettoreAperto');
-    });
+    document.querySelectorAll('.selettoreAperto').forEach(elementoAperto => { elementoAperto.classList.remove('selettoreAperto'); });
     selettoreAperto = null; // resetta la variabile del selettore aperto
 };
 // funzione per selezionare un'opzione
@@ -111,36 +117,27 @@ const selezionaOpzione = (opzioneSelezionata, tutteLeOpzioni) => {
     tutteLeOpzioni.forEach(op => op.classList.remove('selezionatoDaSelettore'));
     opzioneSelezionata.classList.add('selezionatoDaSelettore');
 };
-// aggiungi un listener globale per chiudere i selettori quando si clicca fuori
-document.addEventListener('click', chiudiTuttiISelettori);
 // gestione switch dei selettori
-let rotazione = 0;
 function switchaSelettori(idSelettore1, idSelettore2, idInput) {
     const selettore1 = document.getElementById(idSelettore1).querySelector('.elementoSelezionato');
     const selettore2 = document.getElementById(idSelettore2).querySelector('.elementoSelezionato');
     const input = document.getElementById(idInput);
-    const risultato = document.getElementById("risultato");
     const icona = document.querySelector(".iconaBottoneSwitchaSelettori");
     // recupera i testi delle opzioni selezionate
-    const testo1 = selettore1.innerText;
-    const testo2 = selettore2.innerText;
-    const testo3 = input.value;
-    const testo4 = risultato.innerHTML;
-    if (/^(?!.*[+-]{2})(?!.*\..*\.)[0-9A-Fa-f]*([+-]?[0-9A-Fa-f]*(\.[0-9A-Fa-f]*)?)?$/.test(testo4) || testo4 == "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui..." ||
-    testo4 == "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido..." || testo4 == "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...") {
+    const [ testo1, testo2, testo3, testo4 ] = [ selettore1.innerText, selettore2.innerText, input.value, risultato.innerHTML] ;
+    const valoriInvalidi = [ messaggiRisultato.risultatoDefault, messaggiRisultato.valoreIncompleto, messaggiRisultato.valoreNonValido ];
+    const valido = /^(?!.*[+-]{2})(?!.*\..*\.)[0-9A-Fa-f]*([+-]?[0-9A-Fa-f]*(\.[0-9A-Fa-f]*)?)?$/.test(testo4) || valoriInvalidi.includes(testo4);
+    if (valido) {
         // scambia i testi
-        selettore1.innerText = testo2;
-        selettore2.innerText = testo1;
+        [selettore1.innerText, selettore2.innerText] = [testo2, testo1];
         // aggiorna le classi delle opzioni selezionate
         aggiornaClassiOpzioni(idSelettore1, testo2);
         aggiornaClassiOpzioni(idSelettore2, testo1);
-        // ruotaIcona
-        rotazione += 180;
-        icona.style.transform = `rotate(${rotazione}deg)`;
+        // ruota icona
+        rotazioneIconaSwitchSelettori += 180;
+        icona.style.transform = `rotate(${rotazioneIconaSwitchSelettori}deg)`;
         // scambia input e risultato se risultato esiste
-        if (testo4 != "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui..." &&
-            testo4 != "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido..." &&
-            testo4 != "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...") { 
+        if (!valoriInvalidi.includes(testo4)) { 
             input.value = testo4;
             risultato.innerText = testo3;
         }
@@ -149,15 +146,13 @@ function switchaSelettori(idSelettore1, idSelettore2, idInput) {
 // funzione per aggiornare le classi delle opzioni
 const aggiornaClassiOpzioni = (idSelettore, testo) => {
     const opzioni = document.querySelectorAll(`#${idSelettore} .elementiSelettore li`);
-    opzioni.forEach(op => op.classList.remove('selezionatoDaSelettore'));
-    opzioni.forEach(op => { if (op.textContent === testo) { op.classList.add('selezionatoDaSelettore'); } });
+    opzioni.forEach(op => { op.classList.toggle('selezionatoDaSelettore', op.textContent === testo); });
 };
+document.addEventListener('click', chiudiTuttiISelettori); // chiudi i selettori quando si clicca fuori
 
 
 
 // gestione conversioni
-const risultato = document.getElementById("risultato");
-
 function scegliConversione() {
     // ottieni le basi selezionate
     const primaBase = document.querySelector('#selettorePrimaBase .elementoSelezionato').innerText;
@@ -177,27 +172,28 @@ function scegliConversione() {
     risultato.innerHTML = converti(basePrima, baseSeconda, valoreDaConvertire);
 }
 function converti(basePrima, baseSeconda, valoreDaConvertire) {
-    let controlloRisultato;
-    // controllo del valore in ingresso
-    if (basePrima === 2) controlloRisultato = /^[01.+-]+(\.[01]+)?$/; // binario
-    else if (basePrima === 8) controlloRisultato = /^[0-7.+-]+(\.[0-7]+)?$/; // ottale
-    else if (basePrima === 10) controlloRisultato = /^[0-9.+-]+(\.[0-9]+)?$/; // decimale
-    else controlloRisultato = /^[0-9A-Fa-f.+-]+(\.[0-9A-Fa-f]+)?$/; // esadecimale
     // verifica e conversione
     if (valoreDaConvertire.length === 1 &&
         (valoreDaConvertire == "+" ||
         valoreDaConvertire == "-")) {
-            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.innerHTML = messaggiRisultato.risultatoDefault;
             risultato.classList.remove('risultatoCalcolato');
-            return "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            return messaggiRisultato.risultatoDefault;
     } else {
-        if (controlloRisultato.test(valoreDaConvertire)) {
+        // controllo del valore in ingresso
+        const controlloRisultato = controlli[basePrima];
+        // calcolo risultato
+        if (valoreDaConvertire === "") {
+            risultato.innerHTML = messaggiRisultato.risultatoDefault;
+            risultato.classList.remove('risultatoCalcolato');
+            return messaggiRisultato.risultatoDefault;
+        } else if (controlloRisultato.test(valoreDaConvertire)) {
             let numeroConvertito;
             if (valoreDaConvertire.includes('.')) {
                 if ((valoreDaConvertire.indexOf('.') + 1) == (valoreDaConvertire.length)) {
-                    risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...";
+                    risultato.innerHTML = messaggiRisultato.valoreIncompleto;
                     risultato.classList.remove('risultatoCalcolato');
-                    return "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...";
+                    return messaggiRisultato.valoreIncompleto;
                 } else {
                     numeroConvertito = convertiDecimaleConVirgola(valoreDaConvertire, basePrima, baseSeconda);
                     risultato.innerHTML = numeroConvertito.toUpperCase();
@@ -210,19 +206,15 @@ function converti(basePrima, baseSeconda, valoreDaConvertire) {
                 risultato.classList.add('risultatoCalcolato');
                 return numeroConvertito.toUpperCase(); // mostra risultato in maiuscolo se esadecimale
             }
-        } else if (valoreDaConvertire === "") {
-            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
-            risultato.classList.remove('risultatoCalcolato');
-            return "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
         } else {
-            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+            risultato.innerHTML = messaggiRisultato.valoreNonValido;
             risultato.classList.remove('risultatoCalcolato');
-            return "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+            return messaggiRisultato.valoreNonValido;
         }
     }
 }
 function convertiDecimaleConVirgola(valore, basePrima, baseSeconda) {
-    const [parteIntera, parteDecimale] = valore.split('.');
+    const [ parteIntera, parteDecimale ] = valore.split('.');
     let parteInteraConvertita = parseInt(parteIntera, basePrima).toString(baseSeconda);
     let parteDecimaleConvertita = '';
     if (parteDecimale) {
@@ -230,13 +222,11 @@ function convertiDecimaleConVirgola(valore, basePrima, baseSeconda) {
         for (let i = 0; i < parteDecimale.length; i++) {
             decimale += parseInt(parteDecimale[i], basePrima) / Math.pow(basePrima, i + 1);
         }
-        let contatore = 0;
-        while (decimale > 0 && contatore < 10) {
+        for (let contatore = 0; decimale > 0 && contatore < 10; contatore++) {
             decimale *= baseSeconda;
-            let cifra = Math.floor(decimale);
+            const cifra = Math.floor(decimale);
             parteDecimaleConvertita += cifra.toString(baseSeconda);
             decimale -= cifra;
-            contatore++;
         }
     }
     return parteInteraConvertita + (parteDecimaleConvertita ? '.' + parteDecimaleConvertita : '');
