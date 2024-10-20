@@ -111,9 +111,8 @@ const selezionaOpzione = (opzioneSelezionata, tutteLeOpzioni) => {
     tutteLeOpzioni.forEach(op => op.classList.remove('selezionatoDaSelettore'));
     opzioneSelezionata.classList.add('selezionatoDaSelettore');
 };
-// aggiungi un listener globale per chiudere i selettori quando si clicca fuori o si scrolla
+// aggiungi un listener globale per chiudere i selettori quando si clicca fuori
 document.addEventListener('click', chiudiTuttiISelettori);
-window.addEventListener('scroll', chiudiTuttiISelettori);
 // gestione switch dei selettori
 let rotazione = 0;
 function switchaSelettori(idSelettore1, idSelettore2, idInput) {
