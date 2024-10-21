@@ -32,6 +32,8 @@ const messaggiRisultato = {
 };
 const controlli = {
     2: /^[01.+-]+(\.[01]+)?$/, // binario
+    "numeriBinariConSegno": /^[01+-]+$/, // binario senza virgola
+    "numeriBinari": /^[01]+$/, // binario senza segno e virgola
     8: /^[0-7.+-]+(\.[0-7]+)?$/, // ottale
     10: /^[0-9.+-]+(\.[0-9]+)?$/, // decimale
     16: /^[0-9A-Fa-f.+-]+(\.[0-9A-Fa-f]+)?$/ // esadecimale
@@ -239,60 +241,62 @@ function rappresenta() {
     const valoreDaRappresentare = document.getElementById('elementoDaRappresentare').value;
     let controlloRisultato;
     // controllo del valore in ingresso
-    if (primaRappresentazione === "Binario") controlloRisultato = /^[01.+-]+(\.[01]+)?$/; // binario
-    else controlloRisultato = /^[01]+$/; // altre rappresentazioni
+    if (primaRappresentazione === "Binario" && (secondaRappresentazione == "C1" || secondaRappresentazione == "C2")) controlloRisultato = controlli["numeriBinariConSegno"]; // binario
+    else if (primaRappresentazione === "Binario" && (secondaRappresentazione == "FP32" || secondaRappresentazione == "FP64")) controlloRisultato = controlli[2]; // binario
+    else controlloRisultato = controlli["numeriBinari"]; // altre rappresentazioni
     // verifica e rappresentazione
     if (primaRappresentazione === "Binario" &&
         valoreDaRappresentare.length === 1 &&
         (valoreDaRappresentare == "+" ||
         valoreDaRappresentare == "-")) {
-            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.innerHTML = messaggiRisultato.risultatoDefault;
             risultato.classList.remove('risultatoCalcolato');
-        }
-    else if ((primaRappresentazione === "C1" || primaRappresentazione === "C2") && valoreDaRappresentare.length === 1) {
+    } else if (primaRappresentazione === "Binario" && valoreDaRappresentare.includes('.') &&
+        (valoreDaRappresentare.indexOf('.') + 1) == (valoreDaRappresentare.length) &&
+        (secondaRappresentazione != "C1" && secondaRappresentazione != "C2")) {
+        risultato.innerHTML = messaggiRisultato.valoreIncompleto;
+        risultato.classList.remove('risultatoCalcolato');
+    } else if ((primaRappresentazione === "C1" || primaRappresentazione === "C2") && valoreDaRappresentare.length === 1) {
         if (controlloRisultato.test(valoreDaRappresentare)) {
-            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.innerHTML = messaggiRisultato.risultatoDefault;
             risultato.classList.remove('risultatoCalcolato');
         }
         else {
-            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+            risultato.innerHTML = messaggiRisultato.valoreNonValido;
             risultato.classList.remove('risultatoCalcolato');
         }
-    }
-    else if (primaRappresentazione === "FP32" && valoreDaRappresentare.length != 32) {
+    } else if (primaRappresentazione === "FP32" && valoreDaRappresentare.length != 32) {
         if (valoreDaRappresentare === "") {
-            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.innerHTML = messaggiRisultato.risultatoDefault;
             risultato.classList.remove('risultatoCalcolato');
         } else if (valoreDaRappresentare.length < 32 && controlloRisultato.test(valoreDaRappresentare)) {
-            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...";
+            risultato.innerHTML = messaggiRisultato.valoreIncompleto;
             risultato.classList.remove('risultatoCalcolato');
         } else {
-            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+            risultato.innerHTML = messaggiRisultato.valoreNonValido;
             risultato.classList.remove('risultatoCalcolato');
         }
     } else if (primaRappresentazione === "FP64" && valoreDaRappresentare.length != 64) {
         if (valoreDaRappresentare === "") {
-            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+            risultato.innerHTML = messaggiRisultato.risultatoDefault;
             risultato.classList.remove('risultatoCalcolato');
         } else if (valoreDaRappresentare.length < 64 && controlloRisultato.test(valoreDaRappresentare)) {
-            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...";
+            risultato.innerHTML = messaggiRisultato.valoreIncompleto;
             risultato.classList.remove('risultatoCalcolato');
         } else {
-            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+            risultato.innerHTML = messaggiRisultato.valoreNonValido;
             risultato.classList.remove('risultatoCalcolato');
         }
     } else {
-        if (controlloRisultato.test(valoreDaRappresentare)) {
+        if (valoreDaRappresentare === "") {
+            risultato.innerHTML = messaggiRisultato.risultatoDefault;
+            risultato.classList.remove('risultatoCalcolato');
+        } else if (controlloRisultato.test(valoreDaRappresentare)) {
             let numeroRappresentato = convertiRappresentazione(primaRappresentazione, secondaRappresentazione, valoreDaRappresentare);
             risultato.innerText = numeroRappresentato; // mostra risultato
             risultato.classList.add('risultatoCalcolato');
-        } else if (valoreDaRappresentare === "") {
-            risultato.innerHTML = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
-            risultato.classList.remove('risultatoCalcolato');
-        }
-        
-        else {
-            risultato.innerHTML = "Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...";
+        } else {
+            risultato.innerHTML = messaggiRisultato.valoreNonValido;
             risultato.classList.remove('risultatoCalcolato');
         }
     }
@@ -424,12 +428,12 @@ function opera() {
     const primoInDecimale = converti(2, 10, primoOperando.toString());
     const secondoInDecimale = converti(2, 10, secondoOperando.toString());
     let risultatoCalcolato;
-    if (primoInDecimale === "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui..." ||
-        secondoInDecimale === "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...") {
-        risultatoCalcolato = "Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...";
+    if (primoInDecimale === messaggiRisultato.risultatoDefault ||
+        secondoInDecimale === messaggiRisultato.risultatoDefault) {
+        risultatoCalcolato = messaggiRisultato.risultatoDefault;
         risultato.classList.remove('risultatoCalcolato');
-    } else if (primoInDecimale === "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto..." ||
-        secondoInDecimale === "Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...") {
+    } else if (primoInDecimale === messaggiRisultato.valoreIncompleto ||
+        secondoInDecimale === messaggiRisultato.valoreIncompleto) {
         risultatoCalcolato = "Un&nbsp;valore&nbsp;inserito è&nbsp;incompleto...";
         risultato.classList.remove('risultatoCalcolato'); 
     } else {
