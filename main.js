@@ -343,7 +343,11 @@ function C1_Binario(valore) {
     return `${segno}${valoreAssoluto}`; // restituisce il valore come stringa
 }
 function C2_Binario(valore) {
-    const complemento1 = (parseInt(valore, 2) - 1).toString(2).padStart(valore.length, '0'); // calcola il complemento a 1
+    let complemento1 = valore;
+    if (valore.charAt(0) === "1") {
+        complemento1 = (parseInt(valore, 2) - 1).toString(2).padStart(valore.length, '0'); // calcola il complemento a 1
+        if (complemento1.length <= valore.length && complemento1.charAt(0) != "1") complemento1 = `1${complemento1}`;
+    }
     return C1_Binario(complemento1); // restituisce il valore come stringa
 }
 function FP32_Binario(valore) {
@@ -356,7 +360,7 @@ function FP32_Binario(valore) {
      intView[0] = intValue;
     // creazione di una vista Float32Array per leggere il valore in virgola mobile dal buffer
     const float32View = new Float32Array(buffer);
-    return parseFloat(converti(10, 2, float32View[0].toString()).toString());
+    return parseFloat(converti(10, 2, float32View[0].toString())).toString();
 }
 function FP64_Binario(valore) {
     // converte la stringa binaria in un BigInt
@@ -368,7 +372,7 @@ function FP64_Binario(valore) {
     intView[0] = intValue;
     // creazione di una vista Float64Array per leggere il valore in virgola mobile dal buffer
     const float64View = new Float64Array(buffer);
-    return parseFloat(converti(10, 2, float64View[0].toString().toString()));
+    return parseFloat(converti(10, 2, float64View[0].toString())).toString();
 }
 function Binario_C1(valore) {
     const primoCarattere = valore.charAt(0);
