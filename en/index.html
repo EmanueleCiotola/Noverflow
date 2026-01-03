@@ -1,0 +1,296 @@
+<!--
+ * NOVERFLOW PROJECT
+ * Developer: Emanuele Ciotola
+ * Copyright © 2025. All Rights Reserved.
+ * Original logic and UI design.
+-->
+ 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Language & Encoding -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="language" content="Italian, English">
+        
+    <!-- TITLE & SEO STRATEGY -->
+    <title>Noverflow | Base Converter, Binary Representations & ALU Calculator</title>
+    
+    <!-- DETAILED DESCRIPTION (Ideal for AI and Google snippets) -->
+    <meta name="title" content="Noverflow | Base Converter, Binary Representations & ALU Calculator">
+    <meta name="description" content="The all-in-one binary toolkit: base conversions (2, 8, 10, 16), Signed Magnitude, 1's & 2's Complement, IEEE 754 Standard (FP32/64), and binary operations. Designed for Computer Science and Engineering students.">
+    
+    <meta name="keywords" content="binary calculator, ieee 754 converter, two's complement, one's complement, floating point, binary operations, ALU simulator, binary addition, binary subtraction, binary multiplication, binary division, computer architecture, computer science tools, Emanuele Ciotola, bitwise calculator">
+    <meta name="author" content="Emanuele Ciotola">
+    <meta name="robots" content="index, follow">
+
+    <!-- MULTILINGUAL MANAGEMENT -->
+    <link rel="alternate" hreflang="it" href="https://emanueleciotola.github.io/Noverflow/index.html" />
+    <link rel="alternate" hreflang="en" href="https://emanueleciotola.github.io/Noverflow/en/index.html" />
+    <link rel="alternate" hreflang="x-default" href="https://emanueleciotola.github.io/Noverflow/en/index.html" />
+
+    <!-- OPEN GRAPH (LinkedIn, WhatsApp, Facebook) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Noverflow | All-in-One Binary & Low-Level Computing Toolkit">
+    <meta property="og:description" content="Base conversion, signed binary representations, 1's & 2's Complement, IEEE 754 (FP32/64), and Binary Arithmetic in a single toolkit.">
+    <meta property="og:url" content="https://emanueleciotola.github.io/Noverflow/en/index.html">
+    <meta property="og:image" content="https://emanueleciotola.github.io/Noverflow/assets/index.webp">
+    <meta property="og:site_name" content="Noverflow">
+    <meta property="og:locale" content="en_US">
+
+    <!-- TWITTER CARDS -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Noverflow | All-in-One Binary & Low-Level Computing Toolkit">
+    <meta name="twitter:description" content="Base conversion, 1's & 2's Complement, IEEE 754 (FP32/64), and Binary Arithmetic in a single toolkit.">
+    <meta name="twitter:image" content="https://emanueleciotola.github.io/Noverflow/assets/index.webp">
+
+    <!-- MOBILE INTEGRATION & THEME -->
+    <meta name="theme-color" content="#0F0E17">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Noverflow">
+
+    <!-- JSON-LD (Structured Data for AI & Search Engines) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Noverflow",
+        "url": "https://emanueleciotola.github.io/Noverflow/en/index.html",
+        "image": "https://emanueleciotola.github.io/Noverflow/assets/index.webp",
+        "applicationCategory": "EducationalApplication, UtilitiesApplication",
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Person",
+            "name": "Emanuele Ciotola",
+            "url": "https://emanueleciotola.github.io/portfolio/"
+        },
+        "description": "Comprehensive low-level computing toolkit. Unifies base conversions, binary representations, and binary arithmetic.",
+        "featureList": [
+            "Base conversion (2, 8, 10, 16) with floating point support",
+            "Signed Magnitude, 1's Complement, and 2's Complement encoding",
+            "IEEE 754 Standard analysis for 32 and 64-bit formats (FP32, FP64)",
+            "ALU Simulator: Binary Addition, Subtraction, Multiplication, and Division",
+            "System flag detection: Overflow and Carry"
+        ],
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+    <!-- STYLESHEET & FONT PRELOAD -->
+    <link href="../style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="scanlines"></div>
+
+    <nav class="system-nav">
+        <div class="nav-content">
+            <div class="nav-slot nav-left">
+                <span class="status-lamp"></span>
+                <div class="text-glow">STATUS: OK</div>
+            </div>
+
+            <div class="nav-slot nav-center">
+                <div class="nav-brand-glitch" style="--stacks: 3;" onclick="apriUrl('index.html')">
+                    <h1 style="--index: 0;">Noverflow</h1>
+                    <h1 style="--index: 1;">Noverflow</h1>
+                    <h1 style="--index: 2;">Noverflow</h1>
+                </div>
+
+                <!-- DESKTOP / TABLET NAV -->
+                <div class="internal-nav-links">
+                    <a href="index.html" class="nav-link-item active">HOME</a>
+                    <a href="conversions.html" class="nav-link-item">CONVERSIONS</a>
+                    <a href="representations.html" class="nav-link-item">REPRESENTATIONS</a>
+                    <a href="operations.html" class="nav-link-item">OPERATIONS</a>
+                </div>
+            </div>
+
+            <div class="nav-slot nav-right">
+                <div class="text-glow">ALU_IDL</div>
+                <span class="load-bar"><span class="load-fill"></span></span>
+                <div class="text-glow">V2.8</div>
+            </div>
+
+            <!-- HAMBURGER TRIGGER -->
+            <button class="mobile-trigger" onclick="toggleMobileMenu()">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+    <!-- MOBILE MENU OVERLAY (FULL SCREEN) -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <a href="index.html" class="mobile-link active">HOME</a>
+        <a href="conversions.html" class="mobile-link">CONVERSIONS</a>
+        <a href="representations.html" class="mobile-link">REPRESENTATIONS</a>
+        <a href="operations.html" class="mobile-link">OPERATIONS</a>
+        
+        <div class="mobile-nav-bottom">SYSTEM V2.8_MOBILE</div>
+    </div>
+
+    <header class="hero-header osservato">
+        <div class="hero-container">
+            <p class="tagline">[ BINARY_INTERFACE ]</p>
+            <p class="hero-desc">Number systems and low-level arithmetic analysis.</p>
+        </div>
+    </header>
+
+    <main class="home-grid">
+        <article class="module-card interactive osservato" onclick="apriUrl('conversions.html')" role="button"
+            tabindex="0">
+            <div class="module-header">
+                <svg viewBox="0 0 24 24" class="module-icon">
+                    <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" stroke="currentColor" fill="none"
+                        stroke-width="2" />
+                </svg>
+                <h3>CONV_UNIT</h3>
+            </div>
+            <div class="module-content">
+                <h2>Conversions</h2>
+                <p>Instant conversion between <strong>Binary</strong>, <strong>Octal</strong>,
+                    <strong>Decimal</strong> and <strong>Hexadecimal</strong> number systems.</p>
+                <button class="btn-retro">OPEN_MODULE</button>
+            </div>
+        </article>
+
+        <article class="module-card interactive osservato" onclick="apriUrl('representations.html')" role="button"
+            tabindex="0">
+            <div class="module-header">
+                <svg viewBox="0 0 24 24" class="module-icon">
+                    <path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 14" stroke="currentColor" fill="none" stroke-width="2" />
+                </svg>
+                <h3>REPR_UNIT</h3>
+            </div>
+            <div class="module-content">
+                <h2>Representations</h2>
+                <p>Conversion between <strong>Signed Binary</strong>, <strong>One’s Complement</strong>,
+                    <strong>Two’s Complement</strong>, and <strong>IEEE 754</strong> (FP32 and FP64).</p>
+                <button class="btn-retro">OPEN_MODULE</button>
+            </div>
+        </article>
+
+        <article class="module-card interactive card-featured osservato" onclick="apriUrl('operations.html')"
+            role="button" tabindex="0">
+            <div class="module-header">
+                <svg viewBox="0 0 24 24" class="module-icon">
+                    <path d="M5 12h14M12 5v14" stroke="currentColor" fill="none" stroke-width="2" />
+                </svg>
+                <h3>ARITH_UNIT</h3>
+            </div>
+            <div class="module-content">
+                <h2>Operations</h2>
+                <p>Execution of <strong>Addition</strong>, <strong>Subtraction</strong>,
+                    <strong>Multiplication</strong> and <strong>Division</strong> with carry and overflow handling.</p>
+                <button class="btn-retro">OPEN_MODULE</button>
+            </div>
+        </article>
+    </main>
+
+    <section class="system-manual osservato">
+        <div class="doc-container">
+            <div class="doc-header">
+                <h2>
+                    <svg viewBox="0 0 24 24" style="width: 24px; height: 24px;" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 17 10 11 4 5"></polyline>
+                        <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
+                    SYSTEM_MANUAL
+                </h2>
+            </div>
+            <div class="doc-body">
+                <p class="intro-text">
+                    <strong>Noverflow</strong> is an independent project created to fill a gap in the online tool landscape: the lack of a single, reliable, and comprehensive binary calculator. 
+                    Developed by a <strong>Computer Science student from University of Naples Federico II</strong>, this tool is the ultimate resource for anyone tackling exams like 
+                    <em>Fundamentals of Informatics</em> or <em>Computer Architecture</em>.
+                </p>
+
+                <div class="doc-grid">
+                    <div class="doc-item">
+                        <h3>Arithmetic Verification</h3>
+                        <p>
+                            Solving binary operations manually is the best way to learn, but how can you <strong>be certain of the result</strong>? 
+                            Noverflow allows you to instantly check additions, subtractions, and multiplications, 
+                            ensuring your process is correct before moving forward with your studies.
+                        </p>
+                    </div>
+
+                    <div class="doc-item">
+                        <h3>IEEE 754 Focus</h3>
+                        <p>
+                            Floating-point conversion is often the biggest hurdle for students. 
+                            Noverflow strictly follows the <strong>IEEE 754</strong> standard (FP32 and FP64), providing 
+                            the exact result for comparing Sign, Exponent (Bias), and Normalized Mantissa.
+                        </p>
+                    </div>
+
+                    <div class="doc-full">
+                        <h3>Why use Noverflow?</h3>
+                        <div class="manual-steps">
+                            <div class="step">
+                                <h4>Universal Educational Support:</h4>
+                                <p>
+                                    Although born within the <strong>DIETI (UniNa)</strong> context, Noverflow's logic is valid for any 
+                                    university computer science or engineering course. The topics covered (2's Complement, floating point, non-decimal bases) 
+                                    are fundamental pillars present in every academic program worldwide.
+                                </p>
+                            </div>
+                            <div class="step">
+                                <h4>No Fragmentation:</h4>
+                                <p>
+                                    There was no single reliable tool that provided all necessary functionalities in one place. 
+                                    Noverflow eliminates this need: it is the "Swiss Army Knife" of bit-level computing, capable of handling 
+                                    conversions, representations, and arithmetic calculations without fear of incorrect results.
+                                </p>
+                            </div>
+                            <div class="step">
+                                <h4>Reliability & Logic:</h4>
+                                <p>
+                                    Every module has been tested to match exam-specific cases exactly, making Noverflow 
+                                    the ideal companion for anyone seeking immediate and secure confirmation of their theoretical and practical preparation.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-footer-note">
+                    <p>
+                        <strong>LOG_INFO:</strong> All source code, logical structure, and design of Noverflow are intellectual property protected by copyright. 
+                        Unauthorized reproduction or misappropriation of content and scripts is strictly prohibited without explicit permission.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="system-footer">
+        <div class="footer-grid">
+            <div class="footer-info">© 2025 EMANUELE CIOTOLA - All rights reserved.</div>
+            <div>
+                <div class="footer-links">
+                    <a href="https://github.com/emanueleciotola/Noverflow">GITHUB_REPOSITORY</a>
+                    <span class="footer-separator">|</span>
+                    <a href="../index.html">SWITCH_TO_IT</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+</body>
+
+</html>

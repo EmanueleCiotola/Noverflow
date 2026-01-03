@@ -1,1 +1,528 @@
-var elementiDaOsservare=document.querySelectorAll(".osservato");elementiDaOsservare.forEach((e=>{e.classList.remove("mostrato")})),setTimeout((()=>{var e=new IntersectionObserver((function(e){e.forEach((e=>{var t=e.target.getBoundingClientRect();e.isIntersecting||t.bottom<0?e.target.classList.add("mostrato"):t.top>0&&e.target.classList.remove("mostrato")}))}),{threshold:.05});elementiDaOsservare.forEach((t=>{e.observe(t)}))}),300);const risultato=document.getElementById("risultato"),messaggiRisultato={risultatoDefault:"Il&nbsp;risultato&nbsp;verrà mostrato&nbsp;qui...",valoreNonValido:"Il&nbsp;valore&nbsp;inserito non&nbsp;è&nbsp;valido...",valoreIncompleto:"Il&nbsp;valore&nbsp;inserito è&nbsp;incompleto...",valoriIncompleti:"Un&nbsp;valore&nbsp;inserito è&nbsp;incompleto..."},controlli={2:/^[01.+-]+(\.[01]+)?$/,numeriBinariConSegno:/^[01+-]+$/,numeriBinari:/^[01]+$/,8:/^[0-7.+-]+(\.[0-7]+)?$/,10:/^[0-9.+-]+(\.[0-9]+)?$/,16:/^[0-9A-Fa-f.+-]+(\.[0-9A-Fa-f]+)?$/};let selettoreAperto=null,rotazioneIconaSwitchSelettori=0;document.querySelectorAll(".selettore").forEach((e=>{const t=e.querySelector(".spazioSelezionatoSelettore"),o=e.querySelector(".elementoSelezionato"),i=e.querySelector(".iconaMenuSelezione"),a=e.querySelector(".elementiSelettore"),r=e.querySelectorAll(".elementiSelettore li");t.addEventListener("click",(e=>{selettoreAperto!==a?(chiudiTuttiISelettori(),apriSelettore(a,i)):chiudiTuttiISelettori(),e.stopPropagation()})),r.forEach((t=>t.addEventListener("click",(t=>i=>{(e.classList.contains("selettore-conversione")?verificaSeUguali(e.id,t.innerText,"selettorePrimaBase","selettoreSecondaBase","elementoDaConvertire"):!e.classList.contains("selettore-rappresentazione")||verificaSeUguali(e.id,t.innerText,"selettorePrimaRappresentazione","selettoreSecondaRappresentazione","elementoDaRappresentare"))&&(aggiornaSelettore(t,o,r),e.classList.contains("selettore-conversione")?scegliConversione():e.classList.contains("selettore-rappresentazione")?rappresenta():(sincronizzaSelettoriOperandi(t.innerText),opera())),chiudiTuttiISelettori(),selettoreAperto=null,i.stopPropagation()})(t)))),a.addEventListener("click",(e=>{e.stopPropagation()}))}));const apriSelettore=(e,t)=>{e.classList.add("selettoreAperto"),t.classList.add("selettoreAperto"),selettoreAperto=e},aggiornaSelettore=(e,t,o)=>{t.innerText=e.innerText,selezionaOpzione(e,o)};function verificaSeUguali(e,t,o,i,a){const r=document.getElementById(o),n=document.getElementById(i),l=e===r.id&&t===n.innerText||e===n.id&&t===r.innerText;return l&&switchaSelettori(o,i,a),!l}function sincronizzaSelettoriOperandi(e){["#selettoreOperazionePiccolo","#selettoreOperazioneGrande"].forEach((t=>{document.querySelector(`${t} .elementoSelezionato`).innerHTML=e,aggiornaClassiOpzioni(t.slice(1),e)}))}const chiudiTuttiISelettori=()=>{document.querySelectorAll(".selettoreAperto").forEach((e=>{e.classList.remove("selettoreAperto")})),selettoreAperto=null},selezionaOpzione=(e,t)=>{t.forEach((e=>e.classList.remove("selezionatoDaSelettore"))),e.classList.add("selezionatoDaSelettore")};function switchaSelettori(e,t,o){const i=document.getElementById(e).querySelector(".elementoSelezionato"),a=document.getElementById(t).querySelector(".elementoSelezionato"),r=document.getElementById(o),n=document.querySelector(".iconaBottoneSwitchaSelettori"),[l,s,c,u]=[i.innerText,a.innerText,r.value,risultato.innerHTML],g=[messaggiRisultato.risultatoDefault,messaggiRisultato.valoreIncompleto,messaggiRisultato.valoreNonValido];(/^(?!.*[+-]{2})(?!.*\..*\.)[0-9A-Fa-f]*([+-]?[0-9A-Fa-f]*(\.[0-9A-Fa-f]*)?)?$/.test(u)||g.includes(u))&&([i.innerText,a.innerText]=[s,l],aggiornaClassiOpzioni(e,s),aggiornaClassiOpzioni(t,l),rotazioneIconaSwitchSelettori+=180,n.style.transform=`rotate(${rotazioneIconaSwitchSelettori}deg)`,g.includes(u)||(r.value=u,risultato.innerText=c))}const aggiornaClassiOpzioni=(e,t)=>{document.querySelectorAll(`#${e} .elementiSelettore li`).forEach((e=>{e.classList.toggle("selezionatoDaSelettore",e.textContent===t)}))};function scegliConversione(){const e=document.querySelector("#selettorePrimaBase .elementoSelezionato").innerText,t=document.querySelector("#selettoreSecondaBase .elementoSelezionato").innerText,o=document.getElementById("elementoDaConvertire").value;let i,a;const r={Binario:2,Ottale:8,Decimale:10,Hex:16};i=r[e],a=r[t],risultato.innerHTML=converti(i,a,o)}function converti(e,t,o){if(1!==o.length||"+"!=o&&"-"!=o){const i=controlli[e];if(""===o)return risultato.innerHTML=messaggiRisultato.risultatoDefault,risultato.classList.remove("risultatoCalcolato"),messaggiRisultato.risultatoDefault;if(i.test(o)){let i;return o.includes(".")?o.indexOf(".")+1==o.length?(risultato.innerHTML=messaggiRisultato.valoreIncompleto,risultato.classList.remove("risultatoCalcolato"),messaggiRisultato.valoreIncompleto):(i=convertiDecimaleConVirgola(o,e,t),risultato.innerHTML=i.toUpperCase(),risultato.classList.add("risultatoCalcolato"),i.toUpperCase()):(i=parseInt(o,e).toString(t),risultato.innerHTML=i.toUpperCase(),risultato.classList.add("risultatoCalcolato"),i.toUpperCase())}return risultato.innerHTML=messaggiRisultato.valoreNonValido,risultato.classList.remove("risultatoCalcolato"),messaggiRisultato.valoreNonValido}return risultato.innerHTML=messaggiRisultato.risultatoDefault,risultato.classList.remove("risultatoCalcolato"),messaggiRisultato.risultatoDefault}function convertiDecimaleConVirgola(e,t,o){const[i,a]=e.split(".");let r=parseInt(i,t).toString(o),n="";if(a){let e=0;for(let o=0;o<a.length;o++)e+=parseInt(a[o],t)/Math.pow(t,o+1);for(let t=0;e>0&&t<10;t++){e*=o;const t=Math.floor(e);n+=t.toString(o),e-=t}}return r+(n?"."+n:"")}function rappresenta(){const e=document.querySelector("#selettorePrimaRappresentazione .elementoSelezionato").innerText,t=document.querySelector("#selettoreSecondaRappresentazione .elementoSelezionato").innerText,o=document.getElementById("elementoDaRappresentare").value;let i;if(i="Binario"!==e||"C1"!=t&&"C2"!=t?"Binario"!==e||"FP32"!=t&&"FP64"!=t?controlli.numeriBinari:controlli[2]:controlli.numeriBinariConSegno,"Binario"!==e||1!==o.length||"+"!=o&&"-"!=o)if("Binario"===e&&o.includes(".")&&o.indexOf(".")+1==o.length&&"C1"!=t&&"C2"!=t)risultato.innerHTML=messaggiRisultato.valoreIncompleto,risultato.classList.remove("risultatoCalcolato");else if("C1"!==e&&"C2"!==e||1!==o.length)if("FP32"===e&&32!=o.length)""===o?(risultato.innerHTML=messaggiRisultato.risultatoDefault,risultato.classList.remove("risultatoCalcolato")):o.length<32&&i.test(o)?(risultato.innerHTML=messaggiRisultato.valoreIncompleto,risultato.classList.remove("risultatoCalcolato")):(risultato.innerHTML=messaggiRisultato.valoreNonValido,risultato.classList.remove("risultatoCalcolato"));else if("FP64"===e&&64!=o.length)""===o?(risultato.innerHTML=messaggiRisultato.risultatoDefault,risultato.classList.remove("risultatoCalcolato")):o.length<64&&i.test(o)?(risultato.innerHTML=messaggiRisultato.valoreIncompleto,risultato.classList.remove("risultatoCalcolato")):(risultato.innerHTML=messaggiRisultato.valoreNonValido,risultato.classList.remove("risultatoCalcolato"));else if(""===o)risultato.innerHTML=messaggiRisultato.risultatoDefault,risultato.classList.remove("risultatoCalcolato");else if(i.test(o)){let i=convertiRappresentazione(e,t,o);risultato.innerText=i,risultato.classList.add("risultatoCalcolato")}else risultato.innerHTML=messaggiRisultato.valoreNonValido,risultato.classList.remove("risultatoCalcolato");else i.test(o)?(risultato.innerHTML=messaggiRisultato.risultatoDefault,risultato.classList.remove("risultatoCalcolato")):(risultato.innerHTML=messaggiRisultato.valoreNonValido,risultato.classList.remove("risultatoCalcolato"));else risultato.innerHTML=messaggiRisultato.risultatoDefault,risultato.classList.remove("risultatoCalcolato")}function convertiRappresentazione(e,t,o){let i,a=o;switch(e){case"C1":a=C1_Binario(o);break;case"C2":a=C2_Binario(o);break;case"FP32":a=FP32_Binario(o);break;case"FP64":a=FP64_Binario(o)}switch(t){case"Binario":i=a;break;case"C1":i=Binario_C1(a);break;case"C2":i=Binario_C2(a);break;case"FP32":i=Binario_FP32(a);break;case"FP64":i=Binario_FP64(a)}return i}function C1_Binario(e){const t="1"===e.charAt(0)?"-":"";let o=e.slice(1);return"-"===t&&(o=[...o].map((e=>"0"===e?"1":"0")).join("").replace(/^([+-]?)(0+)(\d)/,"$1$3")),`${t}${o}`}function C2_Binario(e){let t=e;return"1"===e.charAt(0)&&(t=(parseInt(e,2)-1).toString(2).padStart(e.length,"0"),t.length<=e.length&&"1"!=t.charAt(0)&&(t=`1${t}`)),C1_Binario(t)}function FP32_Binario(e){const t=parseInt(e,2),o=new ArrayBuffer(4);new Uint32Array(o)[0]=t;const i=new Float32Array(o);return parseFloat(converti(10,2,i[0].toString())).toString()}function FP64_Binario(e){const t=BigInt("0b"+e),o=new ArrayBuffer(8);new BigUint64Array(o)[0]=t;const i=new Float64Array(o);return parseFloat(converti(10,2,i[0].toString())).toString()}function Binario_C1(e){const t=e.charAt(0),o="-"===t?"1":"0";return"-"!==t&&"+"!=t||(e=e.slice(1)),"1"===o&&(e=[...e].map((e=>"0"===e?"1":"0")).join("")),`${o}${e}`}function Binario_C2(e){const t=e.charAt(0),o="-"===t?"1":"0";"-"!==t&&"+"!=t||(e=e.slice(1));let i=e;if("1"===o){const t=Binario_C1((-e).toString());i=(parseInt(t,2)+1).toString(2).padStart(t.length,"0").slice(1)}return`${o}${i}`}function Binario_FP32(e){const t=converti(2,10,e.toString()),o=new Float32Array(1);o[0]=t;return new Uint32Array(o.buffer)[0].toString(2).padStart(32,"0")}function Binario_FP64(e){const t=converti(2,10,e.toString()),o=new Float64Array(1);o[0]=t;return new BigUint64Array(o.buffer)[0].toString(2).padStart(64,"0")}function opera(){const e=document.getElementById("primoOperando").value,t=document.getElementById("secondoOperando").value,o=document.querySelector(".selettore-operazione .elementoSelezionato").innerText,i=converti(2,10,e.toString()),a=converti(2,10,t.toString());let r;if(i===messaggiRisultato.risultatoDefault||a===messaggiRisultato.risultatoDefault)r=messaggiRisultato.risultatoDefault,risultato.classList.remove("risultatoCalcolato");else if(i===messaggiRisultato.valoreIncompleto||a===messaggiRisultato.valoreIncompleto)r=messaggiRisultato.valoriIncompleti,risultato.classList.remove("risultatoCalcolato");else{let e={ADD:(e,t)=>e+t,SUB:(e,t)=>e-t,MUL:(e,t)=>e*t,DIV:(e,t)=>e/t}[o](parseFloat(i),parseFloat(a));r=parseFloat(converti(10,2,e.toString()).toString())}risultato.innerHTML=r}function apriUrl(e){window.open(e,"_self")}document.addEventListener("click",chiudiTuttiISelettori);
+/* 
+ * NOVERFLOW PROJECT
+ * Developer: Emanuele Ciotola
+ * Copyright © 2025. All Rights Reserved.
+ * Original logic and UI design.
+*/
+
+// ==========================================
+// CONFIGURAZIONE & LINGUA
+// ==========================================
+
+const DICTIONARY = {
+    it: {
+        default: "In attesa di input...",
+        awaitOp: "In attesa di operando...",
+        invalid: "INPUT_NON_VALIDO",
+        nan: "NON_È_UN_NUMERO",
+        divZero: "ERR_DIV_PER_ZERO",
+        wait32: "ATTENDO_32_BIT...",
+        wait64: "ATTENDO_64_BIT...",
+        tooLong: "INPUT_TROPPO_LUNGO",
+        copiato: "COPIATO_NEGLI_APPUNTI!",
+        intOnly: "SOLO_INTERI",      
+        noSign: "SOLO_SENZA_SEGNO" 
+    },
+    en: {
+        default: "Awaiting input...",
+        awaitOp: "Awaiting operands...",
+        invalid: "INVALID_INPUT",
+        nan: "NOT_A_NUMBER",
+        divZero: "DIV_BY_ZERO_ERR",
+        wait32: "AWAITING_32_BITS...",
+        wait64: "AWAITING_64_BITS...",
+        tooLong: "INPUT_TOO_LONG",
+        copiato: "COPIED_TO_CLIPBOARD!",
+        intOnly: "INTEGERS_ONLY",      
+        noSign: "UNSIGNED_ONLY" 
+    }
+};
+
+const currentLang = document.documentElement.lang.substring(0, 2) || 'en';
+const MSG = DICTIONARY[currentLang] || DICTIONARY['en'];
+const SYSTEM_MSGS = [...Object.values(DICTIONARY.it), ...Object.values(DICTIONARY.en)];
+
+const REGEX = {
+    BIN_FLOAT: /[^01.+\-]/g, 
+    HEX_FLOAT: /[^0-9a-fA-F.+\-]/g,
+    DEC_FLOAT: /[^0-9.+\-]/g
+};
+
+// ==========================================
+// BOOTSTRAP
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    initUI(); 
+    if (el('elementoDaConvertire')) initConversioni();
+    else if (el('operando1')) initALU();
+    else if (el('inputRappresentazione')) initRappresentazioni();
+});
+
+const el = (id) => document.getElementById(id);
+
+const getVal = (selId) => {
+    const element = document.querySelector(`#${selId} .elementoSelezionato`);
+    return element ? element.getAttribute('data-value') : null;
+};
+
+const print = (text, id = 'risultato', success = true) => {
+    const target = el(id);
+    if (!target) return;
+    target.innerText = text;
+    target.classList.toggle('text-glow-green', success && !SYSTEM_MSGS.includes(text));
+};
+
+function sanitizza(val, regex) {
+    val = val.replace(/,/g, '.'); 
+    let segno = "";
+    if (val.startsWith('-') || val.startsWith('+')) {
+        segno = val[0];
+        val = val.substring(1);
+    }
+    let corpo = val.replace(regex, '').replace(/[+\-]/g, '');
+    const parti = corpo.split('.');
+    if (parti.length > 2) corpo = parti[0] + '.' + parti.slice(1).join('');
+    return segno + corpo;
+}
+
+function validaInput(val) {
+    if (!val || val === "+" || val === "-") return { ok: false, msg: MSG.default };
+    if (val.startsWith('.')) return { ok: false, msg: MSG.invalid };
+    return { ok: true };
+}
+
+function isInputIncomplete(val) {
+    return (!val || val === "+" || val === "-" || val.startsWith('.'));
+}
+
+// ==========================================
+// CONVERSIONI
+// ==========================================
+
+function initConversioni() {
+    el('elementoDaConvertire').addEventListener('input', (e) => {
+        e.target.value = sanitizza(e.target.value, REGEX.HEX_FLOAT);
+        calcConversioni();
+    });
+}
+
+function calcConversioni() {
+    const val = el('elementoDaConvertire').value;
+    
+    let bIn = parseInt(getVal('selettorePrimaBase'));
+    let bOut = parseInt(getVal('selettoreSecondaBase'));
+
+    if (isNaN(bIn)) bIn = 10;
+    if (isNaN(bOut)) bOut = 10;
+
+    const check = validaInput(val);
+    if (!check.ok) return print(check.msg);
+
+    const validChars = getBaseRegex(bIn);
+    if (!validChars.test(val.replace(/[+-]/, ''))) return print(MSG.invalid);
+
+    const cleanVal = val.replace(/^[+-]/, '');
+    const isNeg = val.startsWith('-');
+    const [intP, decP] = cleanVal.split('.');
+
+    let numDec = parseInt(intP, bIn);
+    if (isNaN(numDec)) return print(MSG.invalid);
+
+    if (decP && decP.length > 0) {
+        for (let i = 0; i < decP.length; i++) {
+            numDec += parseInt(decP[i], bIn) / Math.pow(bIn, i + 1);
+        }
+    }
+
+    let resInt = Math.floor(numDec).toString(bOut);
+    let resto = numDec - Math.floor(numDec);
+    let resDec = "";
+
+    if (resto > 0) {
+        resDec = ".";
+        let maxIter = 12;
+        while (resto > 0 && maxIter-- > 0) {
+            resto *= bOut;
+            let digit = Math.floor(resto);
+            resDec += digit.toString(bOut);
+            resto -= digit;
+        }
+    }
+
+    print((isNeg ? "-" : "") + (resInt + resDec).toUpperCase());
+}
+
+function getBaseRegex(base) {
+    if (base === 2) return /^[01.]+$/;
+    if (base === 8) return /^[0-7.]+$/;
+    if (base === 10) return /^[0-9.]+$/;
+    return /^[0-9a-fA-F.]+$/;
+}
+
+// ==========================================
+// ALU
+// ==========================================
+
+let currentOp = '+';
+
+function initALU() {
+    const btns = document.querySelectorAll('.btn-op');
+    btns.forEach(b => b.addEventListener('click', () => {
+        btns.forEach(btn => btn.classList.remove('active'));
+        b.classList.add('active');
+        currentOp = b.getAttribute('data-op');
+        calcALU();
+    }));
+
+    const handler = (e) => {
+        e.target.value = sanitizza(e.target.value, REGEX.BIN_FLOAT);
+        calcALU();
+    };
+    el('operando1').addEventListener('input', handler);
+    el('operando2').addEventListener('input', handler);
+}
+
+function calcALU() {
+    const v1 = el('operando1').value;
+    const v2 = el('operando2').value;
+
+    if (isInputIncomplete(v1) || isInputIncomplete(v2)) {
+        if (v1.startsWith('.') || v2.startsWith('.')) return print(MSG.invalid, 'risultatoOperazione', false);
+        return print(MSG.awaitOp, 'risultatoOperazione', false);
+    }
+
+    const n1 = binToDecFloat(v1);
+    const n2 = binToDecFloat(v2);
+
+    if (isNaN(n1) || isNaN(n2)) return print(MSG.invalid, 'risultatoOperazione', false);
+
+    let res = 0;
+    switch (currentOp) {
+        case '+': res = n1 + n2; break;
+        case '-': res = n1 - n2; break;
+        case '×': res = n1 * n2; break;
+        case '÷': 
+            if (n2 === 0) return print(MSG.divZero, 'risultatoOperazione', false);
+            res = n1 / n2;
+            break;
+    }
+    print(decToBinFloat(res), 'risultatoOperazione');
+}
+
+function binToDecFloat(str) {
+    const isNeg = str.startsWith('-');
+    const val = str.replace(/^[+-]/, '');
+    const [i, d] = val.split('.');
+    
+    let num = parseInt(i || '0', 2);
+    if (d && d.length > 0) {
+        for (let k = 0; k < d.length; k++) if (d[k] === '1') num += Math.pow(2, -(k + 1));
+    }
+    return isNeg ? -num : num;
+}
+
+function decToBinFloat(num) {
+    if (num === 0) return "0";
+    const isNeg = num < 0;
+    num = Math.abs(num);
+    let iPart = Math.floor(num);
+    let fPart = num - iPart;
+    let bFrac = "";
+
+    if (fPart > 0) {
+        bFrac = ".";
+        let max = 10;
+        while (fPart > 0 && max-- > 0) {
+            fPart *= 2;
+            bFrac += (fPart >= 1 ? "1" : "0");
+            if (fPart >= 1) fPart -= 1;
+        }
+    }
+    return (isNeg ? "-" : "") + iPart.toString(2) + bFrac;
+}
+
+// ==========================================
+// RAPPRESENTAZIONI
+// ==========================================
+
+function initRappresentazioni() {
+    el('inputRappresentazione').addEventListener('input', (e) => {
+        const typeIn = getVal('selettoreSorgenteRep') || 'DEC';
+        let regex = REGEX.DEC_FLOAT; 
+        if (typeIn.includes('IEEE') || typeIn.includes('C1') || typeIn.includes('C2') || typeIn.includes('SM')) {
+            regex = REGEX.BIN_FLOAT; 
+        }
+        e.target.value = sanitizza(e.target.value, regex);
+        calcRep();
+    });
+}
+
+function calcRep() {
+    const val = el('inputRappresentazione').value;
+    const typeIn = getVal('selettoreSorgenteRep') || 'DEC';     
+    const typeOut = getVal('selettoreDestinazioneRep') || 'SM'; 
+    const outID = 'risultatoRappresentazione';
+
+    if (typeIn.includes('IEEE') || typeIn.includes('C1') || typeIn.includes('C2')) {
+        if (val.includes('+') || val.includes('-')) return print(MSG.noSign, outID, false);
+        if (val.includes('.') || val.includes(',')) return print(MSG.intOnly, outID, false);
+    }
+
+    const check = validaInput(val);
+    if (!check.ok) return print(check.msg, outID, false);
+
+    let numJS;
+    let inputBits = null; 
+
+    if (typeIn === 'DEC') {
+        numJS = parseFloat(val);
+    } else {
+        if (typeIn.includes('C1') || typeIn.includes('C2') || typeIn.includes('SM')) inputBits = val.length;
+        if (typeIn.includes('IEEE')) {
+            const len = val.length;
+            if (typeIn.includes('FP32')) {
+                if (len < 32) return print(MSG.wait32, outID, false);
+                if (len > 32) return print(MSG.tooLong, outID, false);
+                numJS = rawBinToFloat(val, 32);
+            } else {
+                if (len < 64) return print(MSG.wait64, outID, false);
+                if (len > 64) return print(MSG.tooLong, outID, false);
+                numJS = rawBinToFloat(val, 64);
+            }
+        }
+        else if (typeIn.includes('C1')) {
+            if (val[0] === '0') numJS = parseInt(val, 2);
+            else {
+                const inverted = val.split('').map(b => b === '1' ? '0' : '1').join('');
+                numJS = -parseInt(inverted, 2);
+            }
+        }
+        else if (typeIn.includes('C2')) {
+            if (val[0] === '0') numJS = parseInt(val, 2);
+            else {
+                const raw = parseInt(val, 2);
+                const max = Math.pow(2, val.length);
+                numJS = raw - max;
+            }
+        }
+        else if (typeIn.includes('SM')) numJS = binToDecFloat(val);
+        else numJS = parseFloat(val);
+    }
+
+    if (isNaN(numJS)) return print(MSG.nan, outID, false);
+
+    if ((typeOut.includes('C1') || typeOut.includes('C2')) && !Number.isInteger(numJS)) {
+        return print(MSG.intOnly, outID, false);
+    }
+
+    let res = MSG.nan;
+
+    if (typeOut === 'DEC') {
+        res = (numJS === 0 ? "0" : numJS.toString());
+    }
+    else if (typeOut === 'SM') {
+        const sign = numJS < 0 ? '-' : '';
+        const binPure = decToBinFloat(Math.abs(numJS));
+        res = sign + binPure;
+    }
+    else if (typeOut.includes('C1')) res = calcC1(Math.trunc(numJS), inputBits);
+    else if (typeOut.includes('C2')) res = calcC2(Math.trunc(numJS), inputBits);
+    else if (typeOut.includes('FP32')) res = floatToIEEE(numJS, 32);
+    else if (typeOut.includes('FP64')) res = floatToIEEE(numJS, 64);
+
+    print(res, outID);
+}
+
+function calcC1(num, forcedBits = null) {
+    if (num === 0) return forcedBits ? "0".repeat(forcedBits) : "0";
+    const abs = Math.abs(num);
+    const binStr = abs.toString(2);
+    let minBits = binStr.length + 1;
+    let bits = (forcedBits && forcedBits >= minBits) ? forcedBits : minBits;
+
+    if (num > 0) return binStr.padStart(bits, '0');
+    else {
+        let padded = binStr.padStart(bits, '0');
+        return padded.split('').map(b => b === '1' ? '0' : '1').join('');
+    }
+}
+
+function calcC2(num, forcedBits = null) {
+    if (num === 0) return forcedBits ? "0".repeat(forcedBits) : "0";
+    const abs = Math.abs(num);
+    const isPowerOfTwo = (abs & (abs - 1)) === 0;
+    
+    let minBits = abs.toString(2).length;
+    if (num > 0 || !isPowerOfTwo) minBits += 1; 
+
+    let bits = (forcedBits && forcedBits >= minBits) ? forcedBits : minBits;
+
+    if (num > 0) return abs.toString(2).padStart(bits, '0');
+    else {
+        const max = Math.pow(2, bits);
+        const c2Val = max - abs;
+        return c2Val.toString(2).padStart(bits, '0');
+    }
+}
+
+function floatToIEEE(num, bits) {
+    const buf = new ArrayBuffer(bits === 64 ? 8 : 4);
+    const view = new DataView(buf);
+    bits === 64 ? view.setFloat64(0, num, false) : view.setFloat32(0, num, false);
+    let bin = '';
+    new Uint8Array(buf).forEach(b => bin += b.toString(2).padStart(8, '0'));
+    if (bits === 32) return `${bin[0]}  ${bin.slice(1, 9)}  ${bin.slice(9)}`;
+    return `${bin[0]}  ${bin.slice(1, 12)}  ${bin.slice(12)}`;
+}
+
+function rawBinToFloat(str, bits) {
+    const buf = new ArrayBuffer(bits === 64 ? 8 : 4);
+    const view = new DataView(buf);
+    const u8 = new Uint8Array(buf);
+    for (let i = 0; i < bits/8; i++) u8[i] = parseInt(str.substring(i*8, (i+1)*8), 2);
+    return bits === 64 ? view.getFloat64(0, false) : view.getFloat32(0, false);
+}
+
+// ==========================================
+// UI HANDLERS
+// ==========================================
+
+function initUI() {
+    document.querySelectorAll('.selettore').forEach(sel => {
+        sel.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const list = sel.querySelector('.elementiSelettore');
+            const icon = sel.querySelector('.iconaMenuSelezione');
+            const isOpen = list.classList.contains('selettoreAperto');
+            closeDropdowns();
+            if (!isOpen) {
+                list.classList.add('selettoreAperto');
+                icon.classList.add('selettoreAperto');
+            }
+        });
+
+        sel.querySelector('.elementiSelettore').addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (e.target.tagName === 'LI') {
+                const newText = e.target.innerText;
+                const newValue = e.target.getAttribute('data-value');
+                const partnerID = getPartner(sel.id);
+
+                if (partnerID && getVal(partnerID) === newValue) {
+                    executeSwitch(sel.id, partnerID);
+                } else {
+                    const elSel = sel.querySelector('.elementoSelezionato');
+                    elSel.innerText = newText;
+                    elSel.setAttribute('data-value', newValue); 
+                    sel.querySelectorAll('li').forEach(l => l.classList.remove('selezionatoDaSelettore'));
+                    e.target.classList.add('selezionatoDaSelettore');
+                    closeDropdowns();
+                    triggerUpdate();
+                }
+            }
+        });
+    });
+
+    document.addEventListener('click', closeDropdowns);
+    initObservers();
+}
+
+const getPartner = (id) => ({
+    'selettorePrimaBase': 'selettoreSecondaBase',
+    'selettoreSecondaBase': 'selettorePrimaBase',
+    'selettoreSorgenteRep': 'selettoreDestinazioneRep',
+    'selettoreDestinazioneRep': 'selettoreSorgenteRep'
+}[id]);
+
+function executeSwitch(id1, id2) {
+    const isConv = id1.includes('Base');
+    const inputId = isConv ? 'elementoDaConvertire' : 'inputRappresentazione';
+    const outputId = isConv ? 'risultato' : 'risultatoRappresentazione';
+
+    const s1 = document.querySelector(`#${id1} .elementoSelezionato`);
+    const s2 = document.querySelector(`#${id2} .elementoSelezionato`);
+    
+    const tmpText = s1.innerText; s1.innerText = s2.innerText; s2.innerText = tmpText;
+    const tmpVal = s1.getAttribute('data-value');
+    s1.setAttribute('data-value', s2.getAttribute('data-value'));
+    s2.setAttribute('data-value', tmpVal);
+
+    [id1, id2].forEach(id => {
+        const val = getVal(id);
+        document.querySelectorAll(`#${id} li`).forEach(li => {
+            li.classList.toggle('selezionatoDaSelettore', li.getAttribute('data-value') === val);
+        });
+    });
+
+    const outTxt = el(outputId).innerText;
+    const inpField = el(inputId);
+
+    if (!SYSTEM_MSGS.includes(outTxt)) {
+        let cleanVal = outTxt.replace(/\s+/g, '');
+        const destType = getVal(id1.includes('Sorgente') ? id1 : id2) || '';
+        if (destType.includes('IEEE') || destType.includes('C1') || destType.includes('C2')) {
+            cleanVal = cleanVal.replace(/^[+-]/, '');
+        }
+        inpField.value = cleanVal;
+    }
+
+    const btn = document.querySelector('.btn-switch-base');
+    if(btn) {
+        btn.classList.add('ruota-attiva');
+        setTimeout(() => btn.classList.remove('ruota-attiva'), 300);
+    }
+    closeDropdowns();
+    triggerUpdate();
+}
+
+window.switchaSelettori = (id1, id2) => executeSwitch(id1, id2);
+
+function closeDropdowns() {
+    document.querySelectorAll('.selettoreAperto').forEach(e => e.classList.remove('selettoreAperto'));
+}
+
+function triggerUpdate() {
+    if (el('elementoDaConvertire')) calcConversioni();
+    else if (el('inputRappresentazione')) calcRep();
+}
+
+function initObservers() {
+    const obs = new IntersectionObserver(es => es.forEach(e => {
+        if(e.isIntersecting) e.target.classList.add('mostrato');
+    }), { threshold: 0.1 });
+    document.querySelectorAll('.osservato').forEach(el => obs.observe(el));
+}
+
+window.toggleMobileMenu = (force) => {
+    const m = el('mobileMenu');
+    const b = document.querySelector('.mobile-trigger');
+    const open = typeof force === 'boolean' ? force : !m.classList.contains('open');
+    m.classList.toggle('open', open);
+    b.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+};
+
+window.copiaNegliAppunti = () => {
+    const txt = document.querySelector('.monitor-result-text')?.innerText;
+    if (!txt || SYSTEM_MSGS.includes(txt)) return;
+    
+    navigator.clipboard.writeText(txt).then(() => {
+        const lbl = el('copy-label');
+        if(lbl) {
+            const old = lbl.innerText;
+            lbl.innerText = MSG.copiato;
+            lbl.style.color = "var(--bgColor)";
+            el('result-header').style.background = "var(--primaryColor)";
+            el('copy-icon').style.color = "var(--bgColor)";
+            setTimeout(() => {
+                lbl.innerText = old;
+                lbl.style.color = "";
+                el('result-header').style.background = "";
+                el('copy-icon').style.color = "";
+            }, 1500);
+        }
+    });
+};
+
+window.apriUrl = (url) => window.location.href = url;

@@ -1,57 +1,296 @@
+<!--
+ * NOVERFLOW PROJECT
+ * Developer: Emanuele Ciotola
+ * Copyright © 2025. All Rights Reserved.
+ * Original logic and UI design.
+-->
+ 
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
+    <!-- Lingua e Codifica -->
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- inserimento sito in risultati ricerca google -->
-    <meta name="google-site-verification" content="W4m6-Cg3xkpEOSg0rzPIgE6C3gl7yw95aOWXSdd87gM" />
-
-    <!-- favicon per i vari dispositivi (anche icone sito aggiunto a desktop) -->
-    <link rel="icon" href="assets/icons/favicon.ico" sizes="32x32" />
-    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
-    <link rel="manifest" href="assets/icons/site.webmanifest" />
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" sizes="180x180" />
-    <meta name="apple-mobile-web-app-title" content="Noverflow" />
+    <meta name="language" content="Italian, English">
+        
+    <!-- TITOLO & SEO STRATEGICA (Max 60 caratteri per Google) -->
+    <title>Noverflow | Convertitore di base, calcolatore rappresentazioni e operazioni binarie</title>
     
+    <!-- DESCRIZIONE DETTAGLIATA (Ideale per snippet Google e AI) -->
+    <meta name="title" content="Noverflow | Convertitore di base, calcolatore rappresentazioni e operazioni binarie">
+    <meta name="description" content="L'unico toolkit binario all-in-one: conversioni basi (2, 8, 10, 16), rappresentazioni in Binario con Segno, Complemento a 1 e 2 e Standard IEEE 754 (FP32/64), operazioni binarie. Sviluppato per studenti di Informatica e Ingegneria.">
+    
+    <meta name="keywords" content="calcolatore binario, ieee 754 converter, complemento a due, complemento a uno, virgola mobile, operazioni binarie, ALU simulator, addizione binaria, sottrazione complemento a due, moltiplicazione binaria, divisione binaria, federico II, DIETI, Emanuele Ciotola, bitwise calculator, binary toolkit">
+    <meta name="author" content="Emanuele Ciotola">
+    <meta name="robots" content="index, follow">
+
+    <!-- GESTIONE MULTILINGUA -->
+    <link rel="alternate" hreflang="it" href="https://emanueleciotola.github.io/Noverflow/index.html" />
+    <link rel="alternate" hreflang="en" href="https://emanueleciotola.github.io/Noverflow/en/index.html" />
+    <link rel="alternate" hreflang="x-default" href="https://emanueleciotola.github.io/Noverflow/en/index.html" />
+
+    <!-- OPEN GRAPH (LinkedIn, WhatsApp, Facebook) - Copre TUTTO il toolkit -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Noverflow | All-in-One Binary & Low-Level Computing Toolkit">
+    <meta property="og:description" content="Conversione basi, rappresentazioni binarie con segno, Complemento a 1, Complemento a 2, IEEE 754 (FP32/64) e Aritmetica Binaria in un unico toolkit.">
+    <meta property="og:url" content="https://emanueleciotola.github.io/Noverflow/">
+    <meta property="og:image" content="https://emanueleciotola.github.io/Noverflow/assets/index.webp">
+    <meta property="og:site_name" content="Noverflow">
+    <meta property="og:locale" content="it_IT">
+
+    <!-- TWITTER CARDS -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Noverflow | All-in-One Binary & Low-Level Computing Toolkit">
+    <meta name="twitter:description" content="Conversione basi, rappresentazioni binarie con segno, Complemento a 1, Complemento a 2, IEEE 754 (FP32/64) e Aritmetica Binaria in un unico toolkit.">
+    <meta name="twitter:image" content="https://emanueleciotola.github.io/Noverflow/assets/index.webp">
+
+    <!-- MOBILE INTEGRATION & THEME -->
+    <meta name="theme-color" content="#0F0E17">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Noverflow">
+
+    <!-- JSON-LD (Dati strutturati per Google & AI) - Elenca esplicitamente le feature -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Noverflow",
+        "url": "https://emanueleciotola.github.io/Noverflow/",
+        "image": "https://emanueleciotola.github.io/Noverflow/assets/index.webp",
+        "applicationCategory": "EducationalApplication, UtilitiesApplication",
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Person",
+            "name": "Emanuele Ciotola",
+            "url": "https://emanueleciotola.github.io/portfolio/"
+        },
+        "description": "Toolkit completo per l'informatica di basso livello. Unifica conversioni di base, rappresentazioni e aritmetica binaria.",
+        "featureList": [
+            "Conversione tra basi 2, 8, 10, 16 con supporto virgola mobile",
+            "Codifica in Binario con Segno, Complemento a 1 e Complemento a 2",
+            "Analisi Standard IEEE 754 per formati a 32 e 64 bit (FP32, FP64)",
+            "Simulatore ALU: Addizione, Sottrazione, Moltiplicazione e Divisione binaria",
+            "Rilevamento flag di sistema: Overflow e Carry"
+        ],
+        "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+        }
+    }
+    </script>
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+    <!-- STYLESHEET -->
     <link href="style.css" rel="stylesheet">
-    <link rel="preload" href="assets/fonts/consola.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-    <title>Noverflow - calcolatore avanzato per conversioni, rappresentazioni e operazioni binarie</title>
-    <meta name="description" content="Scopri Noverflow, il calcolatore online gratuito per effettuare conversioni tra binario, ottale, decimale ed esadecimale. Ottieni rappresentazioni complesse quali binario puro, complemento a 1, complemento a 2, virgola mobile a singola o doppia precisione. Effettua operazioni binarie di addizione, sottrazione, moltiplicazione e divisione. Semplice e veloce, è perfetto per studenti, professionisti e appassionati di informatica!">
 </head>
+
 <body>
-    <header id="homePageHeader" class="osservato" style="--stacks: 3;">
-        <div id="noverflow">
-            <h1 style="--index: 0;">Noverflow</h1>
-            <h1 style="--index: 1;">Noverflow</h1>
-            <h1 style="--index: 2;">Noverflow</h1>
+    <div class="scanlines"></div>
+
+    <nav class="system-nav">
+        <div class="nav-content">
+            <div class="nav-slot nav-left">
+                <span class="status-lamp"></span>
+                <div class="text-glow">STATUS: OK</div>
+            </div>
+
+            <div class="nav-slot nav-center">
+                <div class="nav-brand-glitch" style="--stacks: 3;" onclick="apriUrl('index.html')">
+                    <h1 style="--index: 0;">Noverflow</h1>
+                    <h1 style="--index: 1;">Noverflow</h1>
+                    <h1 style="--index: 2;">Noverflow</h1>
+                </div>
+
+                <!-- DESKTOP / TABLET NAV -->
+                <div class="internal-nav-links">
+                    <a href="index.html" class="nav-link-item active">HOME</a>
+                    <a href="conversioni.html" class="nav-link-item">CONVERSIONI</a>
+                    <a href="rappresentazioni.html" class="nav-link-item">RAPPRESENTAZIONI</a>
+                    <a href="operazioni.html" class="nav-link-item">OPERAZIONI</a>
+                </div>
+            </div>
+
+            <div class="nav-slot nav-right">
+                <div class="text-glow">ALU_IDL</div>
+                <span class="load-bar"><span class="load-fill"></span></span>
+                <div class="text-glow">V2.8</div>
+            </div>
+
+            <!-- HAMBURGER TRIGGER -->
+            <button class="mobile-trigger" onclick="toggleMobileMenu()">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+    <!-- MOBILE MENU OVERLAY (FULL SCREEN) -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <a href="index.html" class="mobile-link active">HOME</a>
+        <a href="conversioni.html" class="mobile-link">CONVERSIONI</a>
+        <a href="rappresentazioni.html" class="mobile-link">RAPPRESENTAZIONI</a>
+        <a href="operazioni.html" class="mobile-link">OPERAZIONI</a>
+        
+        <div class="mobile-nav-bottom">SYSTEM V2.8_MOBILE</div>
+    </div>
+
+    <header class="hero-header osservato">
+        <div class="hero-container">
+            <p class="tagline">[ BINARY_INTERFACE ]</p>
+            <p class="hero-desc">Sistemi di numerazione e analisi aritmetica di basso livello.</p>
         </div>
     </header>
 
-    <main id="homePage">
-        <article id="conversioniCard" class="card osservato">
-            <h2>Conversioni di&nbsp;base</h2>
-            <p class="cardTestiPiccoli">Binario&nbsp;a&nbsp;decimale<br>Decimale&nbsp;a&nbsp;binario<br>Decimale&nbsp;a&nbsp;ottale<br>Altro&nbsp;ancora...</p>
-            <p class="cardTestiGrandi">Binario&nbsp;a&nbsp;decimale, Decimale&nbsp;a&nbsp;binario, Decimale&nbsp;a&nbsp;ottale, Altro&nbsp;ancora...</p>
-            <button onclick="apriUrl('conversioni.html')">Vai</button>
+    <main class="home-grid">
+        <article class="module-card interactive osservato" onclick="apriUrl('conversioni.html')" role="button"
+            tabindex="0">
+            <div class="module-header">
+                <svg viewBox="0 0 24 24" class="module-icon">
+                    <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" stroke="currentColor" fill="none"
+                        stroke-width="2" />
+                </svg>
+                <h3>CONV_UNIT</h3>
+            </div>
+            <div class="module-content">
+                <h2>Conversioni</h2>
+                <p>Passaggio tra sistema di numerazione <strong>Binario</strong>, <strong>Ottale</strong>,
+                    <strong>Decimale</strong> ed <strong>Esadecimale</strong> immediato.</p>
+                <button class="btn-retro">APRI_MODULO</button>
+            </div>
         </article>
-        <article id="rappresentazioniCard" class="card osservato">
-            <h2>Rappresentazioni binarie</h2>
-            <p class="cardTestiPiccoli">Complemento&nbsp;a&nbsp;1<br>Complemento&nbsp;a&nbsp;2<br>Virgola&nbsp;mobile<br>Altro&nbsp;ancora...</p>
-            <p class="cardTestiGrandi">Complemento&nbsp;a&nbsp;1, Complemento&nbsp;a&nbsp;2, Virgola&nbsp;mobile, Altro&nbsp;ancora...</p>
-            <button onclick="apriUrl('rappresentazioni.html')">Vai</button>
+
+        <article class="module-card interactive osservato" onclick="apriUrl('rappresentazioni.html')" role="button"
+            tabindex="0">
+            <div class="module-header">
+                <svg viewBox="0 0 24 24" class="module-icon">
+                    <path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 14" stroke="currentColor" fill="none" stroke-width="2" />
+                </svg>
+                <h3>REPR_UNIT</h3>
+            </div>
+            <div class="module-content">
+                <h2>Rappresentazioni</h2>
+                <p>Conversione tra <strong>Binario con segno</strong>, <strong>Complemento a 1</strong>, <strong>Complemento
+                        a 2</strong>, e standard <strong>IEEE 754</strong> (FP32 e FP64).</p>
+                <button class="btn-retro">APRI_MODULO</button>
+            </div>
         </article>
-        <article id="operazioniCard" class="card osservato">
-            <h2>Operazioni binarie</h2>
-            <p class="cardTestiPiccoli">Addizioni&nbsp;binarie<br>Sottrazioni&nbsp;binarie<br>Prodotti&nbsp;binari<br>Altro&nbsp;ancora...</p>
-            <p class="cardTestiGrandi">Addizioni&nbsp;binarie, Sottrazioni&nbsp;binarie, Prodotti&nbsp;binari, Altro&nbsp;ancora...</p>
-            <button onclick="apriUrl('operazioni.html')">Vai</button>
+
+        <article class="module-card interactive card-featured osservato" onclick="apriUrl('operazioni.html')"
+            role="button" tabindex="0">
+            <div class="module-header">
+                <svg viewBox="0 0 24 24" class="module-icon">
+                    <path d="M5 12h14M12 5v14" stroke="currentColor" fill="none" stroke-width="2" />
+                </svg>
+                <h3>ARIT_UNIT</h3>
+            </div>
+            <div class="module-content">
+                <h2>Operazioni Binarie</h2>
+                <p>Calcolo di <strong>Addizione</strong>, <strong>Sottrazione</strong>, <strong>Moltiplicazione</strong>
+                    e <strong>Divisione</strong> con gestione di carry e overflow.</p>
+                <button class="btn-retro">APRI_MODULO</button>
+            </div>
         </article>
     </main>
 
-    <footer id="homePageFooter" class="osservato">©&nbsp;2024&nbsp;Emanuele&nbsp;Ciotola. Tutti&nbsp;i&nbsp;diritti&nbsp;riservati.</footer>
+   <section class="system-manual osservato">
+        <div class="doc-container">
+            <div class="doc-header">
+                <h2>
+                    <svg viewBox="0 0 24 24" style="width: 24px; height: 24px;" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 17 10 11 4 5"></polyline>
+                        <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
+                    MANUALE_DI_SISTEMA
+                </h2>
+            </div>
+            <div class="doc-body">
+                <p class="intro-text">
+                    <strong>Noverflow</strong> è un progetto indipendente nato per colmare un vuoto nel panorama dei tool online: la mancanza di un calcolatore binario unico, affidabile e completo. 
+                    Creato da uno studente di <strong>Informatica della Federico II</strong>, questo strumento è la risorsa definitiva per chiunque debba affrontare esami come 
+                    <em>Fondamenti di Informatica</em> o <em>Architettura degli Elaboratori</em>.
+                </p>
+
+                <div class="doc-grid">
+                    <div class="doc-item">
+                        <h3>Verifica Aritmetica</h3>
+                        <p>
+                            Svolgere operazioni binarie manualmente è il modo migliore per imparare, ma come <strong>essere certi del risultato</strong>? 
+                            Noverflow permette di correggere istantaneamente somme, sottrazioni e moltiplicazioni, 
+                            assicurandoti che il tuo procedimento sia corretto prima di procedere con lo studio.
+                        </p>
+                    </div>
+
+                    <div class="doc-item">
+                        <h3>Focus IEEE 754</h3>
+                        <p>
+                            La conversione in virgola mobile è spesso lo scoglio più grande per gli studenti. 
+                            Noverflow gestisce rigorosamente lo standard <strong>IEEE 754</strong> (FP32 e FP64), fornendo 
+                            il risultato esatto per il confronto tra Segno, Esponente (Bias) e Mantissa normalizzata.
+                        </p>
+                    </div>
+
+                    <div class="doc-full">
+                        <h3>Perché usare Noverflow?</h3>
+                        <div class="manual-steps">
+                            <div class="step">
+                                <h4>Supporto Didattico Universale:</h4>
+                                <p>
+                                    Sebbene sia nato nel contesto del <strong>DIETI (UniNa)</strong>, le logiche di Noverflow sono valide per qualsiasi 
+                                    corso universitario di informatica o ingegneria. Gli argomenti trattati (C2, virgola mobile, basi non decimali) 
+                                    sono pilastri fondamentali presenti in ogni programma accademico nazionale.
+                                </p>
+                            </div>
+                            <div class="step">
+                                <h4>Nessuna Frammentazione:</h4>
+                                <p>
+                                    Non esisteva alcuno strumento completo e affidabile che fornisse tutte le funzionalità necessarie in un unico posto.
+                                    Noverflow elimina questo bisogno: è lo "Swiss Army Knife" del bit-level computing, capace di gestire
+                                    conversioni, rappresentazioni, e calcoli aritmetici senza timore di incorrere in risultati sbagliati.
+                                </p>
+                            </div>
+                            <div class="step">
+                                <h4>Affidabilità e Logica:</h4>
+                                <p>
+                                    Ogni modulo è stato testato per rispondere esattamente alle casistiche d'esame, rendendo Noverflow 
+                                    il compagno ideale per chiunque voglia una conferma immediata e sicura della propria preparazione teorica e pratica.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-footer-note">
+                    <p>
+                        <strong>LOG_INFO:</strong> Tutto il codice sorgente, la struttura logica e il design di Noverflow sono proprietà intellettuale protetta da copyright. 
+                        È vietata la riproduzione o l'appropriazione indebita dei contenuti e degli script senza autorizzazione esplicita.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="system-footer">
+        <div class="footer-grid">
+            <div class="footer-info">© 2025 EMANUELE CIOTOLA - Tutti i diritti riservati.</div>
+            <div>
+                <div class="footer-links">
+                    <a href="https://github.com/emanueleciotola/Noverflow">GITHUB_REPOSITORY</a>
+                    <span class="footer-separator">|</span>
+                    <a href="en/index.html">SWITCH_TO_EN</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="main.js"></script>
 </body>
+
 </html>

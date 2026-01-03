@@ -6,43 +6,43 @@
 -->
  
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 
 <head>
-    <!-- Lingua e Codifica -->
+    <!-- Language & Encoding -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="language" content="Italian, English">
+    <meta name="language" content="English">
 
-    <!-- TITOLO & SEO STRATEGICA -->
-    <title>Noverflow | Calcolatore IEEE 754, Complemento a 2 e C1</title>
+    <!-- TITLE & SEO STRATEGY -->
+    <title>Noverflow | Binary Representations: Signed, 1's & 2's Complement, IEEE 754</title>
     
-    <!-- DESCRIZIONE DETTAGLIATA -->
-    <meta name="title" content="Noverflow | Rappresentazioni Binarie: Con segno, C1, C2, IEEE 754 (FP32/64)">
-    <meta name="description" content="Calcolatore per rappresentazioni binarie: Binario con Segno, Complemento a 1 (C1), Complemento a 2 (C2) e Standard IEEE 754 (FP32/64).">
+    <!-- DETAILED DESCRIPTION (Ideal for AI and Google snippets) -->
+    <meta name="title" content="Noverflow | Binary Representations: Signed, 1's & 2's Complement, IEEE 754">
+    <meta name="description" content="Binary representation calculator: Signed Magnitude, 1's Complement (C1), 2's Complement (C2), and IEEE 754 Standard (FP32/64). Developed for Computer Science students.">
     
-    <meta name="keywords" content="ieee 754 converter, complemento a due, complemento a uno, binario con segno, bias esponente, mantissa, virgola mobile, esercizi architettura elaboratori, DIETI">
+    <meta name="keywords" content="ieee 754 converter, two's complement, one's complement, signed magnitude, exponent bias, mantissa, floating point binary, computer architecture exercises, DIETI">
     <meta name="author" content="Emanuele Ciotola">
     <meta name="robots" content="index, follow">
-    
-    <!-- GESTIONE MULTILINGUA -->
+
+    <!-- MULTILINGUAL MANAGEMENT -->
     <link rel="alternate" hreflang="it" href="https://emanueleciotola.github.io/Noverflow/rappresentazioni.html" />
     <link rel="alternate" hreflang="en" href="https://emanueleciotola.github.io/Noverflow/en/representations.html" />
     <link rel="alternate" hreflang="x-default" href="https://emanueleciotola.github.io/Noverflow/en/representations.html" />
     
     <!-- OPEN GRAPH (Social SEO) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Noverflow | Calcolatore Rappresentazioni Binarie">
-    <meta property="og:description" content="Converti numeri decimali in binario con segno e virgola mobile IEEE 754, numeri interi in complemento a uno e complemento a due.">
-    <meta property="og:url" content="https://emanueleciotola.github.io/Noverflow/rappresentazioni.html">
+    <meta property="og:title" content="Noverflow | Binary Representation Calculator">
+    <meta property="og:description" content="Convert decimal numbers to signed binary and IEEE 754 floating point, integers to one's complement and two's complement.">
+    <meta property="og:url" content="https://emanueleciotola.github.io/Noverflow/en/representations.html">
     <meta property="og:image" content="https://emanueleciotola.github.io/Noverflow/assets/rappresentazioni.webp">
     <meta property="og:site_name" content="Noverflow">
-    <meta property="og:locale" content="it_IT">
+    <meta property="og:locale" content="en_US">
 
     <!-- TWITTER CARDS -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Noverflow | Calcolatore Rappresentazioni Binarie">
-    <meta name="twitter:description" content="Converti numeri decimali in binario con segno e virgola mobile IEEE 754, numeri interi in complemento a uno e complemento a due.">
+    <meta name="twitter:title" content="Noverflow | Binary Representation Calculator">
+    <meta name="twitter:description" content="Convert decimal numbers to signed binary and IEEE 754 floating point, integers to one's complement and two's complement.">
     <meta name="twitter:image" content="https://emanueleciotola.github.io/Noverflow/assets/rappresentazioni.webp">
 
     <!-- MOBILE INTEGRATION & THEME -->
@@ -52,32 +52,33 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Noverflow">
 
-    <!-- DATI STRUTTURATI AI -->
+    <!-- AI STRUCTURED DATA -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "Noverflow - Calcolatore Rappresentazioni",
-        "description": "Convertitore per rappresentazioni binarie complesse: Standard IEEE 754 (FP32/FP64), Complemento a 1, Complemento a 2 e Binario con Segno.",
-        "url": "https://emanueleciotola.github.io/Noverflow/rappresentazioni.html",
-        "inLanguage": "it-IT",
+        "name": "Noverflow - Binary Representation Calculator",
+        "description": "Converter for complex binary representations: IEEE 754 Standard (FP32/64), 1's Complement, 2's Complement, and Signed Magnitude.",
+        "url": "https://emanueleciotola.github.io/Noverflow/en/representations.html",
+        "inLanguage": "en-US",
         "applicationCategory": "EducationalApplication",
         "operatingSystem": "Web",
         "author": {
             "@type": "Person",
-            "name": "Emanuele Ciotola"
+            "name": "Emanuele Ciotola",
+            "url": "https://emanueleciotola.github.io/portfolio/"
         },
-        "keywords": "IEEE 754, Complemento a due, Complemento a uno, Virgola mobile, Esponente, Mantissa, Bias"
+        "keywords": "IEEE 754, Two's Complement, One's Complement, Floating Point, Exponent, Mantissa, Bias"
     }
     </script>
 
-    <!-- FAVICON -->
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="alternate icon" type="image/x-icon" href="assets/favicon.ico">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <!-- FAVICON (Assuming they are in the root /assets/) -->
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-    <!-- STYLESHEET -->
-    <link href="style.css" rel="stylesheet">
+    <!-- STYLESHEET (Assuming style.css is in the root) -->
+    <link href="../style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -100,9 +101,9 @@
                 <!-- DESKTOP / TABLET NAV -->
                 <div class="internal-nav-links">
                     <a href="index.html" class="nav-link-item">HOME</a>
-                    <a href="conversioni.html" class="nav-link-item">CONVERSIONI</a>
-                    <a href="rappresentazioni.html" class="nav-link-item active">RAPPRESENTAZIONI</a>
-                    <a href="operazioni.html" class="nav-link-item">OPERAZIONI</a>
+                    <a href="conversions.html" class="nav-link-item">CONVERSIONS</a>
+                    <a href="representations.html" class="nav-link-item active">REPRESENTATIONS</a>
+                    <a href="operations.html" class="nav-link-item">OPERATIONS</a>
                 </div>
             </div>
 
@@ -123,9 +124,9 @@
     <!-- MOBILE MENU OVERLAY (FULL SCREEN) -->
     <div class="mobile-menu-overlay" id="mobileMenu">
         <a href="index.html" class="mobile-link">HOME</a>
-        <a href="conversioni.html" class="mobile-link">CONVERSIONI</a>
-        <a href="rappresentazioni.html" class="mobile-link active">RAPPRESENTAZIONI</a>
-        <a href="operazioni.html" class="mobile-link">OPERAZIONI</a>
+        <a href="conversions.html" class="mobile-link">CONVERSIONS</a>
+        <a href="representations.html" class="mobile-link active">REPRESENTATIONS</a>
+        <a href="operations.html" class="mobile-link">OPERATIONS</a>
         
         <div class="mobile-nav-bottom">SYSTEM V2.8_MOBILE</div>
     </div>
@@ -144,10 +145,10 @@
                         
                         <!-- Input Format (Sorgente) -->
                         <div class="selector-group">
-                            <label>Formato Input</label>
+                            <label>Input Format</label>
                             <div id="selettoreSorgenteRep" class="selettore selettore-conversione">
                                 <div class="spazioSelezionatoSelettore">
-                                    <p class="elementoSelezionato">Decimale</p>
+                                    <p class="elementoSelezionato">Decimal</p>
                                     <svg viewBox="0 0 24 24" class="iconaMenuSelezione" fill="none"
                                         stroke="currentColor" stroke-width="3" stroke-linecap="round"
                                         stroke-linejoin="round">
@@ -155,12 +156,12 @@
                                     </svg>
                                 </div>
                                 <ul class="elementiSelettore">
-                                    <li class="selezionatoDaSelettore" data-value="DEC">Decimale</li>
-                                    <li data-value="SM">Binario con segno</li>
-                                    <li data-value="C1">Compl. a 1 (C1)</li>
-                                    <li data-value="C2">Compl. a 2 (C2)</li>
-                                    <li data-value="FP32">IEEE_FP32</li>
-                                    <li data-value="FP64">IEEE_FP64</li>
+                                    <li class="selezionatoDaSelettore">Decimal</li>
+                                    <li>Signed Binary</li>
+                                    <li>One’s Compl. (C1)</li>
+                                    <li>Two’s Compl. (C2)</li>
+                                    <li>IEEE 754 (FP32)</li>
+                                    <li>IEEE 754 (FP64)</li>
                                 </ul>
                             </div>
                         </div>
@@ -178,10 +179,10 @@
 
                         <!-- Output Format (Destinazione) -->
                         <div class="selector-group">
-                            <label>Formato Output</label>
+                            <label>Output Format</label>
                             <div id="selettoreDestinazioneRep" class="selettore selettore-conversione">
                                 <div class="spazioSelezionatoSelettore">
-                                    <p class="elementoSelezionato">Binario con segno</p>
+                                    <p class="elementoSelezionato">Signed Binary</p>
                                     <svg viewBox="0 0 24 24" class="iconaMenuSelezione" fill="none"
                                         stroke="currentColor" stroke-width="3" stroke-linecap="round"
                                         stroke-linejoin="round">
@@ -189,12 +190,12 @@
                                     </svg>
                                 </div>
                                 <ul class="elementiSelettore">
-                                    <li data-value="DEC">Decimale</li>
-                                    <li class="selezionatoDaSelettore" data-value="SM">Binario con segno</li>
-                                    <li data-value="C1">Compl. a 1 (C1)</li>
-                                    <li data-value="C2">Compl. a 2 (C2)</li>
-                                    <li data-value="FP32">IEEE_FP32</li>
-                                    <li data-value="FP64">IEEE_FP64</li>
+                                    <li>Decimal</li>
+                                    <li class="selezionatoDaSelettore">Signed Binary</li>
+                                    <li>One’s Compl. (C1)</li>
+                                    <li>Two’s Compl. (C2)</li>
+                                    <li>IEEE 754 (FP32)</li>
+                                    <li>IEEE 754 (FP64)</li>
                                 </ul>
                             </div>
                         </div>
@@ -202,23 +203,24 @@
 
                     <div class="input-wrapper">
                         <span class="input-prompt">></span>
+                        <!-- oninput generico: accetta numeri, punti, segni e lettere (per hex o notation scientifica se necessaria in futuro) -->
                         <input type="text" id="inputRappresentazione" class="input-conversion"
-                            placeholder="INSERISCI_QUI" autocomplete="off">
+                            placeholder="DIGIT_VALUE_HERE" autocomplete="off">
                     </div>
                 </div>
             </article>
 
             <article class="module-card card-risultato-monitor osservato" onclick="copiaNegliAppunti()">
                 <div class="module-header" id="result-header">
-                    <svg viewBox="0 0 24 24" id="copy-icon" class="module-icon" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg viewBox="0 0 24 24" class="module-icon" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z" />
                         <polyline points="13 2 13 9 20 9" />
                     </svg>
                     <h3 id="copy-label">OUTPUT_LOG</h3>
                 </div>
                 <div class="module-content">
-                    <span class="result-label">VAL_RISULTATO (clicca per copiare):</span>
-                    <p id="risultatoRappresentazione" class="monitor-result-text text-glow-green">In attesa di input...</p>
+                    <span class="result-label">RESULT_VALUE (click to copy):</span>
+                    <p id="risultatoRappresentazione" class="monitor-result-text text-glow-green">Awaiting input...</p>
                 </div>
             </article>
         </section>
@@ -231,51 +233,51 @@
                             <polyline points="4 17 10 11 4 5"></polyline>
                             <line x1="12" y1="19" x2="20" y2="19"></line>
                         </svg>
-                        MANUALE_DI_SISTEMA
+                        SYSTEM_MANUAL
                     </h2>
                 </div>
                 <div class="doc-body">
                     <p class="intro-text">
-                        In un computer, tutto è rappresentato da una sequenza di bit, ma quei bit non hanno un significato intrinseco: siamo noi a darglielo tramite le <strong>rappresentazioni</strong>. Mentre per i numeri naturali basta il binario puro, per gestire numeri negativi e reali servono codifiche specifiche. 
-                        Noverflow ti permette di analizzare come i numeri "umani" vengono trasformati in dati binari pronti per essere processati da una CPU o memorizzati in una RAM.
+                        In a computer, everything is represented by a sequence of bits, but those bits have no intrinsic meaning: we assign it through <strong>representations</strong>. While raw binary is enough for natural numbers, handling negative numbers and real values requires specific encodings. 
+                        Noverflow allows you to analyze how "human" numbers are transformed into binary data, ready to be processed by a CPU or stored in RAM.
                     </p>
 
                     <div class="doc-grid">
                         <div class="doc-item">
-                            <h3>Codifiche Interi</h3>
-                            <p>Supporto per <strong>Segno e Grandezza</strong>, <strong>C1</strong> e <strong>C2</strong>. Il sistema gestisce automaticamente l'estensione del segno e il calcolo del valore algebrico basandosi sul bit più significativo (MSB).</p>
+                            <h3>Integer Encoding</h3>
+                            <p>Support for <strong>Signed Magnitude</strong>, <strong>1's Complement (C1)</strong>, and <strong>2's Complement (C2)</strong>. The system automatically handles sign extension and algebraic value calculation based on the Most Significant Bit (MSB).</p>
                         </div>
 
                         <div class="doc-item">
-                            <h3>Virgola Mobile (IEEE 754)</h3>
-                            <p>Gestione dei numeri reali tramite notazione scientifica binaria. Il modulo analizza la scomposizione in <strong>Segno, Esponente e Mantissa</strong>, applicando correttamente i valori di Bias per i formati a 32 bit (Single Precision) e 64 bit (Double Precision).</p>
+                            <h3>Floating Point (IEEE 754)</h3>
+                            <p>Management of real numbers via binary scientific notation. The module analyzes the breakdown into <strong>Sign, Exponent, and Mantissa</strong>, correctly applying Bias values for 32-bit (Single Precision) and 64-bit (Double Precision) formats.</p>
                         </div>
 
                         <div class="doc-full">
-                            <h3>Guida alle Rappresentazioni</h3>
+                            <h3>Guide to Data Representations</h3>
                             <div class="manual-steps">
                                 <div class="step">
-                                    <h4>Il Complemento a 2 (C2) e l'Aritmetica Modulare</h4>
+                                    <h4>Two's Complement (C2) and Modular Arithmetic</h4>
                                     <p>
-                                        Il <strong>Complemento a 2</strong> è la rappresentazione standard nei processori moderni (x86, ARM). Il suo vantaggio principale è la possibilità di eseguire sottrazioni utilizzando lo stesso hardware dell'addizione. <br>
-                                        <strong>Procedura di calcolo:</strong> Per rappresentare un numero negativo, si parte dal suo valore positivo binario, si esegue il <em>bit-flipping</em> (complemento a 1) e si somma 1 al bit meno significativo (LSB). Questo elimina l'ambiguità dello "zero negativo" e massimizza il range numerico del registro.
+                                        <strong>Two's Complement</strong> is the standard representation in modern processors (x86, ARM). Its main advantage is the ability to perform subtractions using the same hardware as addition. <br>
+                                        <strong>Calculation Procedure:</strong> To represent a negative number, start with its positive binary value, perform <em>bit-flipping</em> (1's complement), and add 1 to the Least Significant Bit (LSB). This eliminates "negative zero" ambiguity and maximizes the register's numerical range.
                                     </p>
                                 </div>
                                 <div class="step">
-                                    <h4>Binario con Segno e Complemento a 1 (C1)</h4>
+                                    <h4>Signed Binary and 1's Complement (C1)</h4>
                                     <p>
-                                        Sebbene meno efficienti, queste forme sono fondamentali per comprendere l'evoluzione dell'informatica. <br>
-                                        In <strong>Binario con Segno</strong> (analogo al Segno e Modulo), il bit più a sinistra (MSB) agisce come un interruttore (0 per positivo, 1 per negativo). <br>
-                                        Il <strong>Complemento a 1</strong> consiste nell'inversione logica di ogni bit per numeri negativi; pur essendo più semplice del C2, soffre del problema della doppia rappresentazione dello zero (0000 e 1111), complicando la logica dei test di uguaglianza.
+                                        While less efficient, these forms are essential for understanding the evolution of computing. <br>
+                                        In <strong>Signed Binary</strong> (analogous to Signed Magnitude), the leftmost bit (MSB) acts as a switch (0 for positive, 1 for negative). <br>
+                                        <strong>One's Complement</strong> consists of logically inverting every bit for negative numbers; although simpler than C2, it suffers from the "double zero" representation problem (0000 and 1111), complicating equality test logic.
                                     </p>
                                 </div>
                                 <div class="step">
-                                    <h4>Lo Standard IEEE 754 per i Numeri Reali</h4>
+                                    <h4>The IEEE 754 Standard for Real Numbers</h4>
                                     <p>
-                                        Per memorizzare numeri con virgola, si utilizza una struttura a tre campi definita dallo standard <strong>IEEE 754</strong>: <br>
-                                        1. <strong>Segno (1 bit):</strong> Definisce la polarità del numero. <br>
-                                        2. <strong>Esponente (8 o 11 bit):</strong> Memorizzato in "eccesso" (Bias). Si somma 127 (per FP32) o 1023 (per FP64) all'esponente reale per evitare l'uso di bit di segno interni. <br>
-                                        3. <strong>Mantissa:</strong> Rappresenta le cifre significative del numero normalizzato. Noverflow gestisce implicitamente il "bit nascosto" (hidden bit) per garantirti il risultato binario esatto presente in memoria.
+                                        To store numbers with fractional parts, a three-field structure defined by the <strong>IEEE 754</strong> standard is used: <br>
+                                        1. <strong>Sign (1 bit):</strong> Defines the number's polarity. <br>
+                                        2. <strong>Exponent (8 or 11 bits):</strong> Stored as "biased." You add 127 (for FP32) or 1023 (for FP64) to the actual exponent to avoid using internal sign bits. <br>
+                                        3. <strong>Mantissa:</strong> Represents the significant digits of the normalized number. Noverflow implicitly handles the <strong>hidden bit</strong> to guarantee the exact binary result stored in memory.
                                     </p>
                                 </div>
                             </div>
@@ -288,18 +290,18 @@
 
     <footer id="system-footer">
         <div class="footer-grid">
-            <div class="footer-info">© 2025 EMANUELE CIOTOLA - Tutti i diritti riservati.</div>
+            <div class="footer-info">© 2025 EMANUELE CIOTOLA - All rights reserved.</div>
             <div>
                 <div class="footer-links">
                     <a href="https://github.com/emanueleciotola/Noverflow">GITHUB_REPOSITORY</a>
                     <span class="footer-separator">|</span>
-                    <a href="en/representations.html">SWITCH_TO_EN</a>
+                    <a href="../rappresentazioni.html">SWITCH_TO_IT</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="main.js"></script>
+    <script src="../main.js"></script>
 </body>
 
 </html>

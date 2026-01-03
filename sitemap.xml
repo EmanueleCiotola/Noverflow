@@ -1,28 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
+  <!-- INDEX -->
   <url>
-    <loc>https://emanueleciotola.github.io/Noverflow/</loc>
-    <lastmod>2024-10-06T17:05:21+00:00</lastmod>
-    <priority>1.00</priority>
+    <loc>https://emanueleciotola.github.io/Noverflow/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://emanueleciotola.github.io/Noverflow/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://emanueleciotola.github.io/Noverflow/en/index.html"/>
+    <priority>1.0</priority>
   </url>
 
+  <!-- CONVERSIONI -->
   <url>
-    <loc>https://emanueleciotola.github.io/Noverflow/conversioni</loc>
-    <lastmod>2024-10-06T17:05:21+00:00</lastmod>
-    <priority>0.80</priority>
+    <loc>https://emanueleciotola.github.io/Noverflow/conversioni.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://emanueleciotola.github.io/Noverflow/conversioni.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://emanueleciotola.github.io/Noverflow/en/conversions.html"/>
+    <priority>0.8</priority>
   </url>
 
+  <!-- RAPPRESENTAZIONI -->
   <url>
-    <loc>https://emanueleciotola.github.io/Noverflow/rappresentazioni</loc>
-    <lastmod>2024-10-06T17:05:21+00:00</lastmod>
-    <priority>0.80</priority>
+    <loc>https://emanueleciotola.github.io/Noverflow/rappresentazioni.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://emanueleciotola.github.io/Noverflow/rappresentazioni.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://emanueleciotola.github.io/Noverflow/en/representations.html"/>
+    <priority>0.8</priority>
   </url>
 
+  <!-- OPERAZIONI -->
   <url>
-    <loc>https://emanueleciotola.github.io/Noverflow/operazioni</loc>
-    <lastmod>2024-10-06T17:05:21+00:00</lastmod>
-    <priority>0.80</priority>
+    <loc>https://emanueleciotola.github.io/Noverflow/operazioni.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://emanueleciotola.github.io/Noverflow/operazioni.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://emanueleciotola.github.io/Noverflow/en/operations.html"/>
+    <priority>0.8</priority>
   </url>
+
+  <!-- VERSIONI INGLESI (Speculari) -->
+  <url><loc>https://emanueleciotola.github.io/Noverflow/en/index.html</loc></url>
+  <url><loc>https://emanueleciotola.github.io/Noverflow/en/conversions.html</loc></url>
+  <url><loc>https://emanueleciotola.github.io/Noverflow/en/representations.html</loc></url>
+  <url><loc>https://emanueleciotola.github.io/Noverflow/en/operations.html</loc></url>
 
 </urlset>

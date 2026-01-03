@@ -6,43 +6,43 @@
 -->
  
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 
 <head>
     <!-- Language & Encoding -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="language" content="Italian, English">
+    <meta name="language" content="English">
 
     <!-- TITLE & SEO STRATEGY -->
-    <title>Noverflow | Conversioni Basi Numeriche (2, 8, 10, 16)</title>
+    <title>Noverflow | Binary, Octal, Hex & Decimal Base Converter</title>
     
-    <!-- DETAILED DESCRIPTION (Ideal for AI and Google snippets) -->
-    <meta name="title" content="Noverflow | Conversioni tra Basi Numeriche (2, 8, 10, 16)">
-    <meta name="description" content="Converti numeri interi e decimali tra binario, ottale, decimale ed esadecimale. Algoritmo ad alta precisione con moltiplicazioni iterate.">
+    <!-- DETAILED DESCRIPTION -->
+    <meta name="title" content="Noverflow | Number Base Conversions (Bases 2, 8, 10, 16)">
+    <meta name="description" content="Convert integers and fractions between binary, octal, decimal, and hexadecimal. High-precision algorithm for floating-point accuracy.">
     
-    <meta name="keywords" content="conversione basi, convertitore binario esadecimale, ottale, decimale, virgola mobile binario, esercizi basi numeriche">
+    <meta name="keywords" content="base converter, binary to hex, hex to binary converter, floating point binary, octal to decimal, number system conversion, computer architecture tools">
     <meta name="author" content="Emanuele Ciotola">
     <meta name="robots" content="index, follow">
     
-    <!-- GESTIONE MULTILINGUA -->
+    <!-- MULTILINGUAL MANAGEMENT -->
     <link rel="alternate" hreflang="it" href="https://emanueleciotola.github.io/Noverflow/conversioni.html" />
     <link rel="alternate" hreflang="en" href="https://emanueleciotola.github.io/Noverflow/en/conversions.html" />
     <link rel="alternate" hreflang="x-default" href="https://emanueleciotola.github.io/Noverflow/en/conversions.html" />
     
-    <!-- OPEN GRAPH (LinkedIn, WhatsApp, Facebook) -->
+    <!-- OPEN GRAPH (Social SEO) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Noverflow | Conversioni tra Basi Numeriche (2, 8, 10, 16)">
-    <meta property="og:description" content="Converti numeri interi e decimali tra binario, ottale, decimale ed esadecimale. Algoritmo ad alta precisione con moltiplicazioni iterate.">
-    <meta property="og:url" content="https://emanueleciotola.github.io/Noverflow/conversioni.html">
+    <meta property="og:title" content="Noverflow | Binary, Octal, Decimal & Hex Base Converter">
+    <meta property="og:description" content="The professional toolkit for number base conversions. Handles floating point via iterated multiplication algorithm.">
+    <meta property="og:url" content="https://emanueleciotola.github.io/Noverflow/en/conversions.html">
     <meta property="og:image" content="https://emanueleciotola.github.io/Noverflow/assets/conversioni.webp">
     <meta property="og:site_name" content="Noverflow">
-    <meta property="og:locale" content="it_IT">
+    <meta property="og:locale" content="en_US">
 
     <!-- TWITTER CARDS -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Noverflow | Convertitore tra Basi Numeriche (2, 8, 10, 16)">
-    <meta name="twitter:description" content="Converti numeri interi e decimali tra binario, ottale, decimale ed esadecimale. Algoritmo ad alta precisione con moltiplicazioni iterate.">
+    <meta name="twitter:title" content="Noverflow | Number Base Converter">
+    <meta name="twitter:description" content="Convert integers and fractional numbers between bases 2, 8, 10, and 16 with high precision.">
     <meta name="twitter:image" content="https://emanueleciotola.github.io/Noverflow/assets/conversioni.webp">
 
     <!-- MOBILE INTEGRATION & THEME -->
@@ -52,32 +52,32 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Noverflow">
 
+    <!-- AI STRUCTURED DATA -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "Noverflow - Convertitore Basi Numeriche",
-        "description": "Strumento per la conversione tra basi 2, 8, 10 e 16 con supporto per la parte frazionaria (virgola mobile).",
-        "url": "https://emanueleciotola.github.io/Noverflow/conversioni.html",
+        "name": "Noverflow - Base Converter",
+        "description": "Professional tool for converting between bases 2, 8, 10, and 16 with floating-point (radix point) support.",
+        "url": "https://emanueleciotola.github.io/Noverflow/en/conversions.html",
+        "inLanguage": "en-US",
         "applicationCategory": "EducationalApplication",
         "operatingSystem": "Web",
-        "browserRequirements": "Requires JavaScript",
         "author": {
             "@type": "Person",
             "name": "Emanuele Ciotola"
         },
-        "abstract": "Algoritmo ad alta precisione per convertire numeri interi e decimali tra binario, ottale, decimale ed esadecimale."
+        "abstract": "High-precision algorithm for converting integers and decimals between binary, octal, decimal, and hexadecimal."
     }
     </script>
 
     <!-- FAVICON -->
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="alternate icon" type="image/x-icon" href="assets/favicon.ico">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-    <!-- STYLESHEET & FONT PRELOAD -->
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link href="style.css" rel="stylesheet">
+    <!-- STYLESHEET -->
+    <link href="../style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -100,9 +100,9 @@
                 <!-- DESKTOP / TABLET NAV -->
                 <div class="internal-nav-links">
                     <a href="index.html" class="nav-link-item">HOME</a>
-                    <a href="conversioni.html" class="nav-link-item active">CONVERSIONI</a>
-                    <a href="rappresentazioni.html" class="nav-link-item">RAPPRESENTAZIONI</a>
-                    <a href="operazioni.html" class="nav-link-item">OPERAZIONI</a>
+                    <a href="conversions.html" class="nav-link-item active">CONVERSIONS</a>
+                    <a href="representations.html" class="nav-link-item">REPRESENTATIONS</a>
+                    <a href="operations.html" class="nav-link-item">OPERATIONS</a>
                 </div>
             </div>
 
@@ -123,9 +123,9 @@
     <!-- MOBILE MENU OVERLAY (FULL SCREEN) -->
     <div class="mobile-menu-overlay" id="mobileMenu">
         <a href="index.html" class="mobile-link">HOME</a>
-        <a href="conversioni.html" class="mobile-link active">CONVERSIONI</a>
-        <a href="rappresentazioni.html" class="mobile-link">RAPPRESENTAZIONI</a>
-        <a href="operazioni.html" class="mobile-link">OPERAZIONI</a>
+        <a href="conversions.html" class="mobile-link active">CONVERSIONS</a>
+        <a href="representations.html" class="mobile-link">REPRESENTATIONS</a>
+        <a href="operations.html" class="mobile-link">OPERATIONS</a>
         
         <div class="mobile-nav-bottom">SYSTEM V2.8_MOBILE</div>
     </div>
@@ -142,10 +142,10 @@
                 <div class="module-content centered-content">
                     <div id="spazioSceltaBasi" class="selectors-grid">
                         <div class="selector-group">
-                            <label>Sorgente</label>
+                            <label>Source</label>
                             <div id="selettorePrimaBase" class="selettore selettore-conversione">
                                 <div class="spazioSelezionatoSelettore">
-                                    <p class="elementoSelezionato" data-value="2">Binario</p>
+                                    <p class="elementoSelezionato">Binary</p>
                                     <svg viewBox="0 0 24 24" class="iconaMenuSelezione" fill="none"
                                         stroke="currentColor" stroke-width="3" stroke-linecap="round"
                                         stroke-linejoin="round">
@@ -153,10 +153,10 @@
                                     </svg>
                                 </div>
                                 <ul class="elementiSelettore">
-                                    <li class="selezionatoDaSelettore" data-value="2">Binario</li>
-                                    <li data-value="8">Ottale</li>
-                                    <li data-value="10">Decimale</li>
-                                    <li data-value="16">Hex</li>
+                                    <li class="selezionatoDaSelettore">Binary</li>
+                                    <li>Octal</li>
+                                    <li>Decimal</li>
+                                    <li>Hex</li>
                                 </ul>
                             </div>
                         </div>
@@ -172,10 +172,10 @@
                         </button>
 
                         <div class="selector-group">
-                            <label>Destinazione</label>
+                            <label>Target</label>
                             <div id="selettoreSecondaBase" class="selettore selettore-conversione">
                                 <div class="spazioSelezionatoSelettore">
-                                    <p class="elementoSelezionato" data-value="8">Ottale</p>
+                                    <p class="elementoSelezionato">Octal</p>
                                     <svg viewBox="0 0 24 24" class="iconaMenuSelezione" fill="none"
                                         stroke="currentColor" stroke-width="3" stroke-linecap="round"
                                         stroke-linejoin="round">
@@ -183,10 +183,10 @@
                                     </svg>
                                 </div>
                                 <ul class="elementiSelettore">
-                                    <li data-value="2">Binario</li>
-                                    <li class="selezionatoDaSelettore" data-value="8">Ottale</li>
-                                    <li data-value="10">Decimale</li>
-                                    <li data-value="16">Hex</li>
+                                    <li>Binary</li>
+                                    <li class="selezionatoDaSelettore">Octal</li>
+                                    <li>Decimal</li>
+                                    <li>Hex</li>
                                 </ul>
                             </div>
                         </div>
@@ -195,7 +195,7 @@
                     <div class="input-wrapper">
                         <span class="input-prompt">></span>
                         <input type="text" id="elementoDaConvertire" class="input-conversion"
-                            placeholder="INSERISCI_QUI" autocomplete="off">
+                            placeholder="DIGIT_VALUE_HERE" autocomplete="off">
                     </div>
                 </div>
             </article>
@@ -209,8 +209,8 @@
                     <h3 id="copy-label">OUTPUT_LOG</h3>
                 </div>
                 <div class="module-content">
-                    <span class="result-label">VAL_RISULTATO (clicca per copiare):</span>
-                    <p id="risultato" class="monitor-result-text text-glow-green">In attesa di input...</p>
+                    <span class="result-label">RESULT_VALUE (click to copy):</span>
+                    <p id="risultato" class="monitor-result-text text-glow-green">Awaiting input...</p>
                 </div>
             </article>
         </section>
@@ -223,49 +223,49 @@
                             <polyline points="4 17 10 11 4 5"></polyline>
                             <line x1="12" y1="19" x2="20" y2="19"></line>
                         </svg>
-                        MANUALE_DI_SISTEMA
+                        SYSTEM_MANUAL
                     </h2>
                 </div>
                 <div class="doc-body">
                     <p class="intro-text">
-                        I sistemi di numerazione posizionale definiscono il valore di una cifra in base alla sua posizione. Mentre il sistema <strong>Decimale (Base 10)</strong> è lo standard umano, l'architettura degli elaboratori si fonda sul <strong>Binario (Base 2)</strong> per rappresentare stati logici ON/OFF. 
-                        L'<strong>Ottale (Base 8)</strong> e l'<strong>Esadecimale (Base 16)</strong> fungono da abbreviazioni del binario, permettendo di mappare rispettivamente gruppi di 3 e 4 bit in un singolo carattere, facilitando la lettura di indirizzi di memoria e istruzioni.
+                        Positional numbering systems define a digit's value based on its place in a string. While <strong>Decimal (Base 10)</strong> is our everyday human standard, computer hardware relies on <strong>Binary (Base 2)</strong> to represent fundamental ON/OFF states. 
+                        <strong>Octal (Base 8)</strong> and <strong>Hexadecimal (Base 16)</strong> work as binary shortcuts: they allow us to group 3 or 4 bits into a single character, making it much easier to read memory addresses and CPU instructions.
                     </p>
 
                     <div class="doc-grid">
                         <div class="doc-item">
-                            <h3>Gestione Basi</h3>
-                            <p>Il modulo CONV_UNIT supporta la conversione istantanea di numeri interi e decimali tra basi 2, 8, 10 e 16.</p>
+                            <h3>Base Management</h3>
+                            <p>The CONV_UNIT module provides instant conversion for both whole numbers and decimals across bases 2, 8, 10, and 16.</p>
                         </div>
 
                         <div class="doc-item">
-                            <h3>Precisione Frazionaria</h3>
-                            <p>L'algoritmo di Noverflow garantisce la massima accuratezza calcolando la parte frazionaria tramite moltiplicazioni iterate fino al limite di registro.</p>
+                            <h3>Fractional Precision</h3>
+                            <p>Noverflow's algorithm ensures high accuracy by calculating the fractional part through repeated multiplications, matching the limits of hardware registers.</p>
                         </div>
 
                         <div class="doc-full">
-                            <h3>Guida Rapida alla Conversione Manuale</h3>
+                            <h3>Quick Guide to Manual Calculation</h3>
                             <div class="manual-steps">
                                 <div class="step">
-                                    <h4>1. Da qualsiasi Base a Decimale (Metodo Pesato):</h4>
+                                    <h4>1. From any Base to Decimal (Weighted Method):</h4>
                                     <p>
-                                        Ogni cifra viene moltiplicata per la base elevata alla sua posizione index (partendo da 0 per la prima cifra a sinistra della virgola).<br>
-                                        <em>Esempio: 110.1₂ = (1×2²) + (1×2¹) + (0×2⁰) + (1×2⁻¹) = 4 + 2 + 0 + 0.5 = 6.5₁₀</em>
+                                        Multiply each digit by the base raised to its position index (starting from 0 for the first digit to the left of the decimal point).<br>
+                                        <em>Example: 110.1₂ = (1×2²) + (1×2¹) + (0×2⁰) + (1×2⁻¹) = 4 + 2 + 0 + 0.5 = 6.5₁₀</em>
                                     </p>
                                 </div>
                                 <div class="step">
-                                    <h4>2. Da Decimale a qualsiasi Base (Divisioni/Moltiplicazioni):</h4>
+                                    <h4>2. From Decimal to any Base (Division/Multiplication):</h4>
                                     <p>
-                                        Per la parte intera: dividi il numero per la base di destinazione e annota i resti dal basso verso l'alto.<br>
-                                        Per la parte frazionaria: moltiplica la parte dopo la virgola per la base; la parte intera risultante è la cifra binaria. Ripeti finché non ottieni 0 o raggiungi la precisione desiderata.
+                                        For whole numbers: divide the number by the target base repeatedly and read the remainders from bottom to top.<br>
+                                        For fractions: multiply the decimal part by the base; the whole number part of the result is your next digit. Repeat until you hit 0 or reach your desired precision.
                                     </p>
                                 </div>
                                 <div class="step">
-                                    <h4>3. Salti Diretti (Potenze di 2):</h4>
+                                    <h4>3. Direct Jumps (Powers of 2):</h4>
                                     <p>
-                                        Per passare tra Binario, Ottale ed Esadecimale non serve passare per il decimale. <br>
-                                        <strong>Ottale:</strong> raggruppa i bit a 3 a 3 (es: 111₂ = 7₈).<br>
-                                        <strong>Esadecimale:</strong> raggruppa i bit a 4 a 4 (es: 1010₂ = A₁₆).
+                                        When switching between Binary, Octal, and Hex, you don't need to go through decimal first. <br>
+                                        <strong>Octal:</strong> group bits in 3s (e.g., 111₂ = 7₈).<br>
+                                        <strong>Hexadecimal:</strong> group bits in 4s (e.g., 1010₂ = A₁₆).
                                     </p>
                                 </div>
                             </div>
@@ -278,18 +278,18 @@
 
     <footer id="system-footer">
         <div class="footer-grid">
-            <div class="footer-info">© 2025 EMANUELE CIOTOLA - Tutti i diritti riservati.</div>
+            <div class="footer-info">© 2025 EMANUELE CIOTOLA - All rights reserved.</div>
             <div>
                 <div class="footer-links">
                     <a href="https://github.com/emanueleciotola/Noverflow">GITHUB_REPOSITORY</a>
                     <span class="footer-separator">|</span>
-                    <a href="en/conversions.html">SWITCH_TO_EN</a>
+                    <a href="../conversioni.html">SWITCH_TO_IT</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="main.js"></script>
+    <script src="../main.js"></script>
 </body>
 
 </html>

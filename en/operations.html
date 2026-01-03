@@ -6,43 +6,43 @@
 -->
  
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 
 <head>
-    <!-- Lingua e Codifica -->
+    <!-- Language & Encoding -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="language" content="Italian, English">
+    <meta name="language" content="English">
 
-    <!-- TITOLO & SEO STRATEGICA (Max 60 caratteri per Google) -->
-    <title>Noverflow | Operazioni Binarie e Simulatore ALU (Overflow & Carry)</title>
+    <!-- TITLE & SEO STRATEGY -->
+    <title>Noverflow | Binary Calculator & ALU Simulator</title>
     
-    <!-- DESCRIZIONE DETTAGLIATA (Ideale per snippet Google e AI) -->
-    <meta name="title" content="Noverflow | Operazioni Binarie: Addizione, Sottrazione, Moltiplicazione e Divisione">
-    <meta name="description" content="Esegui operazioni aritmetiche binarie: addizione, sottrazione via complemento a due, moltiplicazione e divisione. Simulatore ALU con rilevamento di Overflow e Carry.">
+    <!-- DETAILED DESCRIPTION -->
+    <meta name="title" content="Noverflow | Binary Calculation: Addition, Subtraction, multiplication, and division">
+    <meta name="description" content="Perform binary arithmetic operations: addition, subtraction via 2's complement, multiplication, and division. ALU simulator with Overflow and Carry detection.">
     
-    <meta name="keywords" content="operazioni binarie, addizione binaria, sottrazione binaria, moltiplicazione binaria, divisione binaria, simulatore ALU, overflow binario, flag carry, aritmetica di registro, DIETI, informatica federico II">
+    <meta name="keywords" content="binary operations, binary addition, binary subtraction, binary multiplication, binary division, ALU simulator, binary overflow, carry flag, bitwise arithmetic, computer architecture tools">
     <meta name="author" content="Emanuele Ciotola">
     <meta name="robots" content="index, follow">
 
-    <!-- GESTIONE MULTILINGUA -->
+    <!-- MULTILINGUAL MANAGEMENT -->
     <link rel="alternate" hreflang="it" href="https://emanueleciotola.github.io/Noverflow/operazioni.html" />
     <link rel="alternate" hreflang="en" href="https://emanueleciotola.github.io/Noverflow/en/operations.html" />
     <link rel="alternate" hreflang="x-default" href="https://emanueleciotola.github.io/Noverflow/en/operations.html" />
     
-    <!-- OPEN GRAPH (LinkedIn, WhatsApp, Facebook) -->
+    <!-- OPEN GRAPH (Social SEO) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Noverflow | Operazioni Binarie e Simulatore ALU">
-    <meta property="og:description" content="Calcola addizioni, sottrazioni, moltiplicazioni e divisioni binarie con analisi in tempo reale di Carry e Overflow. Strumento ideale per l'esame di Architettura.">
-    <meta property="og:url" content="https://emanueleciotola.github.io/Noverflow/operazioni.html">
+    <meta property="og:title" content="Noverflow | Binary Calculation & ALU Simulator">
+    <meta property="og:description" content="Calculate binary addition, subtraction, multiplication, and division with real-time Carry and Overflow analysis.">
+    <meta property="og:url" content="https://emanueleciotola.github.io/Noverflow/en/operations.html">
     <meta property="og:image" content="https://emanueleciotola.github.io/Noverflow/assets/operazioni.webp">
     <meta property="og:site_name" content="Noverflow">
-    <meta property="og:locale" content="it_IT">
+    <meta property="og:locale" content="en_US">
 
     <!-- TWITTER CARDS -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Noverflow | Operazioni Binarie e Simulatore ALU">
-    <meta name="twitter:description" content="Calcola addizioni, sottrazioni, moltiplicazioni e divisioni binarie con analisi in tempo reale di Carry e Overflow.">
+    <meta name="twitter:title" content="Noverflow | Binary Calculation & ALU Simulator">
+    <meta name="twitter:description" content="Calculate binary addition, subtraction, multiplication, and division with real-time Carry and Overflow analysis.">
     <meta name="twitter:image" content="https://emanueleciotola.github.io/Noverflow/assets/operazioni.webp">
 
     <!-- MOBILE INTEGRATION & THEME -->
@@ -52,15 +52,15 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Noverflow">
 
-    <!-- DATI STRUTTURATI AI (JSON-LD) -->
+    <!-- AI STRUCTURED DATA -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "Noverflow - Simulatore Operazioni ALU",
-        "description": "Esegui operazioni aritmetiche binarie (addizione, sottrazione, moltiplicazione, divisione) con analisi dei flag di Overflow e Carry.",
-        "url": "https://emanueleciotola.github.io/Noverflow/operazioni.html",
-        "inLanguage": "it-IT",
+        "name": "Noverflow - ALU Operations Simulator",
+        "description": "Perform binary arithmetic (addition, subtraction, multiplication, division) with Overflow and Carry flag analysis.",
+        "url": "https://emanueleciotola.github.io/Noverflow/en/operations.html",
+        "inLanguage": "en-US",
         "applicationCategory": "EducationalApplication",
         "operatingSystem": "Web",
         "author": {
@@ -68,21 +68,21 @@
             "name": "Emanuele Ciotola"
         },
         "featureList": [
-            "Addizione binaria con gestione del riporto (Carry)",
-            "Sottrazione binaria tramite Complemento a due",
-            "Moltiplicazione e Divisione binaria",
-            "Rilevamento automatico dell'Overflow (V)"
+            "Binary addition with Carry management",
+            "Binary subtraction via Two's Complement",
+            "Binary Multiplication and Division",
+            "Automatic Overflow (V) detection"
         ]
     }
     </script>
 
     <!-- FAVICON -->
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="alternate icon" type="image/x-icon" href="assets/favicon.ico">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
     <!-- STYLESHEET -->
-    <link href="style.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -105,9 +105,9 @@
                 <!-- DESKTOP / TABLET NAV -->
                 <div class="internal-nav-links">
                     <a href="index.html" class="nav-link-item">HOME</a>
-                    <a href="conversioni.html" class="nav-link-item">CONVERSIONI</a>
-                    <a href="rappresentazioni.html" class="nav-link-item">RAPPRESENTAZIONI</a>
-                    <a href="operazioni.html" class="nav-link-item active">OPERAZIONI</a>
+                    <a href="conversions.html" class="nav-link-item">CONVERSIONS</a>
+                    <a href="representations.html" class="nav-link-item">REPRESENTATIONS</a>
+                    <a href="operations.html" class="nav-link-item active">OPERATIONS</a>
                 </div>
             </div>
 
@@ -128,9 +128,9 @@
     <!-- MOBILE MENU OVERLAY (FULL SCREEN) -->
     <div class="mobile-menu-overlay" id="mobileMenu">
         <a href="index.html" class="mobile-link">HOME</a>
-        <a href="conversioni.html" class="mobile-link">CONVERSIONI</a>
-        <a href="rappresentazioni.html" class="mobile-link">RAPPRESENTAZIONI</a>
-        <a href="operazioni.html" class="mobile-link active">OPERAZIONI</a>
+        <a href="conversions.html" class="mobile-link">CONVERSIONS</a>
+        <a href="representations.html" class="mobile-link">REPRESENTATIONS</a>
+        <a href="operations.html" class="mobile-link active">OPERATIONS</a>
         
         <div class="mobile-nav-bottom">SYSTEM V2.8_MOBILE</div>
     </div>
@@ -149,11 +149,11 @@
                     <div class="alu-grid">
                         
                         <div class="selector-group area-a">
-                            <label>Operando A (Bin)</label>
+                            <label>Operand A (Bin)</label>
                             <div class="input-wrapper input-wrapper-operando">
                                 <span class="input-prompt">></span>
                                 <input type="text" id="operando1" class="input-conversion"
-                                    placeholder="INSERISCI_QUI" autocomplete="off">
+                                    placeholder="DIGIT_VALUE_HERE" autocomplete="off">
                             </div>
                         </div>
 
@@ -167,11 +167,11 @@
                         </div>
 
                         <div class="selector-group area-b">
-                            <label>Operando B (Bin)</label>
+                            <label>Operand B (Bin)</label>
                             <div class="input-wrapper input-wrapper-operando">
                                 <span class="input-prompt ">></span>
                                 <input type="text" id="operando2" class="input-conversion"
-                                    placeholder="INSERISCI_QUI" autocomplete="off">
+                                    placeholder="DIGIT_VALUE_HERE" autocomplete="off">
                             </div>
                         </div>
 
@@ -188,8 +188,8 @@
                     <h3 id="copy-label">OUTPUT_LOG</h3>
                 </div>
                 <div class="module-content">
-                    <span class="result-label">VAL_RISULTATO (clicca per copiare):</span>
-                    <p id="risultatoOperazione" class="monitor-result-text text-glow-green">In attesa di operandi...</p>
+                    <span class="result-label">RESULT_VALUE (click to copy):</span>
+                    <p id="risultatoOperazione" class="monitor-result-text text-glow-green">Awaiting operands...</p>
                 </div>
             </article>
         </section>
@@ -197,54 +197,54 @@
         <section class="system-manual osservato">
             <div class="doc-container">
                 <div class="doc-header">
-                    <h2>
+                    <h2 style="display: flex; align-items: center; gap: 10px;">
                         <svg viewBox="0 0 24 24" style="width: 24px; height: 24px;" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="4 17 10 11 4 5"></polyline>
                             <line x1="12" y1="19" x2="20" y2="19"></line>
                         </svg>
-                        MANUALE_DI_SISTEMA
+                        SYSTEM_MANUAL
                     </h2>
                 </div>
                 <div class="doc-body">
                     <p class="intro-text">
-                        L'unità aritmetico-logica (ALU) è il cuore pulsante di ogni processore. A differenza del calcolo umano, l'aritmetica binaria è vincolata dalla <strong>dimensione dei registri</strong>: ogni operazione avviene in uno spazio limitato di bit. 
-                        Noverflow simula il comportamento hardware, permettendoti di eseguire calcoli e comprendere come i circuiti digitali gestiscono il riporto e i limiti della rappresentazione numerica.
+                        The Arithmetic Logic Unit (ALU) is the heart of every processor. Unlike human calculation, binary arithmetic is constrained by <strong>register size</strong>: every operation occurs within a limited bit space. 
+                        Noverflow simulates hardware behavior, allowing you to perform calculations and understand how digital circuits handle carry bits and the limits of numerical representation.
                     </p>
 
                     <div class="doc-grid">
                         <div class="doc-item">
-                            <h3>Aritmetica di Registro</h3>
-                            <p>Ogni calcolo viene processato bit-a-bit. Il sistema analizza la propagazione del <strong>Carry</strong> (riporto) e la coerenza del risultato rispetto agli operandi inseriti.</p>
+                            <h3>Register Arithmetic</h3>
+                            <p>Every calculation is processed bit-by-bit. The system analyzes <strong>Carry</strong> propagation and ensures the result's consistency relative to the input operands.</p>
                         </div>
 
                         <div class="doc-item">
-                            <h3>Sottrazione via Somma</h3>
-                            <p>Nelle architetture reali, la sottrazione (SUB) viene eseguita sommando al minuendo il <strong>Complemento a 2</strong> del sottraendo, ottimizzando così il numero di porte logiche necessarie.</p>
+                            <h3>Subtraction via Addition</h3>
+                            <p>In real-world architectures, subtraction (SUB) is performed by adding the <strong>Two's Complement</strong> of the subtrahend to the minuend, thus optimizing the number of required logic gates.</p>
                         </div>
 
                         <div class="doc-full">
-                            <h3>Logica Operativa e Gestione Criticità</h3>
+                            <h3>Operational Logic and Critical Issues</h3>
                             <div class="manual-steps">
                                 <div class="step">
-                                    <h4>Le Regole dell'Addizione Binaria</h4>
+                                    <h4>Rules of Binary Addition</h4>
                                     <p>
-                                        L'addizione si basa su quattro regole fondamentali: <br>
-                                        0+0=0 | 0+1=1 | 1+0=1 | 1+1=0 con <strong>Carry (riporto)</strong> di 1. <br>
-                                        Se durante una somma tra due bit si riceve un riporto dalla posizione precedente, il risultato sarà 1 con riporto di 1 (nel caso di 1+1+c1). Noverflow gestisce automaticamente la propagazione del carry lungo tutta la stringa di bit.
+                                        Addition is based on four fundamental rules: <br>
+                                        0+0=0 | 0+1=1 | 1+0=1 | 1+1=0 with a <strong>Carry</strong> of 1. <br>
+                                        If a carry is received from the previous position during a two-bit addition, the result will be 1 with a carry of 1 (in the case of 1+1+c1). Noverflow automatically handles carry propagation throughout the entire bitstring.
                                     </p>
                                 </div>
                                 <div class="step">
-                                    <h4>Il Numero di Bit e la Precisione</h4>
+                                    <h4>Bit Count and Precision</h4>
                                     <p>
-                                        In informatica, il numero di bit definisce il "range" (intervallo) di valori rappresentabili. Se un'operazione richiede 8 bit, il valore massimo rappresentabile senza segno è 255. <br>
-                                        Usare un numero insufficiente di bit porta alla perdita di informazioni critiche. Noverflow permette di sperimentare con operandi di diverse lunghezze per osservare come la precisione influenzi il risultato finale.
+                                        In computing, the number of bits defines the "range" of representable values. If an operation requires 8 bits, the maximum representable unsigned value is 255. <br>
+                                        Using an insufficient number of bits leads to the loss of critical information. Noverflow allows you to experiment with operands of different lengths to observe how precision influences the final result.
                                     </p>
                                 </div>
                                 <div class="step">
-                                    <h4>Comprendere l'Overflow (V)</h4>
+                                    <h4>Understanding Overflow (V)</h4>
                                     <p>
-                                        L'<strong>Overflow</strong> si verifica quando il risultato di un'operazione eccede la capacità del registro o produce un errore di segno. <br>
-                                        <strong>In aritmetica con segno (C2):</strong> si ha overflow se sommando due numeri concordi (entrambi positivi o entrambi negativi) si ottiene un risultato di segno opposto. Ad esempio, se la somma di due numeri positivi produce un bit di segno "1", il sistema ha subito un overflow, rendendo il risultato logicamente errato.
+                                        <strong>Overflow</strong> occurs when an operation's result exceeds the register's capacity or produces a sign error. <br>
+                                        <strong>In signed arithmetic (2's Complement):</strong> overflow occurs if adding two numbers with the same sign (both positive or both negative) yields a result of the opposite sign. For example, if adding two positive numbers produces a sign bit of "1", the system has suffered an overflow, making the result logically incorrect.
                                     </p>
                                 </div>
                             </div>
@@ -257,18 +257,18 @@
 
     <footer id="system-footer">
         <div class="footer-grid">
-            <div class="footer-info">© 2025 EMANUELE CIOTOLA - Tutti i diritti riservati.</div>
+            <div class="footer-info">© 2025 EMANUELE CIOTOLA - All rights reserved.</div>
             <div>
                 <div class="footer-links">
                     <a href="https://github.com/emanueleciotola/Noverflow">GITHUB_REPOSITORY</a>
                     <span class="footer-separator">|</span>
-                    <a href="en/operations.html">SWITCH_TO_EN</a>
+                    <a href="../operazioni.html">SWITCH_TO_IT</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="main.js"></script>
+    <script src="../main.js"></script>
 </body>
 
 </html>
