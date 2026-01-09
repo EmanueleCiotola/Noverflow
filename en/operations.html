@@ -9,28 +9,27 @@
 <html lang="en">
 
 <head>
-    <!-- Language & Encoding -->
+    <!-- LANGUAGE & ENCODING -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="language" content="English">
+    <link rel="alternate" hreflang="it" href="https://emanueleciotola.github.io/Noverflow/operazioni.html" />
+    <link rel="alternate" hreflang="en" href="https://emanueleciotola.github.io/Noverflow/en/operations.html" />
+    <link rel="alternate" hreflang="x-default" href="https://emanueleciotola.github.io/Noverflow/en/operations.html" />
 
-    <!-- TITLE & SEO STRATEGY -->
-    <title>Noverflow | Binary Calculator & ALU Simulator</title>
+    <!-- VERIFICA GOOGLE -->
+    <meta name="google-site-verification" content="W4m6-Cg3xkpEOSg0rzPIgE6C3gl7yw95aOWXSdd87gM" />
     
-    <!-- DETAILED DESCRIPTION -->
+    <!-- TITLE & DESCRIPTION -->
+    <title>Noverflow | Binary Calculator & ALU Simulator</title>
     <meta name="title" content="Noverflow | Binary Calculation: Addition, Subtraction, multiplication, and division">
     <meta name="description" content="Perform binary arithmetic operations: addition, subtraction via 2's complement, multiplication, and division. ALU simulator with Overflow and Carry detection.">
     
     <meta name="keywords" content="binary operations, binary addition, binary subtraction, binary multiplication, binary division, ALU simulator, binary overflow, carry flag, bitwise arithmetic, computer architecture tools">
     <meta name="author" content="Emanuele Ciotola">
     <meta name="robots" content="index, follow">
-
-    <!-- MULTILINGUAL MANAGEMENT -->
-    <link rel="alternate" hreflang="it" href="https://emanueleciotola.github.io/Noverflow/operazioni.html" />
-    <link rel="alternate" hreflang="en" href="https://emanueleciotola.github.io/Noverflow/en/operations.html" />
-    <link rel="alternate" hreflang="x-default" href="https://emanueleciotola.github.io/Noverflow/en/operations.html" />
     
-    <!-- OPEN GRAPH (Social SEO) -->
+    <!-- OPEN GRAPH (LinkedIn, WhatsApp, Facebook) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Noverflow | Binary Calculation & ALU Simulator">
     <meta property="og:description" content="Calculate binary addition, subtraction, multiplication, and division with real-time Carry and Overflow analysis.">
@@ -52,7 +51,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Noverflow">
 
-    <!-- AI STRUCTURED DATA -->
+    <!-- JSON-LD -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -98,8 +97,8 @@
             <div class="nav-slot nav-center">
                 <div class="nav-brand-glitch" style="--stacks: 3;" onclick="window.location.href='index.html';">
                     <h1 style="--index: 0;">Noverflow</h1>
-                    <h1 style="--index: 1;">Noverflow</h1>
-                    <h1 style="--index: 2;">Noverflow</h1>
+                    <span class="glitch-clone" style="--index: 1;" aria-hidden="true">Noverflow</span>
+                    <span class="glitch-clone" style="--index: 2;" aria-hidden="true">Noverflow</span>
                 </div>
 
                 <!-- DESKTOP / TABLET NAV -->
@@ -118,7 +117,7 @@
             </div>
 
             <!-- HAMBURGER TRIGGER -->
-            <button class="mobile-trigger" onclick="toggleMobileMenu()">
+            <button class="mobile-trigger" onclick="toggleMobileMenu()" aria-label="Navigation menu" aria-expanded="false" aria-controls="mobileMenu"></button>>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -142,7 +141,7 @@
                     <svg viewBox="0 0 24 24" class="module-icon" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5v14" />
                     </svg>
-                    <h3>ARIT_UNIT</h3>
+                    <span class="unit-id">ARITH_UNIT</span>
                 </div>
                 
                 <div class="module-content centered-content">
@@ -185,7 +184,7 @@
                         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
                     </svg>
-                    <h3 id="copy-label">OUTPUT_LOG</h3>
+                    <span id="copy-label" class="unit-id">OUTPUT_LOG</span>
                 </div>
                 <div class="module-content">
                     <span class="result-label">RESULT_VALUE (click to copy):</span>

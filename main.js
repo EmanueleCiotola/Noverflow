@@ -497,10 +497,13 @@ function initObservers() {
 window.toggleMobileMenu = (force) => {
     const m = el('mobileMenu');
     const b = document.querySelector('.mobile-trigger');
-    const open = typeof force === 'boolean' ? force : !m.classList.contains('open');
-    m.classList.toggle('open', open);
-    b.classList.toggle('open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
+    
+    const isOpen = typeof force === 'boolean' ? force : !m.classList.contains('open');
+    m.classList.toggle('open', isOpen);
+    b.classList.toggle('open', isOpen);
+    b.setAttribute('aria-expanded', isOpen);
+    
+    document.body.style.overflow = isOpen ? 'hidden' : '';
 };
 
 window.copiaNegliAppunti = () => {

@@ -86,21 +86,26 @@ body {
     justify-items: center; align-items: center;
     height: 48px; cursor: pointer;
 }
-.nav-brand-glitch > h1 {
+.nav-brand-glitch > h1,
+.nav-brand-glitch > .glitch-clone {
     grid-row-start: 1; grid-column-start: 1;
     font-size: 34px; 
     text-transform: uppercase; letter-spacing: 5px; text-indent: 5px;
     user-select: none;
+    font-weight: bold;
+    margin: 0;
     --stack-height: calc(100% / var(--stacks) - 1px);
     --inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
     --clip-top: calc(var(--stack-height) * var(--index));
     --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
     clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
-    animation: glitch-original 4s infinite;
+    animation: glitch 4s infinite;
 }
-.nav-brand-glitch > h1:nth-child(1) { animation-delay: 0.1s; }
-.nav-brand-glitch > h1:nth-child(2) { animation-delay: 0.2s; }
-.nav-brand-glitch > h1:nth-child(3) { animation-delay: 0.3s; }
+
+/* Aggiorna i delay dell'animazione */
+.nav-brand-glitch > *:nth-child(1) { animation-delay: 0.1s; }
+.nav-brand-glitch > *:nth-child(2) { animation-delay: 0.2s; }
+.nav-brand-glitch > *:nth-child(3) { animation-delay: 0.3s; }
 
 /* --- Navbar extension --- */
 .internal-nav-links { display: flex; gap: 15px; margin-top: 10px; }
@@ -224,7 +229,13 @@ body {
     opacity: 0.85;
 }
 .module-icon { width: 20px; height: 20px; color: var(--primaryColor); }
-.module-header h3 { font-size: 0.65rem; letter-spacing: 1.5px; color: var(--primaryColor); }
+.unit-id { 
+    font-size: 0.65rem; 
+    letter-spacing: 1.5px; 
+    color: var(--primaryColor); 
+    font-weight: bold;
+    font-family: inherit;
+}
 
 .module-content { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
 
@@ -568,7 +579,7 @@ footer {
     to { transform: translateX(100%); }
 }
 
-@keyframes glitch-original {
+@keyframes glitch {
     0%, 10% { transform: translate(0); text-shadow: none; }
     11% { transform: translate(3px, -1px); text-shadow: 2px 0 var(--secondaryColor), -2px 0 var(--accentColor); }
     13% { transform: translate(-3px, 1px); text-shadow: 1.5px 0 var(--primaryColor); }
@@ -594,7 +605,7 @@ footer {
     .nav-left, .nav-right { display: none; }
     .nav-center { flex-direction: row; justify-content: space-between; width: 100%; align-items: center; }
     .internal-nav-links { margin-top: 0; }
-    .nav-brand-glitch > h1 { font-size: 28px; }
+    .nav-brand-glitch > h1, .nav-brand-glitch > .glitch-clone { font-size: 28px; }
 
     .home-grid { grid-template-columns: repeat(2, 1fr); }
     .card-featured { grid-column: 1 / span 2; justify-self: center; width: 100%; max-width: 580px; }
