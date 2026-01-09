@@ -21,12 +21,12 @@
     <meta name="google-site-verification" content="W4m6-Cg3xkpEOSg0rzPIgE6C3gl7yw95aOWXSdd87gM" />
     
     <!-- TITLE & DESCRIPTION -->
-    <title>Noverflow | Binary Representations: Signed, 1's & 2's Complement, IEEE 754</title>
-    <meta name="title" content="Noverflow | Binary Representations: Signed, 1's & 2's Complement, IEEE 754">
-    <meta name="description" content="Binary representation calculator: Signed Magnitude, 1's Complement (C1), 2's Complement (C2), and IEEE 754 Standard (FP32/64). Developed for Computer Science students.">
+    <title>Noverflow | 1's & 2's Comp, IEEE 754 Calculator</title>
+    <meta name="title" content="Noverflow | Signed Binary, 1's & 2's Complement, IEEE 754 (FP32/64) Calculator">
+    <meta name="description" content="Binary representation calculator: Signed Binary, 1's Complement (C1), 2's Complement (C2), and IEEE 754 Standard (FP32/64). Developed for Computer Science students.">
     
     <link rel="canonical" href="https://emanueleciotola.github.io/Noverflow/en/representations.html" />
-    <meta name="keywords" content="ieee 754 converter, two's complement, one's complement, signed magnitude, exponent bias, mantissa, floating point binary, computer architecture exercises, DIETI">
+    <meta name="keywords" content="ieee 754 converter, two's complement, one's complement, signed binary, exponent bias, mantissa, floating point binary, computer architecture exercises, DIETI">
     <meta name="author" content="Emanuele Ciotola">
     <meta name="robots" content="index, follow">
 
@@ -149,7 +149,7 @@
                             <label>Input Format</label>
                             <div id="selettoreSorgenteRep" class="selettore selettore-conversione">
                                 <div class="spazioSelezionatoSelettore">
-                                    <p class="elementoSelezionato">Decimal</p>
+                                    <p class="elementoSelezionato" data-value="DEC">Decimal</p>
                                     <svg aria-hidden="true" viewBox="0 0 24 24" class="iconaMenuSelezione" fill="none"
                                         stroke="currentColor" stroke-width="3" stroke-linecap="round"
                                         stroke-linejoin="round">
@@ -157,12 +157,12 @@
                                     </svg>
                                 </div>
                                 <ul class="elementiSelettore">
-                                    <li class="selezionatoDaSelettore">Decimal</li>
-                                    <li>Signed Binary</li>
-                                    <li>One’s Compl. (C1)</li>
-                                    <li>Two’s Compl. (C2)</li>
-                                    <li>IEEE 754 (FP32)</li>
-                                    <li>IEEE 754 (FP64)</li>
+                                    <li class="selezionatoDaSelettore" data-value="DEC">Decimal</li>
+                                    <li data-value="SM">Signed Binary</li>
+                                    <li data-value="C1">One’s Compl. (C1)</li>
+                                    <li data-value="C2">Two’s Compl. (C2)</li>
+                                    <li data-value="IEEE_FP32">IEEE 754 (FP32)</li>
+                                    <li data-value="IEEE_FP64">IEEE 754 (FP64)</li>
                                 </ul>
                             </div>
                         </div>
@@ -183,7 +183,7 @@
                             <label>Output Format</label>
                             <div id="selettoreDestinazioneRep" class="selettore selettore-conversione">
                                 <div class="spazioSelezionatoSelettore">
-                                    <p class="elementoSelezionato">Signed Binary</p>
+                                    <p class="elementoSelezionato" data-value="SM">Signed Binary</p>
                                     <svg aria-hidden="true" viewBox="0 0 24 24" class="iconaMenuSelezione" fill="none"
                                         stroke="currentColor" stroke-width="3" stroke-linecap="round"
                                         stroke-linejoin="round">
@@ -191,12 +191,12 @@
                                     </svg>
                                 </div>
                                 <ul class="elementiSelettore">
-                                    <li>Decimal</li>
-                                    <li class="selezionatoDaSelettore">Signed Binary</li>
-                                    <li>One’s Compl. (C1)</li>
-                                    <li>Two’s Compl. (C2)</li>
-                                    <li>IEEE 754 (FP32)</li>
-                                    <li>IEEE 754 (FP64)</li>
+                                    <li data-value="DEC">Decimal</li>
+                                    <li class="selezionatoDaSelettore" data-value="SM">Signed Binary</li>
+                                    <li data-value="C1">One’s Compl. (C1)</li>
+                                    <li data-value="C2">Two’s Compl. (C2)</li>
+                                    <li data-value="IEEE_FP32">IEEE 754 (FP32)</li>
+                                    <li data-value="IEEE_FP64">IEEE 754 (FP64)</li>
                                 </ul>
                             </div>
                         </div>

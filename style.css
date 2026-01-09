@@ -311,7 +311,10 @@ body {
     cursor: pointer;
     display: flex;
     align-items: center;
-    transition: border 0.3s;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+    z-index: 1000;
 }
 
 .spazioSelezionatoSelettore {
@@ -322,7 +325,13 @@ body {
     pointer-events: none;
 }
 
-.module-content .elementoSelezionato { font-size: 0.85rem; color: var(--primaryColor); margin: 0; }
+.module-content .elementoSelezionato {
+    font-size: 0.85rem;
+    color: var(--primaryColor);
+    margin: 0;
+    transform: translateZ(0); 
+    z-index: 1200; 
+}
 
 .iconaMenuSelezione {
     width: 12px;
@@ -506,7 +515,6 @@ footer {
 .mobile-link.active { color: var(--primaryColor); text-shadow: 0 0 10px rgba(81, 240, 45, 0.5); }
 
 /* FEEDBACK AL TOCCO (Per Mobile) */
-/* Usiamo :active per dare un lampo di colore rapido senza che resti "appiccicato" */
 .btn-op:active, .selettore:active {
     background: var(--secondaryColor);
     color: var(--primaryColor);
@@ -524,8 +532,6 @@ footer {
         text-shadow: 0 0 10px rgba(81, 240, 45, 0.5); 
     }
 
-    /* Le card index le lasciamo interattive anche su mobile come hai chiesto, 
-       ma su desktop aggiungiamo l'ombra più complessa */
     .module-card.interactive:hover {
         border-color: var(--primaryColor);
         box-shadow: 0 0 25px rgba(81, 240, 45, 0.15);
@@ -561,6 +567,8 @@ footer {
     box-shadow: 0 0 10px var(--accentColor);
     font-weight: bold;
 }
+
+.selettore:has(.selettoreAperto) { border-color: var(--primaryColor); }
 .selezionatoDaSelettore { background: var(--secondaryColor); color: var(--primaryColor); }
 .iconaMenuSelezione.selettoreAperto { transform: rotate(180deg); opacity: 1; }
 .elementiSelettore.selettoreAperto { display: block; }

@@ -16,11 +16,11 @@ const DICTIONARY = {
         invalid: "INPUT_NON_VALIDO",
         nan: "NON_È_UN_NUMERO",
         divZero: "ERR_DIV_PER_ZERO",
-        wait32: "ATTENDO_32_BIT...",
-        wait64: "ATTENDO_64_BIT...",
+        wait32: "In attesa di 32 BIT...",
+        wait64: "In attesa di 64 BIT...",
         tooLong: "INPUT_TROPPO_LUNGO",
         copiato: "COPIATO_NEGLI_APPUNTI!",
-        intOnly: "SOLO_INTERI",      
+        intOnly: "AMMESSI_SOLO_INTERI",      
         noSign: "SOLO_SENZA_SEGNO" 
     },
     en: {
@@ -29,12 +29,12 @@ const DICTIONARY = {
         invalid: "INVALID_INPUT",
         nan: "NOT_A_NUMBER",
         divZero: "DIV_BY_ZERO_ERR",
-        wait32: "AWAITING_32_BITS...",
-        wait64: "AWAITING_64_BITS...",
+        wait32: "Awaiting 32 bits...",
+        wait64: "Awaiting 64 bits...",
         tooLong: "INPUT_TOO_LONG",
         copiato: "COPIED_TO_CLIPBOARD!",
-        intOnly: "INTEGERS_ONLY",      
-        noSign: "UNSIGNED_ONLY" 
+        intOnly: "INTEGERS_ONLY_ALLOWED",      
+        noSign: "UNSIGNED_ONLY_ALLOWED" 
     }
 };
 
@@ -88,7 +88,10 @@ function sanitizza(val, regex) {
 
 function validaInput(val) {
     if (!val || val === "+" || val === "-") return { ok: false, msg: MSG.default };
-    if (val.startsWith('.')) return { ok: false, msg: MSG.invalid };
+    if (val.startsWith('.') || ((val.startsWith('+') || val.startsWith('-')) && val[1] === '.')) {
+        return { ok: false, msg: MSG.invalid };
+    }
+
     return { ok: true };
 }
 
@@ -246,14 +249,13 @@ function decToBinFloat(num) {
 // RAPPRESENTAZIONI
 // ==========================================
 
+// ==========================================
+// RAPPRESENTAZIONI
+// ==========================================
+
 function initRappresentazioni() {
     el('inputRappresentazione').addEventListener('input', (e) => {
-        const typeIn = getVal('selettoreSorgenteRep') || 'DEC';
-        let regex = REGEX.DEC_FLOAT; 
-        if (typeIn.includes('IEEE') || typeIn.includes('C1') || typeIn.includes('C2') || typeIn.includes('SM')) {
-            regex = REGEX.BIN_FLOAT; 
-        }
-        e.target.value = sanitizza(e.target.value, regex);
+        e.target.value = sanitizza(e.target.value, REGEX.DEC_FLOAT);
         calcRep();
     });
 }
@@ -265,29 +267,46 @@ function calcRep() {
     const outID = 'risultatoRappresentazione';
 
     if (typeIn.includes('IEEE') || typeIn.includes('C1') || typeIn.includes('C2')) {
-        if (val.includes('+') || val.includes('-')) return print(MSG.noSign, outID, false);
-        if (val.includes('.') || val.includes(',')) return print(MSG.intOnly, outID, false);
+        if (val.includes('+') || val.includes('-')) {
+            return print(MSG.noSign, outID, false);
+        }
     }
 
+    // 1. Controllo validità sintattica di base (gestisce stringhe vuote, solo punti, ecc.)
     const check = validaInput(val);
     if (!check.ok) return print(check.msg, outID, false);
 
-    let numJS;
-    let inputBits = null; 
+    // 2. Validazione Specifica per Tipo Sorgente (Caratteri non ammessi)
+    
+    // CASO A: Formati "Raw Bits" 
+    if (typeIn.includes('IEEE') || typeIn.includes('C1') || typeIn.includes('C2')) {
+        if (val.includes('.')) return print(MSG.intOnly, outID, false);
+        if (/[^01]/.test(val)) return print(MSG.invalid, outID, false);
+    }
+    
+    // CASO B: Segno e Modulo (Binario Puro con Segno)
+    else if (typeIn.includes('SM')) {
+        if (/[^01.+\-]/.test(val)) return print(MSG.invalid, outID, false);
+    }
 
+    // CASO C: Decimale (già gestito dalla sanitizzazione di base)
+
+    let numJS;
+    let inputBits = val.length; 
+
+    // 3. Logica di Parsing (Input -> Numero JS)
     if (typeIn === 'DEC') {
         numJS = parseFloat(val);
-    } else {
-        if (typeIn.includes('C1') || typeIn.includes('C2') || typeIn.includes('SM')) inputBits = val.length;
+    } 
+    else {
         if (typeIn.includes('IEEE')) {
-            const len = val.length;
             if (typeIn.includes('FP32')) {
-                if (len < 32) return print(MSG.wait32, outID, false);
-                if (len > 32) return print(MSG.tooLong, outID, false);
+                if (inputBits < 32) return print(MSG.wait32, outID, false);
+                if (inputBits > 32) return print(MSG.tooLong, outID, false);
                 numJS = rawBinToFloat(val, 32);
-            } else {
-                if (len < 64) return print(MSG.wait64, outID, false);
-                if (len > 64) return print(MSG.tooLong, outID, false);
+            } else { // FP64
+                if (inputBits < 64) return print(MSG.wait64, outID, false);
+                if (inputBits > 64) return print(MSG.tooLong, outID, false);
                 numJS = rawBinToFloat(val, 64);
             }
         }
@@ -306,26 +325,25 @@ function calcRep() {
                 numJS = raw - max;
             }
         }
-        else if (typeIn.includes('SM')) numJS = binToDecFloat(val);
-        else numJS = parseFloat(val);
+        else if (typeIn.includes('SM')) {
+            numJS = binToDecFloat(val);
+        }
     }
 
     if (isNaN(numJS)) return print(MSG.nan, outID, false);
 
+    // 4. Controllo compatibilità Output
     if ((typeOut.includes('C1') || typeOut.includes('C2')) && !Number.isInteger(numJS)) {
         return print(MSG.intOnly, outID, false);
     }
 
-    let res = MSG.nan;
+    // 5. Generazione Output
+    let res = numJS;
 
     if (typeOut === 'DEC') {
-        res = (numJS === 0 ? "0" : numJS.toString());
+        res = numJS.toString();
     }
-    else if (typeOut === 'SM') {
-        const sign = numJS < 0 ? '-' : '';
-        const binPure = decToBinFloat(Math.abs(numJS));
-        res = sign + binPure;
-    }
+    else if (typeOut.includes('SM')) res = decToBinFloat(numJS);
     else if (typeOut.includes('C1')) res = calcC1(Math.trunc(numJS), inputBits);
     else if (typeOut.includes('C2')) res = calcC2(Math.trunc(numJS), inputBits);
     else if (typeOut.includes('FP32')) res = floatToIEEE(numJS, 32);
@@ -377,10 +395,20 @@ function floatToIEEE(num, bits) {
 }
 
 function rawBinToFloat(str, bits) {
-    const buf = new ArrayBuffer(bits === 64 ? 8 : 4);
-    const view = new DataView(buf);
-    const u8 = new Uint8Array(buf);
-    for (let i = 0; i < bits/8; i++) u8[i] = parseInt(str.substring(i*8, (i+1)*8), 2);
+    if (str.length !== bits) return NaN;
+
+    const buffer = new ArrayBuffer(bits === 64 ? 8 : 4);
+    const view = new DataView(buffer);
+    const bytes = new Uint8Array(buffer);
+
+    for (let i = 0; i < bits / 8; i++) {
+        const byteStr = str.substring(i * 8, (i + 1) * 8);
+        const byteVal = parseInt(byteStr, 2);
+        // Se c'è un errore di parsing (es. caratteri non binari sfuggiti ai controlli)
+        if (isNaN(byteVal)) return NaN;
+        bytes[i] = byteVal;
+    }
+
     return bits === 64 ? view.getFloat64(0, false) : view.getFloat32(0, false);
 }
 
