@@ -367,6 +367,8 @@ body {
     align-items: center;
     margin: 5px 0;
     pointer-events: auto;
+    transition: all 0.3s ease;
+    will-change: transform;
 }
 
 /* Input */
@@ -559,6 +561,8 @@ footer {
 }
 
 /* REGOLE DI STATO (Indipendenti dall'hover) */
+.btn-switch-base.ruota-attiva { animation: spinSwitchH 0.3s; }
+
 .btn-op.active {
     background: var(--primaryColor);
     color: var(--bgColor);
@@ -604,9 +608,13 @@ footer {
     100% { transform: translate(0); }
 }
 
-@keyframes spinSwitch {
+@keyframes spinSwitchH {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(180deg); }
+}
+@keyframes spinSwitchV {
+    0% { transform: rotate(90deg) scale(1.1); }
+    100% { transform: rotate(270deg) scale(1.1); }
 }
 
 /* -----------------
@@ -635,7 +643,7 @@ footer {
     
     .home-grid { grid-template-columns: 1fr; padding: 20px; }
     .card-featured { grid-column: auto; max-width: 100%; }
-    
+
     .doc-grid { grid-template-columns: 1fr; gap: 30px; }
     .doc-full { grid-column: auto; }
     .doc-container { padding: 25px; }
@@ -646,6 +654,7 @@ footer {
     .selectors-grid { grid-template-columns: 1fr; gap: 20px; justify-items: center; }
     .selector-group { width: 100%; }
 
+    .btn-switch-base.ruota-attiva { animation: spinSwitchV 0.3s; }
     .btn-switch-base { transform: rotate(90deg); margin: 5px auto; }
     .btn-switch-base:hover { transform: rotate(90deg) scale(1.1); }
 
