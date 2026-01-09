@@ -516,10 +516,10 @@ footer {
 .mobile-link.active { color: var(--primaryColor); text-shadow: 0 0 10px rgba(81, 240, 45, 0.5); }
 
 /* FEEDBACK AL TOCCO (Per Mobile) */
-.btn-op:active, .selettore:active {
-    background: var(--secondaryColor);
-    color: var(--primaryColor);
-}
+.module-card.interactive:active { border-color: var(--primaryColor); box-shadow: 0 0 20px rgba(81, 240, 45, 0.2); }
+.module-card.interactive:active .btn-retro { background: var(--primaryColor); color: var(--bgColor); }
+
+.btn-op:active, .selettore:active { background: var(--secondaryColor); color: var(--primaryColor); }
 
 /* EFFETTI SOLO PER DESKTOP (Mouse) */
 @media (hover: hover) {
