@@ -426,6 +426,16 @@ function initUI() {
 
     document.addEventListener('click', closeDropdowns);
     initObservers();
+
+    window.addEventListener('resize', () => {
+        // Se lo schermo supera i 750px E il menu è aperto forziamo la chiusura passando 'false'
+        if (window.innerWidth > 750) {
+            const m = el('mobileMenu');
+            if (m && m.classList.contains('open')) {
+                toggleMobileMenu(false);
+            }
+        }
+    });
 }
 
 const getPartner = (id) => ({

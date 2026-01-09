@@ -128,29 +128,32 @@ body {
 
 /* --- Hamburger menu --- */
 .mobile-trigger {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between; 
+    display: none; /* Appare solo su mobile grazie alle media queries */
     background: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
-    height: 15px; 
-    width: 25px;
-    transition: all 0.4s ease;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    z-index: 2100;
 }
 .hamburger-line {
-    width: 100%;
+    width: 24px;
     height: 2px;
     background-color: var(--primaryColor);
-    transition: all 0.3s;
     box-shadow: 0 0 3px var(--secondaryColor);
-    transform-origin: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -12px;
+    margin-top: -1px;
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease;
 }
 
 .mobile-menu-overlay {
     display: flex;
-    gap: clamp(5px, 3vh, 40px); /* TODO */
+    gap: clamp(5px, 3vh, 40px);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -492,9 +495,13 @@ footer {
     box-shadow: 0 0 5px var(--primaryColor);
 }
 
-.mobile-trigger.open .hamburger-line:nth-child(1) { transform: translateY(6px) rotate(-45deg); }
-.mobile-trigger.open .hamburger-line:nth-child(2) { opacity: 0; scale: 0; }
-.mobile-trigger.open .hamburger-line:nth-child(3) { transform: translateY(-6px) rotate(45deg); }
+.mobile-trigger .hamburger-line:nth-child(1) { transform: translateY(-7px); }
+.mobile-trigger .hamburger-line:nth-child(2) { transform: translateY(0); }
+.mobile-trigger .hamburger-line:nth-child(3) { transform: translateY(7px); }
+.mobile-trigger.open .hamburger-line:nth-child(1) { transform: translateY(0) rotate(-45deg); }
+.mobile-trigger.open .hamburger-line:nth-child(2) { opacity: 0; transform: scale(0); }
+.mobile-trigger.open .hamburger-line:nth-child(3) { transform: translateY(0) rotate(45deg); }
+
 .mobile-menu-overlay.open { transform: translateY(0); }
 .mobile-link.active { color: var(--primaryColor); text-shadow: 0 0 10px rgba(81, 240, 45, 0.5); }
 
