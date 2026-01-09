@@ -314,7 +314,7 @@ body {
     transform: translateZ(0);
     backface-visibility: hidden;
     -webkit-font-smoothing: subpixel-antialiased;
-    z-index: 1000;
+    z-index: 100;
 }
 
 .spazioSelezionatoSelettore {
@@ -329,8 +329,7 @@ body {
     font-size: 0.85rem;
     color: var(--primaryColor);
     margin: 0;
-    transform: translateZ(0); 
-    z-index: 1200; 
+    transform: translateZ(0);
 }
 
 .iconaMenuSelezione {
@@ -351,10 +350,10 @@ body {
     box-shadow: 
         -1px 0 0 0 var(--primaryColor), 1px 0 0 0 var(--primaryColor), 0 1px 0 0 var(--primaryColor),
         0 -1px 0 0 var(--primaryColor), 0 10px 20px rgba(0, 0, 0, 0.5); 
-    z-index: 2000;
+    z-index: 1;
     list-style: none;
     display: none;
-    margin-top: 1px; 
+    margin-top: 1px;
 }
 
 .elementiSelettore > li { padding: 10px 12px; font-size: 0.8rem; color: var(--dimmedColor); text-align: left; }
@@ -568,7 +567,7 @@ footer {
     font-weight: bold;
 }
 
-.selettore:has(.selettoreAperto) { border-color: var(--primaryColor); }
+.selettore:has(.selettoreAperto) { border-color: var(--primaryColor); z-index: 2100; }
 .selezionatoDaSelettore { background: var(--secondaryColor); color: var(--primaryColor); }
 .iconaMenuSelezione.selettoreAperto { transform: rotate(180deg); opacity: 1; }
 .elementiSelettore.selettoreAperto { display: block; }
