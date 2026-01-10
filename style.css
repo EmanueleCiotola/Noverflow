@@ -17,7 +17,7 @@
     --dimmedColor: rgba(231, 240, 229, 0.5);
 }
 
-@font-face { font-family: 'myFont'; src: url('assets/fonts/consola.woff2'); font-display: swap; }
+@font-face { font-family: 'myFont'; src: url('/Noverflow/assets/fonts/consola.woff2') format('woff2');; font-display: swap; }
 
 /* --- Reset & Base --- */
 html { scroll-behavior: smooth; overflow-anchor: none; }
