@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://emanueleciotola.github.io/Noverflow/sitemap.xml
